@@ -10,9 +10,13 @@ import cn.edu.seu.agriculture.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+@Service
 public class BoolServiceImpl implements BookService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -22,9 +26,6 @@ public class BoolServiceImpl implements BookService {
 
     @Autowired
     private AppointmentMapper appointmentDao;
-
-    @Autowired
-    private BookExample book_exm;
 
     @Override
     public Book getById(long bookId) {
@@ -37,6 +38,7 @@ public class BoolServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public AppointExecution appoint(long bookId, long studentId) {
         return null;
     }

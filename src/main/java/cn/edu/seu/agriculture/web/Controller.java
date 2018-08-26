@@ -18,8 +18,16 @@ import java.util.List;
 public class Controller {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/hello",method = RequestMethod.GET)
-    public String showView(Model model) {
+    @Autowired
+    private BookService bookService;
+
+    @RequestMapping(value = "/hello/{name}",method = RequestMethod.GET)
+    public String showView(@PathVariable("name")String name,Model model) {
+        if (name == null){
+            model.addAttribute("name"," world!");
+        }else{
+            model.addAttribute("name",name);
+        }
         return "hello";
     }
 //    @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -30,18 +38,18 @@ public class Controller {
 //        return "list";// WEB-INF/jsp/"list".jsp
 //    }
 //
-//    @RequestMapping(value = "/{bookId}/detail", method = RequestMethod.GET)
-//    private String detail(@PathVariable("bookId") Long bookId, Model model) {
-//        if (bookId == null) {
-//            return "redirect:/book/list";
-//        }
-//        Book book = bookService.getById(bookId);
-//        if (book == null) {
-//            return "forward:/book/list";
-//        }
-//        model.addAttribute("book", book);
-//        return "detail";
-//    }
+    @RequestMapping(value = "/{bookId}/detail", method = RequestMethod.GET)
+    private String detail(@PathVariable("bookId") Long bookId, Model model) {
+        if (bookId == null) {
+            return "redirect:/book/list";
+        }
+        Book book = bookService.getById(bookId);
+        if (book == null) {
+            return "forward:/book/list";
+        }
+        model.addAttribute("book", book);
+        return "detail";
+    }
 
 //    //ajax json
 //    @RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
