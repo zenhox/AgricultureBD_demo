@@ -15,8 +15,5 @@ public class ServiceTest extends BaseTest{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Test
     public List<Map<Date,Double>> testDatePriceService() throws Exception{
-        List<Map<Date,Double>> reList = datePriceService.getPriceListByInfo(
-                "山西","太原农贸市场","水果","苹果");
-        return reList;
     }
 }

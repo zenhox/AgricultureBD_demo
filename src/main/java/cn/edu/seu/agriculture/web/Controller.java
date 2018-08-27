@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 @org.springframework.stereotype.Controller
 public class Controller {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -17,9 +21,10 @@ public class Controller {
 
     @RequestMapping(value = "/hello",method = RequestMethod.GET)
     @ResponseBody
-    public String showView() {
-        datePriceService
-        return "hello";
+    public List<Map<Date,Double>> showView() {
+        List<Map<Date,Double>> reList = datePriceService.getPriceListByInfo(
+                "山西","太原农贸市场","水果","苹果");
+        return reList;
     }
 //    @RequestMapping(value = "/list", method = RequestMethod.GET)
 //    private String list(Model model) {
