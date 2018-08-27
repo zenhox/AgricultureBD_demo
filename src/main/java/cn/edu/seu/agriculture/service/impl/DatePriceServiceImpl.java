@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.sql.Date;
 
 @Service
 public class DatePriceServiceImpl implements DatePriceService {
@@ -35,8 +36,8 @@ public class DatePriceServiceImpl implements DatePriceService {
         List<DatePrice> list = datePriceMapper.selectByExample(example);
         List<Map<Date,Double>> json = new ArrayList<>();
         for(DatePrice dp : list){
-            Map<java.util.Date,Double> map = new HashMap();
-            map.put(dp.getDate(),dp.getPrice());
+            Map<Date,Double> map = new HashMap();
+            map.put(new Date(dp.getDate().getTime()),dp.getPrice());
             json.add(map);
         }
         return json;

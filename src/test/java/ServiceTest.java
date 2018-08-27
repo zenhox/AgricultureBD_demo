@@ -13,7 +13,4 @@ public class ServiceTest extends BaseTest{
     @Autowired
     private DatePriceService datePriceService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Test
-    public List<Map<Date,Double>> testDatePriceService() throws Exception{
-    }
 }

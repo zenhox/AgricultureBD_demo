@@ -4,7 +4,7 @@
 <script>
     window.onload = function(){
         document.getElementById("get").onclick = function(){
-            $.ajax({url:"/Agriculture/6666/detail",success:function(result){
+            $.ajax({url:"/Agriculture/hello",success:function(result){
                  console.log(result);
                  $("#div1").html(result);
             }});

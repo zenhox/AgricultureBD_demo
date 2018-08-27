@@ -10,21 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
 public class Controller {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
     private DatePriceService datePriceService;
 
-    @RequestMapping(value = "/hello",method = RequestMethod.GET)
+    @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<Date,Double>> showView() {
-        List<Map<Date,Double>> reList = datePriceService.getPriceListByInfo(
-                "山西","太原农贸市场","水果","苹果");
-        return reList;
+    public String showView(@PathVariable("province")String province,
+                           @PathVariable("market")String market,
+                           @PathVariable("type")String type,
+                           @PathVariable("name")String name ) {
+        if (province!=null && market!=null && type!=null&&name!=null){
+            List<Map<Date,Double>> reList = datePriceService.getPriceListByInfo(
+                    province,market,type,name);
+            logger.info(reList.toString());
+            return reList.toString();
+        }
+        return null;
     }
 //    @RequestMapping(value = "/list", method = RequestMethod.GET)
 //    private String list(Model model) {
