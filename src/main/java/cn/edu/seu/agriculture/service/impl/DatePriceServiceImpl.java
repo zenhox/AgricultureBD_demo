@@ -6,8 +6,8 @@ import cn.edu.seu.agriculture.entity.DatePriceExample;
 import cn.edu.seu.agriculture.service.DatePriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 @Service
 public class DatePriceServiceImpl implements DatePriceService {
@@ -16,7 +16,7 @@ public class DatePriceServiceImpl implements DatePriceService {
     private DatePriceMapper datePriceMapper;
 
     @Override
-    public ArrayList<Double> getPriceListByInfo(String province,
+    public List<Map<Date,Double>> getPriceListByInfo(String province,
                                                 String market,
                                                 String type,
                                                 String name)
@@ -31,11 +31,14 @@ public class DatePriceServiceImpl implements DatePriceService {
                 .andMarketEqualTo(market)
                 .andTypeEqualTo(type)
                 .andNameEqualTo(name);
+        example.setOrderByClause("date ASC");
         List<DatePrice> list = datePriceMapper.selectByExample(example);
-        ArrayList<Double> priceList = new ArrayList<>();
+        List<Map<Date,Double>> json = new ArrayList<>();
         for(DatePrice dp : list){
-            priceList.add(dp.getPrice());
+            Map<java.util.Date,Double> map = new HashMap();
+            map.put(dp.getDate(),dp.getPrice());
+            json.add(map);
         }
-        return priceList;
+        return json;
     }
 }

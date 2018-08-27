@@ -1,11 +1,13 @@
 package cn.edu.seu.agriculture.service;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public interface DatePriceService {
 
-    public ArrayList<Double> getPriceListByInfo(String province,  //省份
-                                                String market,
-                                                String type,      //品种
-                                                String name);     //名字
+    public List<Map<Date,Double>> getPriceListByInfo(String province,  //省份
+                                                     String market,
+                                                     String type,      //品种
+                                                     String name);     //名字
 }

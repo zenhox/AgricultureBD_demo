@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.seu.agriculture.dao.BookMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.seu.agriculture.entity.Book">
+<mapper namespace="cn.edu.seu.agriculture.dao.DatePriceMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.seu.agriculture.entity.DatePrice">
     <constructor>
-      <idArg column="book_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="market" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="price" javaType="java.lang.Double" jdbcType="DOUBLE" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    book_id, name, number
+    date, province, market, type, name, price
   </sql>
-  <select id="selectByExample" parameterType="cn.edu.seu.agriculture.entity.BookExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.edu.seu.agriculture.entity.DatePriceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from book
+    from date_price
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,70 +86,97 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from book
-    where book_id = #{bookId,jdbcType=BIGINT}
+    from date_price
+    where date = #{date,jdbcType=DATE}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from book
-    where book_id = #{bookId,jdbcType=BIGINT}
+  <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
+    delete from date_price
+    where date = #{date,jdbcType=DATE}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.edu.seu.agriculture.entity.BookExample">
-    delete from book
+  <delete id="deleteByExample" parameterType="cn.edu.seu.agriculture.entity.DatePriceExample">
+    delete from date_price
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.seu.agriculture.entity.Book">
-    insert into book (book_id, name, number
-      )
-    values (#{bookId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
+    insert into date_price (date, province, market, 
+      type, name, price)
+    values (#{date,jdbcType=DATE}, #{province,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.seu.agriculture.entity.Book">
-    insert into book
+  <insert id="insertSelective" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
+    insert into date_price
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bookId != null">
-        book_id,
+      <if test="date != null">
+        date,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="type != null">
+        type,
       </if>
       <if test="name != null">
         name,
       </if>
-      <if test="number != null">
-        number,
+      <if test="price != null">
+        price,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bookId != null">
-        #{bookId,jdbcType=BIGINT},
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="number != null">
-        #{number,jdbcType=INTEGER},
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.edu.seu.agriculture.entity.BookExample" resultType="java.lang.Long">
-    select count(*) from book
+  <select id="countByExample" parameterType="cn.edu.seu.agriculture.entity.DatePriceExample" resultType="java.lang.Long">
+    select count(*) from date_price
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update book
+    update date_price
     <set>
-      <if test="record.bookId != null">
-        book_id = #{record.bookId,jdbcType=BIGINT},
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.number != null">
-        number = #{record.number,jdbcType=INTEGER},
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -154,30 +184,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update book
-    set book_id = #{record.bookId,jdbcType=BIGINT},
+    update date_price
+    set date = #{record.date,jdbcType=DATE},
+      province = #{record.province,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      number = #{record.number,jdbcType=INTEGER}
+      price = #{record.price,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.seu.agriculture.entity.Book">
-    update book
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
+    update date_price
     <set>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        market = #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="number != null">
-        number = #{number,jdbcType=INTEGER},
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
       </if>
     </set>
-    where book_id = #{bookId,jdbcType=BIGINT}
+    where date = #{date,jdbcType=DATE}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.seu.agriculture.entity.Book">
-    update book
-    set name = #{name,jdbcType=VARCHAR},
-      number = #{number,jdbcType=INTEGER}
-    where book_id = #{bookId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
+    update date_price
+    set province = #{province,jdbcType=VARCHAR},
+      market = #{market,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE}
+    where date = #{date,jdbcType=DATE}
   </update>
 </mapper>

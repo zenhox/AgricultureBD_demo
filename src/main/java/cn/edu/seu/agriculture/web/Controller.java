@@ -1,5 +1,6 @@
 package cn.edu.seu.agriculture.web;
 
+import cn.edu.seu.agriculture.service.DatePriceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @org.springframework.stereotype.Controller
 public class Controller {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private DatePriceService datePriceService;
 
-
-    @RequestMapping(value = "/hello/{name}",method = RequestMethod.GET)
-    public String showView(@PathVariable("name")String name,Model model) {
-        if (name == null){
-            model.addAttribute("name"," world!");
-        }else{
-            model.addAttribute("name",name);
-        }
+    @RequestMapping(value = "/hello",method = RequestMethod.GET)
+    @ResponseBody
+    public String showView() {
+        datePriceService
         return "hello";
     }
 //    @RequestMapping(value = "/list", method = RequestMethod.GET)
