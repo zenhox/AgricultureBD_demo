@@ -1,5 +1,8 @@
 package cn.edu.seu.agriculture.web;
 
+import cn.edu.seu.agriculture.exception.DBAccessException;
+import cn.edu.seu.agriculture.exception.DataNotExistException;
+import cn.edu.seu.agriculture.exception.PathInvalidException;
 import cn.edu.seu.agriculture.service.DatePriceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,18 +26,25 @@ public class Controller {
 
     @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET)
     @ResponseBody
-    public String showView(@PathVariable("province")String province,
+    public String datePriceHandler(@PathVariable("province")String province,
                            @PathVariable("market")String market,
                            @PathVariable("type")String type,
                            @PathVariable("name")String name ) {
-        if (province!=null && market!=null && type!=null&&name!=null){
+        try {
             List<Map<Date,Double>> reList = datePriceService.getPriceListByInfo(
                     province,market,type,name);
             logger.info(reList.toString());
             return reList.toString();
+        }catch (PathInvalidException | DataNotExistException e1){
+//            String url = "/agriculture/datePrice"+province+"/"+market+"/"+type+"/"+name+".do";
+            return "Access failed, please check your input!";
+        } catch (Exception e){
+            return "Server inner problem: access to database failed!";
         }
-        return null;
     }
+
+
+
 //    @RequestMapping(value = "/list", method = RequestMethod.GET)
 //    private String list(Model model) {
 //        List<Book> list = bookService.getList();
