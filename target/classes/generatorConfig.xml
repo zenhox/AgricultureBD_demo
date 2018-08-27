@@ -22,10 +22,10 @@
         <!--password="root">-->
         <!--</jdbcConnection>-->
 
-        <jdbcConnection driverClass="${jdbc.driver}"
-                        connectionURL="${jdbc.url}"
-                        userId="${jdbc.username}"
-                        password="${jdbc.username}">
+        <jdbcConnection driverClass="${driver}"
+                        connectionURL="${url}"
+                        userId="${username}"
+                        password="${username}">
         </jdbcConnection>
 
         <javaTypeResolver >
@@ -94,16 +94,16 @@
             <property name="rootInterface" value=""/>-->
         </javaClientGenerator>
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table schema="agriculture" tableName="date_price" domainObjectName="DatePrice">
+        <table schema="test_db" tableName="book" domainObjectName="Book">
             <!--enableCountByExample="false" enableUpdateByExample="false"-->
             <!--enableDeleteByExample="false" enableSelectByExample="false"-->
             <!--selectByExampleQueryId="false"-->
         </table>
-        <!--<table schema="test_db" tableName="appointment" domainObjectName="Appointment">-->
-            <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
-            <!--&lt;!&ndash;enableDeleteByExample="false" enableSelectByExample="false"&ndash;&gt;-->
-            <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
-        <!--</table>-->
+        <table schema="test_db" tableName="appointment" domainObjectName="Appointment">
+            <!--enableCountByExample="false" enableUpdateByExample="false"-->
+            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+            <!--selectByExampleQueryId="false"-->
+        </table>
         <!--<table schema="blog" tableName="user" domainObjectName="User"-->
         <!--enableCountByExample="false" enableUpdateByExample="false"-->
         <!--enableDeleteByExample="false" enableSelectByExample="false"-->

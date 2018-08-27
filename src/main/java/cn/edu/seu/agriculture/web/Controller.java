@@ -1,7 +1,5 @@
 package cn.edu.seu.agriculture.web;
 
-import cn.edu.seu.agriculture.entity.Book;
-import cn.edu.seu.agriculture.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @org.springframework.stereotype.Controller
 public class Controller {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private BookService bookService;
 
     @RequestMapping(value = "/hello/{name}",method = RequestMethod.GET)
     public String showView(@PathVariable("name")String name,Model model) {
@@ -38,18 +30,6 @@ public class Controller {
 //        return "list";// WEB-INF/jsp/"list".jsp
 //    }
 //
-    @RequestMapping(value = "/{bookId}/detail", method = RequestMethod.GET)
-    private String detail(@PathVariable("bookId") Long bookId, Model model) {
-        if (bookId == null) {
-            return "redirect:/book/list";
-        }
-        Book book = bookService.getById(bookId);
-        if (book == null) {
-            return "forward:/book/list";
-        }
-        model.addAttribute("book", book);
-        return "detail";
-    }
 
 //    //ajax json
 //    @RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
