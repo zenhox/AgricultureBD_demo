@@ -3,7 +3,7 @@
 <mapper namespace="cn.edu.seu.agriculture.dao.DatePriceMapper">
   <resultMap id="BaseResultMap" type="cn.edu.seu.agriculture.entity.DatePrice">
     <constructor>
-      <idArg column="date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="market" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -86,16 +86,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from date_price
-    where date = #{date,jdbcType=DATE}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
-    delete from date_price
-    where date = #{date,jdbcType=DATE}
-  </delete>
   <delete id="deleteByExample" parameterType="cn.edu.seu.agriculture.entity.DatePriceExample">
     delete from date_price
     <if test="_parameter != null">
@@ -194,35 +184,5 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
-    update date_price
-    <set>
-      <if test="province != null">
-        province = #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="market != null">
-        market = #{market,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null">
-        price = #{price,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where date = #{date,jdbcType=DATE}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
-    update date_price
-    set province = #{province,jdbcType=VARCHAR},
-      market = #{market,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DOUBLE}
-    where date = #{date,jdbcType=DATE}
   </update>
 </mapper>
