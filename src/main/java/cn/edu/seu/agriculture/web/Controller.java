@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,14 @@ public class Controller {
                 province,market,type,name);
         logger.info(reList.toString());
         return reTypeService.toJson(reList).toString();
+    }
+
+    @RequestMapping(value = "/datePrice",method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView datePricePage(){
+        ModelAndView retMap = new ModelAndView();  //返回新的ModelAndView
+        retMap.setViewName("/datePrice.jsp");
+        return retMap;
     }
 
 
