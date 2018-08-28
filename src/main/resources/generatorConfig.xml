@@ -99,17 +99,12 @@
             <!--enableDeleteByExample="false" enableSelectByExample="false"-->
             <!--selectByExampleQueryId="false"-->
         </table>
-        <table schema="agriculture" tableName="province_market" domainObjectName="ProvinceMarket">
-            <!--enableCountByExample="false" enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false"-->
-        </table>
-        <table schema="agriculture" tableName="type_name" domainObjectName="TypeName">
-            <!--enableCountByExample="false" enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false"-->
-        </table>
         <table schema="agriculture" tableName="users" domainObjectName="Users">
+            <!--enableCountByExample="false" enableUpdateByExample="false"-->
+            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+            <!--selectByExampleQueryId="false"-->
+        </table>
+        <table schema="agriculture" tableName="category_related" domainObjectName="CategoryRelated">
             <!--enableCountByExample="false" enableUpdateByExample="false"-->
             <!--enableDeleteByExample="false" enableSelectByExample="false"-->
             <!--selectByExampleQueryId="false"-->

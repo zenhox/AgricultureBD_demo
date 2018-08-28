@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.seu.agriculture.dao.ProvinceMarketMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.seu.agriculture.entity.ProvinceMarket">
+<mapper namespace="cn.edu.seu.agriculture.dao.CategoryRelatedMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.seu.agriculture.entity.CategoryRelated">
     <constructor>
       <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="market" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    province, market
+    province, market, type, name
   </sql>
-  <select id="selectByExample" parameterType="cn.edu.seu.agriculture.entity.ProvinceMarketExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.edu.seu.agriculture.entity.CategoryRelatedExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from province_market
+    from category_related
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,24 +84,32 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.edu.seu.agriculture.entity.ProvinceMarketExample">
-    delete from province_market
+  <delete id="deleteByExample" parameterType="cn.edu.seu.agriculture.entity.CategoryRelatedExample">
+    delete from category_related
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.seu.agriculture.entity.ProvinceMarket">
-    insert into province_market (province, market)
-    values (#{province,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="cn.edu.seu.agriculture.entity.CategoryRelated">
+    insert into category_related (province, market, type, 
+      name)
+    values (#{province,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.seu.agriculture.entity.ProvinceMarket">
-    insert into province_market
+  <insert id="insertSelective" parameterType="cn.edu.seu.agriculture.entity.CategoryRelated">
+    insert into category_related
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="province != null">
         province,
       </if>
       <if test="market != null">
         market,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -109,16 +119,22 @@
       <if test="market != null">
         #{market,jdbcType=VARCHAR},
       </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.edu.seu.agriculture.entity.ProvinceMarketExample" resultType="java.lang.Long">
-    select count(*) from province_market
+  <select id="countByExample" parameterType="cn.edu.seu.agriculture.entity.CategoryRelatedExample" resultType="java.lang.Long">
+    select count(*) from category_related
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update province_market
+    update category_related
     <set>
       <if test="record.province != null">
         province = #{record.province,jdbcType=VARCHAR},
@@ -126,15 +142,23 @@
       <if test="record.market != null">
         market = #{record.market,jdbcType=VARCHAR},
       </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update province_market
+    update category_related
     set province = #{record.province,jdbcType=VARCHAR},
-      market = #{record.market,jdbcType=VARCHAR}
+      market = #{record.market,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
