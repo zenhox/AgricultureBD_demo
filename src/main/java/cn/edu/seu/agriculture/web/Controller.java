@@ -27,14 +27,14 @@ public class Controller {
 
     @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject datePriceHandler(@PathVariable("province")String province,
+    public String datePriceHandler(@PathVariable("province")String province,
                                        @PathVariable("market")String market,
                                        @PathVariable("type")String type,
                                        @PathVariable("name")String name ) {
         List<Map<String,Object>> reList = datePriceService.getPriceListByInfo(
                 province,market,type,name);
         logger.info(reList.toString());
-        return reTypeService.toJson(reList);
+        return reTypeService.toJson(reList).toString();
     }
 
 
