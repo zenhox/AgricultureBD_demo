@@ -1,0 +1,1923 @@
+@charset "utf-8";
+/* CSS Document */
+
+.search{
+	/* margin-left:60px; */
+	text-align: center;
+	margin-bottom: 15px;
+}
+.search span{
+	/* margin-left:60px; */
+	margin-left:20px;
+	display:inline-block;
+	padding-right:20px;
+	border-right:1px solid #ccc;
+	color:#ccc;
+	font-size:12px;font-weight:bold;
+	cursor: pointer;
+}
+.search span.on{
+	/* margin-left:60px; */
+	color:#333;
+}
+.logo{
+	background: url("../images/yn.png") no-repeat;
+	background-position-y: 3px;
+	padding-left:30px;	
+}
+.search_btn{
+	width:100px;height:31px;background:#F93;cursor: pointer;  font-size: 12px;border: none;color: white;
+}
+.price_1 {
+	width: 1200px;
+	float: left;
+	display: inline;
+	overflow: hidden;
+}
+
+.price_2 {
+	width: 1200px;
+	/* height: 510px; */
+	float: left;
+	display: inline;
+	position: relative;
+	overflow: hidden;
+	margin: 30px 0px 0px 0px;
+}
+
+.price_3 {
+	width: 600px;
+	float: left;
+	display: inline;
+	margin: 30px 0px 0px 0px;
+	overflow: hidden;
+	background: url("img/price_3_line.png") no-repeat 599px 76px #ffffff;
+}
+
+.price_4 {
+	width: 600px;
+	height: 644px;
+	float: left;
+	display: inline;
+	margin: 30px 0px 0px 0px;
+	overflow: hidden;
+}
+.price_5 {
+	width: 1200px;
+	height: 680px;
+	float: left;
+	display: inline;
+	margin: 30px 0px 0px 0px;
+	overflow: hidden;
+	background: white;
+}
+.price_6 {
+	width: 1200px;
+	height: 800px;
+	float: left;
+	display: inline;
+	margin: 30px 0px 0px 0px;
+	overflow: hidden;
+	background: white;
+}
+.price_1 .title,.price_2 .title,.price_3 .title,.price_4 .title,.price_5 .title,.price_6 .title {
+	width: 100%;
+	height: 60px;
+	float: left;
+	display: inline;
+}
+.title h2{
+			margin-left:25px;
+		}
+.price_1 .title {
+	background: url("img/price_title.png") no-repeat 5px -296px #fff;
+}
+
+.price_2 .title {
+	background: url("img/price_title.png") no-repeat 0px -65px #fff;
+}
+
+.price_3 .title {
+	width: 99.8%;
+	background: url("img/price_title.png") no-repeat 5px -150px #fff;
+}
+
+.price_4 .title {
+	background: url("img/price_title.png") no-repeat 0px -226px #fff;
+}
+.price_5 .title {
+	background: url("img/price_title.png") no-repeat 5px -226px #fff;
+}
+.price_6 .title {
+	background: url("img/price_title.png") no-repeat 5px -226px #fff;
+}
+.price_1 .content,.price_2 .content,.price_3 .content,.price_4 .content,.price_5 .content,.price_6 .content
+	{
+	width: 100%;
+	float: left;
+	/* display: inline; */
+	position: relative;
+	background: #ffffff;
+}
+
+
+.price_1 .content {
+	height: 610px;
+}
+.price_2 .content {
+	/* height: 470px; */
+}
+
+.price_3 .content {
+	width: 99.8%;
+}
+
+.price_4 .content {
+	height: 644px;
+}
+.price_5 .content {
+	height: 644px;
+}
+.price_6 .content {
+	height: 644px;
+}
+.kind_nav {
+	width: 100%;
+/* 	height: 130px; */
+	float: left;
+	display: inline;
+	/* margin: 0px 0px 0px 20px; */
+  	/* padding: 0px 0px 0px 15px; */
+}
+
+.kind_nav li {
+	width: 280px;
+	/* height: 98px; */
+	float: left;
+	display: inline;
+	position: relative;
+	margin: 10px 0px 0px 6px;
+	cursor: default;
+	border-radius: 4px;
+	overflow: hidden;
+}
+.kind_nav li.li_first{
+	margin-left:15px;
+}
+.kind_nav .name {
+	width: 100%;
+	/* height: 40px; */
+	line-height: 30px;
+	font-family: "微软雅黑";
+	color: #343844;
+	font-size: 18px;
+	float: left;
+	display: inline;
+	/* margin: 0px 0px 0px 15px; */
+}
+
+.kind_nav .ratio {
+	width: auto;
+	height: 35px;
+	line-height: 30px;
+	font-family: "微软雅黑";
+	color: #343844;
+	font-size: 14px;
+	float: right;
+	display: inline;
+	margin: 3px 10px 0px 0px;
+}
+
+.kind_nav .ratio.up {
+	background: url("img/price_icon.png") no-repeat -3px -588px;
+	padding: 0px 0px 0px 15px;
+}
+
+.kind_nav .ratio.down {
+	background: url("img/price_icon.png") no-repeat -3px -617px;
+	padding: 0px 0px 0px 15px
+}
+
+.kind_nav .price {
+	width: 100%;
+	height: 30px;
+	position: absolute;
+	color: #343844;
+	bottom: 2px;
+}
+
+.kind_nav .price span {
+	width: auto;
+	height: auto;
+	float: left;
+	display: block;
+	font-size: 24px;
+	margin: 0px 0px 0px 15px;
+	font-family: arial;
+}
+
+.price p {
+	width: auto;
+	height: auto;
+	float: left;
+	display: block;
+	font-size: 24px;
+	margin: 0px 0px 0px 15px;
+	font-family: arial;
+}
+
+.kind_nav .price p {
+	width: auto;
+	height: auto;
+	float: left;
+	display: block;
+	font-size: 14px;
+	margin: 7px 0px 0px 0px;
+	font-family: "微软雅黑";
+}
+
+.kind_nav .li_long {
+	/* background: #FFFF99; */
+	border: 1px solid #FFCC33;
+	text-align: center;
+}
+
+.kind_nav .li_short {
+	background: #FFFF99;
+	border: 1px solid #993300;
+}
+
+.kind_switch {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+	position: relative;
+}
+
+.kind_left {
+	width: 40%;
+	height: 300px;
+	float: left;
+	display: inline;
+	position: relative;
+	margin: 0px 0px 0px 28px;
+}
+
+.kind_left p {
+	color: #343844;
+	font-size: 18px;
+	font-family: "微软雅黑";
+}
+
+.kind_left p strong {
+	color: #813b33;
+	font-size: 24px;
+}
+
+.kind_left ul {
+	width: 60%;
+	height: 250px;
+	float: left;
+	display: block;
+	margin: 20px 0px 0px 0px;
+}
+
+.kind_left ul li {
+	width: 100%;
+	height: 36px;
+	float: left;
+	display: inline;
+	font-family: "微软雅黑";
+	color: #343844;
+	margin: 10px 0px;
+}
+
+.kind_left ul li strong {
+	color: #813b33;
+	font-size: 24px;
+	line-height: 24px;
+	font-weight: normal;
+}
+
+.kind_left ul li em {
+	font-style: normal;
+}
+
+.kind_left ul li .rise {
+	color: #813b33;
+	margin: 0px 2px;
+}
+
+.kind_left ul li .fall {
+	color: #50c042;
+	margin: 0px 2px;
+}
+
+.kind_left ul li .falt {
+	color: #343844;
+	margin: 0px 2px;
+}
+
+.kind_left .more {
+	cursor: pointer;
+	color: #fff;
+	width: auto;
+	height: 20px;
+	position: absolute;
+	z-index: 99;
+	bottom: 40px;
+	padding: 0px 15px;
+	text-align: center;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	background: #50c042;
+	border-radius: 50px;
+}
+
+.kind_left .more a {
+	color: #fff;
+}
+
+.kind_explain {
+	width: auto;
+	height: 24px;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	font-family: "微软雅黑";
+	cursor: default;
+}
+
+.kind_right {
+	/*width: 400px;height:245px;position:absolute;z-index:111;bottom: 0px;right: 0px;*/
+	/*background: url("img/kind_right.png");*/
+	bottom: 30px;
+	height: 245px;
+	position: absolute;
+	right: 60px;
+	width: 400px;
+	z-index: 111;
+}
+
+.news_title {
+	width: 90%;
+	height: 30px;
+	float: left;
+	display: inline;
+	margin: 0px 0px 0px 5%;
+}
+
+.news_title ul {
+	width: 100%;
+	height: 100%;
+	float: left;
+	display: block;
+}
+
+.news_title ul li {
+	width: auto;
+	height: 30px;
+	float: left;
+	display: inline;
+	padding: 0px 10px;
+	font-size: 14px;
+	text-align: center;
+	margin: 0px 15px 0px 0px;
+	cursor: pointer;
+	font-family: "微软雅黑";
+	color: #2f364a;
+	line-height: 36px;
+	vertical-align: bottom;
+}
+
+.news_title ul .li_normal {
+	border-bottom: 4px solid #dadada;
+}
+
+.news_title ul .li_click {
+	border-bottom: 4px solid #70ca10;
+}
+
+.news_title ul span {
+	width: 30px;
+	height: 30px;
+	float: left;
+	display: block;
+	color: #407434;
+	margin: 5px 0px 0px 0px;
+	cursor: pointer;
+}
+
+.news_title ul span a {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: bottom;
+	font-size: 14px;
+	float: left;
+	display: block;
+	color: #407434;
+	font-family: "微软雅黑";
+}
+
+.news_content {
+	width: 90%;
+	height: 390;
+	float: left;
+	display: inline;
+	margin: 0px 0px 0px 5%;
+}
+
+.news_content_title {
+	width: 90%;
+	height: 22px;
+	margin: 10px 0px 0px 5%;
+	float: left;
+	display: block;
+}
+
+.news_content_title th {
+	background: url("img/price_2_table.png") repeat-x;
+	color: #333;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	height: 22px;
+	line-height: 22px;
+	vertical-align: bottom;
+}
+
+.news_content ul {
+	height: auto;
+	width: 100%;
+	margin: 10px 0px 0px 0%;
+	float: left;
+	display: block;
+}
+
+.news_content ul li {
+	width: 98%;
+	height: 33px;
+	margin: 0px 0px 5px 0px;
+	float: left;
+	display: inline;
+	border: 1px solid #fff;
+	overflow: hidden;
+}
+
+.news_content ul li.normal {
+	border: 1px solid #fff;
+	border-radius: 5px;
+}
+
+.news_content ul li.select {
+	border: 1px solid #50c042;
+	border-radius: 5px;
+}
+
+.news_content li div {
+	font-size: 12px;
+	height: 100%;
+	border-bottom: none;
+	color: #333333;
+	font-family: "微软雅黑";
+	vertical-align: bottom;
+	float: left;
+	display: block;
+	overflow: hidden;
+	text-indent: 14px;
+}
+
+.news_content li div span {
+	width: 100%;
+	height: 100%;
+	float: left;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: default
+}
+
+.news_content li div span.rise {
+	background: url("img/price_icon.png") no-repeat 26px -328px;
+	color: #813b33;
+}
+
+.news_content li div span.fall {
+	background: url("img/price_icon.png") no-repeat 26px -378px;
+	color: #607b69;
+}
+
+.news_explain {
+	width: auto;
+	height: 24px;
+	position: absolute;
+	left: 35px;
+	bottom: 20px;
+	font-family: "微软雅黑";
+	cursor: default;;
+}
+
+.kind_contrast {
+	width: 95%;
+	float: left;
+	display: inline;
+	margin: 0px 0px 0px 2.5%;
+}
+
+.kind_contrast .contrast_title {
+	width: auto;
+	height: 18px;
+	float: left;
+	display: inline;
+	color: #343844;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	text-indent: 10px;
+	font-size: 18px;
+	line-height: 16px;
+	margin-left: -10px;
+	vertical-align: top;
+}
+
+.kind_contrast .contrast_content {
+	width: 100%;
+	height: 320px;
+	float: left;
+	display: inline;
+	margin: 10px 0px 0px 0px;
+}
+
+.kind_contrast .contrast_content ul {
+	width: 70px;
+	height: auto;
+	float: left;
+	display: block;
+	margin: 30px 0px 0px 10px;
+}
+
+.kind_contrast .contrast_content ul li {
+	height: 22px;
+	line-height: 20px;
+	vertical-align: bottom;;
+	float: left;
+	display: inline;
+	padding: 0px 6px;
+	margin: 2px auto;
+	font-size: 14px;
+	cursor: pointer;
+	font-family: "微软雅黑";
+}
+
+.kind_contrast .contrast_content ul span {
+	height: 20px;
+	float: left;
+	display: inline;
+	color: #407434;
+	padding: 0px 6px;
+}
+
+.kind_contrast .contrast_content ul span a {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: bottom;
+	font-size: 14px;
+	float: left;
+	display: block;
+	color: #407434;
+	font-family: "微软雅黑";
+}
+
+.price_map {
+	width: 400px;
+	height: 308px;
+	float: left;
+	display: inline; /*background: url("img/price_map.png") no-repeat;*/
+	margin: 10px 0px 0px 25px;
+}
+
+.price_map_ul {
+	width: 150px;
+	height: 250px;
+	float: left;
+	display: inline;
+	margin: 25px 0px 0px -20px;
+}
+
+.price_map_ul ul {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: block;
+}
+
+.price_map_ul ul li {
+	width: auto;
+	height: 60px;
+	float: right;
+	display: inline;
+	border-bottom: 1px solid #555555;
+	font-family: "微软雅黑";
+	line-height: 26px;
+}
+/*.price_map_ul ul .fold{font-family:"微软雅黑"; }*/
+.price_map_ul ul .fold strong {
+	color: #813B33;
+	font-size: 30px;
+	margin: 0px 0px 0px 5px;
+	font-weight: normal;
+}
+
+.price_map_ul ul .fold em {
+	color: #813B33;
+	font-size: 12px;
+	vertical-align: bottom;
+	font-style: normal;
+}
+/*.price_map_ul ul .same strong{  color: #813B33; font-size: 30px;margin: 0px 0px 0px 5px;}*/
+/*.price_map_ul ul .ring strong{  color: #813B33; font-size: 30px;margin: 0px 0px 0px 5px;}*/
+.price_map_ul ul li.same {
+	border: none;
+	width: 90px;
+}
+
+.price_map_ul ul li.ring {
+	border: none;
+	width: 90px;
+}
+
+.price_map_ul ul li .rise {
+	vertical-align: top;
+	background: url("img/price_icon.png") no-repeat 0px -216px;
+	font-size: 18px;
+	line-height: 34px;
+	color: #813b33;
+	padding: 0px 5px 0px 22px;
+}
+
+.price_map_ul ul li .fall {
+	vertical-align: top;
+	background: url("img/price_icon.png") no-repeat 0px -277px;
+	font-size: 18px;
+	line-height: 34px;
+	color: #73bd08;
+	padding: 0px 5px 0px 22px
+}
+
+.price_map_ul .more {
+	cursor: pointer;
+	color: #fff;
+	width: auto;
+	height: 20px;
+	margin: 20px 0px 0px 0px;
+	float: right;
+	display: inline;
+	padding: 0px 15px;
+	text-align: center;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	background: #50c042;
+	border-radius: 50px;
+}
+
+.price_map_ul .more a {
+	color: #fff;
+}
+
+.price_map_icon {
+	width: 152px;
+	height: 18px;
+	position: absolute;
+	left: 40px;
+	top: 305px;
+	background: url("img/price_icon.png") no-repeat 0px -691px;;
+	z-index: 99;
+}
+
+.price_4 .news_content {
+	width: 465px;
+	height: 390;
+	float: left;
+	display: inline;
+	position: relative;
+	margin: 10px 0px 0px 65px;
+}
+
+.price_4 .news_content th {
+	background: url("img/price_2_table.png") repeat-x;
+	color: #333333;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	height: 22px;
+	line-height: 22px;
+	vertical-align: bottom;
+}
+
+.price_4 .news_content td {
+	text-indent: 15px;
+	font-size: 12px;
+	height: 30px;
+	border-bottom: none;
+	color: #333333;
+	font-family: "微软雅黑";
+	line-height: 30px;
+	vertical-align: bottom;
+}
+
+.price_4 .news_content td .rise {
+	background: url("img/price_icon.png") no-repeat 0px -338px;
+	color: #813b33;
+	padding: 0px 5px 0px 15px;
+	line-height: 30px;
+	vertical-align: bottom;
+	font-family: "arial"
+}
+
+.price_4 .news_content td .fall {
+	background: url("img/price_icon.png") no-repeat 0px -386px;
+	color: #607b69;
+	padding: 0px 5px 0px 15px;
+	vertical-align: bottom;
+	font-family: "arial"
+}
+
+/*地图滚动条*/
+.jp-container {
+	width: 100%;
+	height: 220px;
+	position: relative;
+	float: left;
+	display: inline;
+	overflow: hidden;
+}
+
+.jp-container a {
+	padding: 15px 20px;
+	display: block;
+	line-height: 20px;
+	background-color: #fff;
+	border-bottom: 1px solid #F2F4F8;
+	border-top: 1px solid #D8DFEA;
+}
+
+.jp-container a:first-child {
+	border-top: none;
+}
+
+.jp-container a:last-child {
+	border-bottom: none;
+}
+
+.jp-container a:hover {
+	background: #ECEFF5;
+	border-bottom-color: #ECEFF5;
+}
+
+.jp-container a h3 {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 2px 0 5px 0;
+	text-transform: uppercase;
+}
+
+.jp-container a img {
+	float: left;
+	margin: 5px 10px 0px 0px;
+	padding: 3px;
+	background: #fff;
+	border: 1px solid #D8DFEA;
+}
+
+.jspContainer {
+	overflow: hidden;
+	position: relative;
+}
+
+.jspPane {
+	position: absolute;
+}
+
+.jspVerticalBar {
+	position: absolute;
+	top: 0;
+	right: 3;
+	width: 8px;
+	height: 100%;
+	background: transparent;
+}
+
+.jspHorizontalBar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 14px;
+	background: transparent;
+}
+
+.jspVerticalBar *,.jspHorizontalBar * {
+	margin: 0;
+	padding: 0;
+}
+
+.jspCap {
+	display: none;
+}
+
+.jspHorizontalBar .jspCap {
+	float: left;
+}
+
+.jspTrack {
+	background: transparent;
+	position: relative;
+}
+
+.jspDrag {
+	background: #73bd08;
+	opacity: 0.5;
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.jspHorizontalBar .jspTrack,.jspHorizontalBar .jspDrag {
+	float: left;
+	height: 100%;
+}
+
+.jspArrow {
+	background: #50506d;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+
+.jspArrow.jspDisabled {
+	cursor: default;
+	background: #80808d;
+}
+
+.jspVerticalBar .jspArrow {
+	height: 16px;
+}
+
+.jspHorizontalBar .jspArrow {
+	width: 16px;
+	float: left;
+	height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus {
+	outline: none;
+}
+
+.jspCorner {
+	background: #eeeef4;
+	float: left;
+	height: 100%;
+}
+
+.price_4 #price_area_table {
+	margin: 0px 0px 0px 0px;
+	width: 100%;
+	height: auto;
+	float: left;
+	display: block;
+}
+
+.price_4 #price_area_table li div {
+	width: auto;
+	float: left;
+	display: inline;
+	text-indent: 42px;
+	font-size: 12px;
+	height: 30px;
+	border-bottom: none;
+	color: #333333;
+	font-family: "微软雅黑";
+	line-height: 30px;
+	vertical-align: bottom;
+	margin-left: -5px
+}
+
+.price_4 #price_area_table li div.rise {
+	background: url("img/price_icon.png") no-repeat 0px -338px;
+	color: #813b33;
+	padding: 0px 5px 0px 15px;
+	line-height: 30px;
+	vertical-align: bottom;
+	font-family: "arial"
+}
+
+.price_4 #price_area_table li div.fall {
+	background: url("img/price_icon.png") no-repeat 0px -386px;
+	color: #607b69;
+	padding: 0px 5px 0px 15px;
+	vertical-align: bottom;
+	font-family: "arial"
+}
+
+/*内页 涨跌幅排行*/
+.price_title {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: bottom;
+	float: left;
+	display: inline;
+	background: url("img/price_inner_title.png") no-repeat 0px 38px;
+}
+
+.price_title h1 {
+	width: auto;
+	height: 40px;
+	line-height: 38px;
+	text-indent: 20px;
+	font-size: 24px;
+	vertical-align: bottom;
+	float: left;
+	display: block;
+	color: #343844;
+	font-family: "微软雅黑";
+	font-weight: normal;
+}
+
+.price_content {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+}
+
+.price_content .weidu_zone {
+	width: 100%;
+	height: 64px;
+	float: left;
+	display: inline;
+	position: relative;
+}
+
+/*页面维度 肖何 修改添加 开始*/
+.price_content .weidu_div {
+	width: auto;
+	height: auto;
+	float: left;
+	display: inline;
+	position: relative;
+	margin: 10px 10px 0px 0px;
+	background: none;
+}
+
+.price_content .weidu_title,.price_content .weidu_title_2 {
+	width: auto;
+	height: 28px;
+	max-width: none;
+	overflow: hidden;
+	float: left;
+	display: inline;
+	border: 1px solid #e5e5e5;
+	padding: 0px 25px 0px 15px;
+	line-height: 28px;
+	vertical-align: bottom;
+	cursor: pointer;
+	font-family: "微软雅黑";
+	color: #2f364a;
+	font-weight: bold;
+	color: #2f364a;
+	background: url(img/Wdate_down.png) #ffffff 100% no-repeat;
+}
+
+.price_content .weidu_content,.price_content .weidu_content_2 {
+	width: auto;
+	height: auto;
+	position: absolute;
+	z-index: 111;
+	top: 29px;
+	padding: 0px 5px 50px 0px;
+}
+
+.price_content .weidu_content_2 {
+	width: 214px;
+}
+
+.price_content .weidu_content_title {
+	width: 12px;
+	height: 6px;
+	position: absolute;
+	z-index: 1;
+	top: 5px;
+	left: 10px;
+	background: url(img/weidu_content_title.png) no-repeat;
+}
+
+.price_content .weidu_content_main {
+	width: 100%;
+	min-width: 145px;
+	height: auto;
+	float: left;
+	display: inline;
+	margin: 10px 0px 0px 0px;
+	background: #ffffff;
+	border: 1.5px solid #ececec;
+	overflow: hidden;
+	border-radius: 0px 0px 2px 2px;
+}
+
+.price_content .weidu_main_title {
+	width: 100%;
+	height: 30px;
+	overflow: hidden;
+	line-height: 30px;
+	text-indent: 10px;
+	vertical-align: bottom;
+	font-family: "微软雅黑";
+	color: #2f364a;
+	font-weight: bold;
+	cursor: default;
+	padding: 0px 0px 0px 0px;
+	border-bottom: 1px solid #ECECEC;
+}
+
+.price_content .weidu_main_title a {
+	width: auto;
+	height: 100%;
+	float: right;
+	display: block;
+	margin: 0px 10px 0px 0px;
+	padding: 0px 0px 0px 10px;
+	cursor: pointer;
+	color: #2f364a;
+	font-weight: normal;
+	font-family: "微软雅黑";
+}
+
+.price_content .weidu_main_title .all {
+	width: auto;
+	height: 100%;
+	float: right;
+	display: block;
+	margin: -4px 10px 0px 0px;
+	padding: 0px 0px 0px 10px;
+	cursor: pointer;
+	color: #2f364a;
+	font-weight: normal;
+	font-family: "微软雅黑";
+}
+
+.price_content .weidu_search {
+	width: 91%;
+	height: 28px;
+	float: left;
+	display: inline;
+	border: 1px solid #ccc;
+	margin: 8px 0px 0px 8px;
+	background: url("img/weidu_search.png") no-repeat right;
+}
+
+.price_content .weidu_search input {;
+	height: 28px;
+	float: left;
+	display: block;
+	border: none;
+	margin: 0px;
+	width: 80%;
+}
+
+.price_content .weidu_main_content {
+	width: 100%;
+	max-height: 200px;
+	float: left;
+	display: inline;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.price_content .weidu_main_content ul {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+}
+
+.price_content .weidu_main_content ul li {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: bottom;
+	border-bottom: 1px solid #ececec;
+	float: left;
+	display: inline;
+	padding: 0px 0px 0px 0px;
+	cursor: pointer;
+}
+
+.price_content .weidu_main_content ul li a {
+	color: #2f364a;
+	width: 100%;
+	display: block;
+	float: left;
+	margin: 0px 0px 0px 12px;
+	padding: 0px 80px 0px 18px;
+	white-space: nowrap;
+}
+
+.price_content .weidu_main_content .li_hover {
+	background: #f8f8f8;
+}
+
+.price_content .weidu_main_content .li_hover_select {
+	background: #f8f8f8;
+}
+
+.price_content .weidu_main_content .li_click {
+	background: #eeeeee;
+}
+
+.price_content  .a_normal {
+	background: url(img/weidu_more_normal.png) no-repeat 0px 8px;
+}
+
+.price_content  .a_click {
+	background: url(img/weidu_more_click.png) no-repeat 0px 8px;
+}
+
+.price_content .weidu_main_foot {
+	width: 100%;
+	height: 50px;
+	float: left;
+	display: inline;
+	border-top: 1px solid #ececec;
+}
+
+.price_content .weidu_main_button_sure,.weidu_main_button_delete {
+	width: 60px;
+	height: 30px;
+	float: right;
+	display: inline;
+	text-align: center;
+	line-height: 28px;
+	vertical-align: bottom;
+	cursor: pointer;
+	margin: 13px 8px 0px 0px;
+}
+
+.price_content .weidu_main_button_sure a,.weidu_main_button_delete a {
+	color: #2f364a;
+	width: 100%;
+	height: 100%;
+	display: block;
+	font-family: "微软雅黑";
+}
+
+.price_content .weidu_button_normal {
+	background: url(img/weidu_button_normal.png) no-repeat;
+}
+
+.price_content .weidu_button_click {
+	background: url(img/weidu_button_click.png) no-repeat;
+}
+
+/*详参*/
+.price_content .weidu_zone .reference {
+	width: auto;
+	height: 30px;
+	float: left;
+	display: inline;
+	line-height: 30px;
+	padding: 0px 25px 0px 0px;
+	background: url("img/Wdate_down.png") no-repeat right 14px;
+	vertical-align: bottom;
+	cursor: pointer;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #343844;
+}
+
+.price_content .weidu_zone .reference_div {
+	width: 96.7%;
+	height: auto;
+	max-height: 400px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	overflow: auto;
+	position: absolute;
+	z-index: 99;
+	top: 45px;
+	left: 20px;
+	padding: 10px 0px;
+	/*background:url("img/reference_div.png") repeat-x #ffffff;*/
+	background: #ffffff;
+	border-bottom: 4px solid #85888f;
+	display: none;
+}
+
+.price_content .weidu_zone .reference_div ul {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline
+}
+
+.price_content .weidu_zone .reference_div ul li {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+	color: #343844;
+	font-family: "微软雅黑";
+}
+
+.price_content .weidu_zone .reference_div ul li .reference_left {
+	width: 100px;
+	height: auto;;
+	float: left;
+	display: inline;
+	font-size: 16px;
+	text-align: center;
+	line-height: 26px;
+	margin: 0px 0px 0px 10px;
+	vertical-align: bottom;
+}
+
+.price_content .weidu_zone .reference_div .reference_right {
+	width: 90%;
+	height: auto;
+	float: left;
+	display: inline;
+}
+
+.reference_right div {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+}
+
+.price_content .weidu_zone .reference_div .reference_right span,.price_content .weidu_zone .reference_div .reference_right .right .right strong
+	{
+	width: auto;
+	height: 26px;
+	line-height: 26px;
+	font-size: 14px;
+	vertical-align: bottom;;
+	float: left;
+	display: block;
+	margin: 0px 20px 0px 0px;
+}
+
+.price_content .weidu_zone .reference_div .reference_right .left {
+	width: 50px;
+	height: 100%;
+	float: left;
+	display: inline;
+	height: 26px;
+	line-height: 26px;
+	font-size: 14px;
+	vertical-align: bottom;
+}
+
+.price_content .weidu_zone .reference_div .reference_right .right {
+	width: 95%;
+	height: 100%;
+	float: left;
+	display: inline;
+}
+
+/*查询按钮*/
+.price_search {
+	width: 89px;
+	height: 30px;
+	float: right;
+	display: inline;
+	background: url("img/price_icon.png") no-repeat 0px -418px;
+	cursor: pointer;
+}
+
+/*页面维度 肖何 修改添加 结束*/
+/*价格指标*/
+.price_index {
+	width: 100%;
+	height: 150px;
+	float: left;
+	display: inline;
+	margin: 0px 0px 30px 0px;
+}
+
+.price_index_1 {
+	width: 266px;
+	height: 150px;
+	float: left;
+	display: inline;
+	background: #fff;
+	margin: 0px 20px 0px 20px;
+}
+
+.price_index_1 .index_title {
+	width: auto;
+	height: 20px;
+	float: left;
+	display: inline;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	margin: 20px 0px 0px 56px;
+}
+
+.price_index_1 .index_content {
+	width: auto;
+	height: 48px;
+	margin: 5px 0px 0px 55px;
+	line-height: 48px;
+	font-family: arial;
+	font-size: 48px;
+	float: left;
+	display: inline;
+	color: #813b33;
+}
+
+.price_index_1 .index_content span {
+	vertical-align: bottom;
+	font-size: 12px;
+	margin: 7px 0px 0px 2px;
+	float: right;
+	display: block;;
+}
+
+.price_index_1 .index_foot {
+	width: auto;
+	height: 24px;
+	float: left;
+	display: inline;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	margin: 10px 0px 0px 46px;
+}
+
+.price_index_1 .index_foot em {
+	font-family: arial;
+	font-size: 18px;
+}
+
+.price_index_1 .index_foot em.up {
+	font-style: normal;
+	background: url("img/price_icon.png") no-repeat 0px -528px;
+	padding: 0px 10px 0px 10px;
+	color: #813b33;
+}
+
+.price_index_1 .index_foot em.down {
+	font-style: normal;
+	background: url("img/price_icon.png") no-repeat 0px -567px;
+	padding: 0px 10px 0px 10px;
+	color: #73bd08;
+}
+
+.price_index_2 {
+	width: 275px;
+	height: 150px;
+	float: left;
+	display: inline;
+	background: #fff;
+	margin: 0px 20px 0px 0px;
+}
+
+.price_index_2 .index_up {
+	width: 230px;
+	height: 48px;
+	float: left;
+	display: inline;
+	border-bottom: 1px solid #cccccc;
+	margin: 26px 0px 0px 23px;
+}
+
+.price_index_2 .index_down {
+	width: 230px;
+	height: 48px;
+	float: left;
+	display: inline;
+	border-top: 1px solid #eef1f7;
+	margin: 0px 0px 0px 23px;
+}
+
+.price_index_2 .index_title {
+	width: auto;
+	height: 20px;
+	float: left;
+	display: inline;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin: 0px 0px 0px 0px;
+}
+
+.price_index_2 .index_down .index_title {
+	margin: 10px 0px 0px 0px;
+}
+
+.price_index_2 .index_content {
+	width: 100%;
+	height: 24px;
+	float: left;
+	display: inline;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin: 0px 0px 0px 0px;
+	line-height: 24px;
+	color: #343844;
+	font-weight: bold;
+}
+
+.price_index_2 .index_content em.up {
+	font-style: normal;
+	color: #813b33;
+	font-size: 16px;
+	font-family: arial, "微软雅黑";
+	margin: 0px 0px 0px 10px;
+	line-height: 20px;
+	vertical-align: bottom;
+}
+
+.price_index_2 .index_content em.down {
+	font-style: normal;
+	color: #73bd08;
+	font-size: 16px;
+	font-family: arial, "微软雅黑";
+	margin: 0px 0px 0px 10px;
+	line-height: 20px;
+	vertical-align: bottom;
+}
+
+.price_index_3 {
+	width: 275px;
+	height: 150px;
+	float: left;
+	display: inline;
+	background: #fff;
+	margin: 0px 20px 0px 0px;
+}
+
+.price_index_3 .index_left {
+	width: 165px;
+	height: 150px;
+	float: left;
+	display: inline;
+}
+
+.price_index_3 .index_right {
+	width: 40%;
+	height: 100%;
+	float: left;
+	display: inline;
+}
+
+.price_index_3 .index_right ul {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: block;
+	margin: 5px 0px 0px 0px;
+}
+
+.price_index_3 .index_right ul li {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+	line-height: 22px;
+	font-family: "微软雅黑";
+}
+
+.price_index_3 .index_right ul li em {
+	font-style: normal;
+	color: #813b33;
+	font-family: arial;
+}
+
+.price_index_3 .index_right ul li.small {
+	font-size: 12px;
+}
+
+.price_index_3 .index_right ul li.small em {
+	font-size: 18px;
+}
+
+.price_index_3 .index_right ul li.big {
+	font-size: 16px;
+}
+
+.price_index_3 .index_right ul li.big em {
+	font-size: 26px;
+}
+
+.price_index_4 {
+	width: 265px;
+	height: 150px;
+	float: left;
+	display: inline;
+	background: #fff;
+}
+
+.price_index_4 .index_up {
+	width: 230px;
+	height: 48px;
+	float: left;
+	display: inline;
+	border-bottom: 1px solid #cccccc;
+	margin: 26px 0px 0px 23px;
+}
+
+.price_index_4 .index_down {
+	width: 230px;
+	height: 48px;
+	float: left;
+	display: inline;
+	border-top: 1px solid #eef1f7;
+	margin: 0px 0px 0px 23px;
+}
+
+.price_index_4 .index_title {
+	width: auto;
+	height: 20px;
+	float: left;
+	display: inline;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin: 0px 0px 0px 0px;
+}
+
+.price_index_4 .index_down .index_title {
+	margin: 10px 0px 0px 0px;
+}
+
+.price_index_4 .index_content {
+	width: 100%;
+	height: 24px;
+	float: left;
+	display: inline;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin: 0px 0px 0px 0px;
+	line-height: 24px;
+	color: #343844;
+	font-weight: bold;
+}
+
+.price_index_4 .index_content em.up {
+	font-style: normal;
+	color: #813b33;
+	font-size: 16px;
+	font-family: arial;
+	margin: 0px 0px 0px 10px;
+}
+
+.price_index_4 .index_content em.down {
+	font-style: normal;
+	color: #73bd08;
+	font-size: 16px;
+	font-family: arial;
+	margin: 0px 0px 0px 10px;
+}
+
+/*表格*/
+.price_table_explain {
+	font-family: '微软雅黑';
+	font-size: 14px;
+	color: #343844;
+	text-indent: 20px;
+	margin: 10px 0px 0px 0px;
+	float: left;
+	display: block;
+}
+
+.price_table {
+	width: 100%;
+	height: auto;
+	min-height: 600px;
+	float: left;
+	display: block;
+	background: #fff;
+}
+
+.price_table ul {
+	width: 95%;
+	height: auto;
+	float: left;
+	display: block;
+	margin: 0px 2.5%;
+}
+
+.price_table ul li {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+	line-height: 40px;
+}
+
+.price_table ul li div {
+	float: left;
+	display: inline;
+}
+
+.price_table ul li.thead div,.price_table ul li.td div {
+	font-family: "微软雅黑";
+	text-indent: 40px;
+	vertical-align: bottom;
+	color: #343844;
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-wrap: normal;
+}
+
+.price_table ul li.thead div {
+	border-bottom: 1px solid #f7f7ff;
+	font-weight: bold;
+	font-size: 14px;
+	text-indent: 0px;
+	cursor: default;
+}
+
+.price_table ul li.td_odd {
+	background: #f8f8ff;
+}
+
+.price_table ul li.thead div span {
+	width: auto;
+	height: 100%;
+	cursor: pointer;
+	float: left;
+	display: block;
+	margin: 0px auto;
+	padding: 0px 30px 0px 40px;
+}
+
+.price_table ul li.thead div span.up {
+	background: url("img/price_icon.png") no-repeat right -485px;
+}
+
+.price_table ul li.thead div span.down {
+	background: url("img/price_icon.png") no-repeat right -454px;
+}
+
+.price_table ul li.thead div span.up_down {
+	background: url("img/price_icon.png") no-repeat right -642px;
+}
+
+/*分页*/
+.pagination_div {
+	width: 500px;
+	height: auto;
+	float: left;
+	display: inline;
+	/*margin:10px 0px 0px 30%;*/
+	margin: 0px auto;
+	position: relative;
+}
+/*切换 地图 表格*/
+.price_switch {
+	width: auto;
+	height: 30px;
+	float: right;
+	display: inline;
+	border: 1px solid #e5e5e5;
+}
+
+.price_switch span {
+	width: auto;
+	height: 100%;
+	float: left;
+	display: block;
+	padding: 0px 12px;
+	line-height: 30px;
+	vertical-align: bottom;
+	text-align: center;
+	cursor: pointer;
+	font-size: 14px;
+	color: #1f4167;
+	font-family: "微软雅黑";
+}
+
+.price_switch .normal {
+	background: #fff;
+}
+
+.price_switch .click {
+	background: #ececec;
+}
+/*地图*/
+.price_inner_map {
+	width: 100%;
+	height: 650px;
+	float: left;
+	display: block;
+	/*background: #e8e8e9;*/
+	background: #fff;
+}
+
+/*市场走势*/
+.weidu_dqdb {
+	width: auto;
+	height: 100%;
+	float: left;
+	display: inline;
+}
+
+.weidu_zone .weidu_pzdb {
+	width: auto;
+	height: 0px;
+	float: left;
+	display: inline;
+}
+
+.weidu_pzdb {
+	width: auto;
+	height: 100px;
+	float: left;
+	display: inline;
+}
+
+.price_chart {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: inline;
+	background: #fff;
+}
+
+.price_chart #container,.price_chart #container1 {
+	width: 100%;
+	height: 400px;
+	margin: 0px 0px 0px 0px;
+	float: left;
+	display: inline;
+}
+
+.price_chart .price_slider {
+	width: 100%;
+	float: left;
+	display: inline;
+}
+
+/*维度*/
+.Wdate {
+	height: 28px;
+	border: 1px solid #E5E5E5;
+	text-align: center;
+	color: #343844;
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+
+/*价格首页蛋疼的插件*/
+.price_3 .content #djb {
+	width: auto;
+	height: 300px;
+	float: left;
+	display: inline;
+	overflow: hidden;
+}
+
+.price_3 .content #djb #container {
+	width: 480px;
+	height: 220px;;
+	float: left;
+	display: inline;
+	margin: 0px 0px 0px 10px;
+}
+
+.price_3 .content #qushi {
+	width: auto;
+	height: 300px;
+	float: left;
+	display: inline;
+	margin: 0px 0px 0px 100px;
+	overflow: hidden;
+	position: relative;
+}
+
+.price_3 .content #qushi #container1 {
+	width: 480px;
+	height: 220px;;
+	float: left;
+	display: inline;
+	margin: 10px 0px 0px 0px;
+}
+
+.price_3 .click {
+	width: auto;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: bottom;
+	background: #50c042;
+	color: #fff;
+	border-radius: 0px;
+	overflow: hidden;
+}
+
+.price_3 .normal {
+	width: auto;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: bottom;
+	background: none;
+	color: #343844;
+	border-radius: 0px;
+	overflow: hidden;
+}
+
+#price_3_1 #djb {
+	margin: 30px 0px 0px 100px;
+	width: 520px;
+}
+
+#price_3_1 #djb .ui-corner-all {
+	background-color: #eee;
+	background: #eee;
+}
+
+#price_3_1 #djb .ui-widget-content {
+	background: #000
+}
+
+#price_3_1 .ui-slider-horizontal {
+	height: 2px;
+	margin-bottom: 0px;
+}
+
+#price_3_1 .ui-slider-horizontal .ui-slider-handle {
+	top: -0.4em;
+	border: 1px solid #343844;
+	background: #fff;
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+#price_3_1 .ui-widget-header {
+	background: #000;
+}
+
+#price_3_1 .g-current-month,#price_3_1 .g-most-recent-month {
+	top: -10px;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	color: #343844;
+}
+
+#price_3_2 .ui-slider {
+	height: 2px;
+	margin: 10px 0px 0px 34px;
+	width: 91%
+}
+
+#price_3_2 #doubleSlider-lineTip,.price_slider #doubleSlider-lineTip {
+	font-family: arial;
+	font-size: 12px;
+	width: 100%;
+	height: 30px;
+	font-family: "微软雅黑";
+	text-indent: 24px;
+	color: #343844;
+}
+
+#price_3_2 .ui-slider-horizontal .ui-slider-handle {
+	top: -0.4em;
+}
+/*#DJBToolbar .price_slider .ui-corner-all{background-color: #eee; background: #eee;}*/
+#DJBToolbar .price_slider .ui-widget-content {
+	background: #F6A828;
+}
+
+#DJBToolbar .price_slider .ui-widget-header {
+	background: #eeeeee;
+}
+
+#price_3_2 .ui-widget-header {
+	background: #000;
+}
+
+#price_3_2 .ui-slider .ui-slider-handle {
+	border: 1px solid #343844;
+	background: #fff;
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+/*.price_3  .container{margin: 5px 0px 0px 0px;}*/
+.price_line {
+	width: 1px;
+	height: 510px;
+	float: left;
+	display: inline;
+	background: #ffffff url("img/price_index_lin.png") no-repeat 0px 88px;
+}
