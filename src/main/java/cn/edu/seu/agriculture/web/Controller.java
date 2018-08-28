@@ -1,20 +1,18 @@
 package cn.edu.seu.agriculture.web;
 
-import cn.edu.seu.agriculture.exception.DBAccessException;
 import cn.edu.seu.agriculture.exception.DataNotExistException;
 import cn.edu.seu.agriculture.exception.PathInvalidException;
 import cn.edu.seu.agriculture.service.DatePriceService;
 import cn.edu.seu.agriculture.service.ReTypeService;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,21 +27,14 @@ public class Controller {
 
     @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET)
     @ResponseBody
-    public String datePriceHandler(@PathVariable("province")String province,
-                           @PathVariable("market")String market,
-                           @PathVariable("type")String type,
-                           @PathVariable("name")String name ) {
-        try {
-            List<Map<String,Object>> reList = datePriceService.getPriceListByInfo(
-                    province,market,type,name);
-            logger.info(reList.toString());
-            return reTypeService.toJson(reList);
-        }catch (PathInvalidException | DataNotExistException e1){
-//            String url = "/agriculture/datePrice"+province+"/"+market+"/"+type+"/"+name+".do";
-            return "Access failed, please check your input!";
-        } catch (Exception e){
-            return "Server inner problem: access to database failed!";
-        }
+    public JSONObject datePriceHandler(@PathVariable("province")String province,
+                                       @PathVariable("market")String market,
+                                       @PathVariable("type")String type,
+                                       @PathVariable("name")String name ) {
+        List<Map<String,Object>> reList = datePriceService.getPriceListByInfo(
+                province,market,type,name);
+        logger.info(reList.toString());
+        return reTypeService.toJson(reList);
     }
 
 

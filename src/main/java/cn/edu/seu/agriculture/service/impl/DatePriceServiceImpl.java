@@ -3,7 +3,6 @@ package cn.edu.seu.agriculture.service.impl;
 import cn.edu.seu.agriculture.dao.DatePriceMapper;
 import cn.edu.seu.agriculture.entity.DatePrice;
 import cn.edu.seu.agriculture.entity.DatePriceExample;
-import cn.edu.seu.agriculture.exception.DBAccessException;
 import cn.edu.seu.agriculture.exception.DataNotExistException;
 import cn.edu.seu.agriculture.exception.PathInvalidException;
 import cn.edu.seu.agriculture.service.DatePriceService;
@@ -65,13 +64,12 @@ public class DatePriceServiceImpl implements DatePriceService {
             json.add(xMap);
             json.add(yMap);
             return json;
-        }catch (PathInvalidException e1){
+        }catch (PathInvalidException | DataNotExistException e1){
+            logger.error(e1.getMessage());
             throw e1;
-        }catch (DataNotExistException e2){
+        } catch (Exception e2){
+            logger.error(e2.getMessage(),e2);
             throw e2;
-        }catch (Exception e){
-            logger.error(e.getMessage(),e);
-            throw new DBAccessException("Exception while access the database: "+ e.getMessage());
         }
     }
 }
