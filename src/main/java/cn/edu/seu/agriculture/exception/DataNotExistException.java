@@ -1,12 +1,14 @@
 package cn.edu.seu.agriculture.exception;
 
+import java.util.Date;
+
 public class DataNotExistException extends RuntimeException{
 
-    public DataNotExistException(String message){
-        super(message);
+    public DataNotExistException(){
+        this("Data not exist in database!");
     }
-
-    public DataNotExistException(String errorCode,Throwable throwable){
-        super(errorCode,throwable);
+    public DataNotExistException(String message)
+    {
+        super(message);
     }
 }
