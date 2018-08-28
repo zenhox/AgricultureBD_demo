@@ -23,7 +23,7 @@ public class DatePriceServiceImpl implements DatePriceService {
     private DatePriceMapper datePriceMapper;
 
     @Override
-    public List<Map<Date,Double>> getPriceListByInfo(String province,
+    public List<Map<String,Object>> getPriceListByInfo(String province,
                                                 String market,
                                                 String type,
                                                 String name)
@@ -51,12 +51,19 @@ public class DatePriceServiceImpl implements DatePriceService {
             if (list == null || list.isEmpty()){
                 throw new DataNotExistException("No data is stored in database!");
             }
-            List<Map<Date,Double>> json = new ArrayList<>();
+            List<Map<String,Object>> json = new ArrayList<>();
+            List<String> dateList = new ArrayList<>();
+            List<Double> priceList = new ArrayList<>();
             for(DatePrice dp : list){
-                Map<Date,Double> map = new HashMap();
-                map.put(new Date(dp.getDate().getTime()),dp.getPrice());
-                json.add(map);
+                dateList.add(new Date(dp.getDate().getTime()).toString());
+                priceList.add(dp.getPrice());
             }
+            Map<String,Object> xMap = new HashMap<>();
+            Map<String,Object> yMap = new HashMap<>();
+            xMap.put("date",dateList);
+            yMap.put("price",priceList);
+            json.add(xMap);
+            json.add(yMap);
             return json;
         }catch (PathInvalidException e1){
             throw e1;

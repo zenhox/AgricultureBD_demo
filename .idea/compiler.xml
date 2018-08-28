@@ -9,8 +9,5 @@
         <module name="agriculture" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="agriculture" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>

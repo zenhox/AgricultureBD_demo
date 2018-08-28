@@ -4,6 +4,7 @@ import cn.edu.seu.agriculture.exception.DBAccessException;
 import cn.edu.seu.agriculture.exception.DataNotExistException;
 import cn.edu.seu.agriculture.exception.PathInvalidException;
 import cn.edu.seu.agriculture.service.DatePriceService;
+import cn.edu.seu.agriculture.service.ReTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class Controller {
 
     @Autowired
     private DatePriceService datePriceService;
+    @Autowired
+    private ReTypeService reTypeService;
 
     @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET)
     @ResponseBody
@@ -31,10 +34,10 @@ public class Controller {
                            @PathVariable("type")String type,
                            @PathVariable("name")String name ) {
         try {
-            List<Map<Date,Double>> reList = datePriceService.getPriceListByInfo(
+            List<Map<String,Object>> reList = datePriceService.getPriceListByInfo(
                     province,market,type,name);
             logger.info(reList.toString());
-            return reList.toString();
+            return reTypeService.toJson(reList);
         }catch (PathInvalidException | DataNotExistException e1){
 //            String url = "/agriculture/datePrice"+province+"/"+market+"/"+type+"/"+name+".do";
             return "Access failed, please check your input!";
