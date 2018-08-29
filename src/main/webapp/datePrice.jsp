@@ -25,10 +25,13 @@ myChart.setOption({
 });
 
     window.onload = function(){
+        var province=null;
+        var market=null;
+        var type=null;
+        var name=null;
 
         function getMarket(){
-            var province = $("#select_1").find("option:selected").text();
-            var market = $("#select_2").find("option:selected").text();
+            province = $("#select_1").find("option:selected").text();
             $.ajax({
                 type:"GET",
                 url:"http://localhost:8080/agriculture/getMarket",
@@ -39,9 +42,11 @@ myChart.setOption({
                 success:function (data) {
                     data=data.substring(1,data.length-1);
                     var arrayData = data.split(",");
-                    console.log(arrayData.length)
+                    console.log(arrayData)
                     console.log(arrayData[0])
                     $("#select_2").html('<option value=1 selected="selected">请选择</option>');
+                    $("#select_3").html('<option value=1 selected="selected">请选择</option>');
+                    $("#select_4").html('<option value=1 selected="selected">请选择</option>');
                     for (var i = 0; i < arrayData.length; i++) {
                         var tempOpt = document.createElement('option');
                         $(tempOpt).attr('value',i+2);
@@ -52,43 +57,60 @@ myChart.setOption({
             })
         }
         function getType(){
-            var type = $("#select_3").find("option:selected").text();
+            market = $("#select_2").find("option:selected").text();
             $.ajax({
                 type:"GET",
-                url:"",
+                url:"http://localhost:8080/agriculture/getType",
                 data:{
+                    province:province,
                     market:market
                 },
                 success:function (data) {
                     $("#select_3").html('<option value=1 selected="selected">请选择</option>');
-                    for (var i = 0; i < data.length; i++) {
-                        var tempOpt = document.createElement('option ');
-                        $(tempOpt).attr('value',data[i].typeName);
+                    $("#select_4").html('<option value=1 selected="selected">请选择</option>');
+                    data=data.substring(1,data.length-1);
+                    var arrayData = data.split(",");
+                    console.log(arrayData.length)
+                    console.log(arrayData[0])
+                    for (var i = 0; i < arrayData.length; i++) {
+                        var tempOpt = document.createElement('option');
+                        $(tempOpt).attr('value',i+2);
+                        $(tempOpt).text(arrayData[i]);
                         $("#select_3").append(tempOpt);
                     }
                 }
             })
         }
         function getName(){
-            var name = $("#select_4").find("option:selected").text();
+            type = $("#select_3").find("option:selected").text();
             $.ajax({
                 type:"GET",
-                url:"",
+                url:"http://localhost:8080/agriculture/getName",
                 data:{
-                    name:name
+                    province:province,
+                    market:market,
+                    type:type
                 },
                 success:function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        $("#select_3").html('<option value=1 sel ected="selected">请选择</option>');
-                        var tempOpt = document.createElement('option ');
-                        $(tempOpt).attr('value',data[i].nameName);
+                    $("#select_4").html('<option value=1 selected="selected">请选择</option>');
+                    data=data.substring(1,data.length-1);
+                    var arrayData = data.split(",");
+                    console.log(arrayData.length)
+                    console.log(arrayData[0])
+                    for (var i = 0; i < arrayData.length; i++) {
+                        var tempOpt = document.createElement('option');
+                        $(tempOpt).attr('value',i+2);
+                        $(tempOpt).text(arrayData[i])
                         $("#select_4").append(tempOpt);
                     }
                 }
             })
         }
         function getGraph(){
-            $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",success:function(result) {
+            name = $("#select_4").find("option:selected").text();
+            console.log(province+market+type+name);
+            $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
+                success:function(result) {
                     result = eval("("+result+")");
                     myChart.setOption({
                         xAxis:{data: result.date},
@@ -96,22 +118,21 @@ myChart.setOption({
                     });
                     console.log(result);
                     $("#div1").html(result);
+                },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("选项有误，请检查选项是否有问题或与系统管理员联系");
                 }
             });
         }
 
-        $("#select_1").change(function () {
-            getMarket();
-        });
+
+        $("#select_1").change(getMarket);
         $("#select_2").change(getType);
         $("#select_3").change(getName);
         $("#select_4").change(getGraph);
     }
-    
-    
 </script>
-
-<div id="div1">
+<div id="div1"></div>
+<div id="div2">
     <label>省份:</label>
     <select id="select_1">
         <option value=1 selected="selected">请选择</option>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,12 +55,34 @@ public class Controller {
     //下拉栏获取市场名
     @RequestMapping(value = "/getMarket",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
-    public String datePriceHandler(String province) {
+    public String getMarket(String province) {
         System.out.println(province);
         ArrayList reList = tocSearchService.getMarketByProvince(province);
         logger.info(reList.toString());
         System.out.println(reList.toString());
-        return reList.toString();
+        return reList.toString().replace(" ","");
+    }
+
+    //下拉栏获取品类名
+    @RequestMapping(value = "/getType",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String getType(String province, String market) {
+        System.out.println(market+" "+province);
+        ArrayList reList = tocSearchService.getTypeByArea(province,market);
+        logger.info(reList.toString());
+        System.out.println(reList.toString());
+        return reList.toString().replace(" ","");
+    }
+
+    //下拉栏获取品种名
+    @RequestMapping(value = "/getName",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String getName(String province, String market, String type) {
+        System.out.println(type+" "+market+" "+province);
+        ArrayList reList = tocSearchService.getNameByAreaAndType(province,market,type);
+        logger.info(reList.toString());
+        System.out.println(reList.toString());
+        return reList.toString().replace(" ","");
     }
 
 }
