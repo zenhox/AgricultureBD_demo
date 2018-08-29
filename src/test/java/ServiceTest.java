@@ -1,6 +1,5 @@
 import cn.edu.seu.agriculture.service.DatePriceService;
 import cn.edu.seu.agriculture.service.TocSearchService;
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
