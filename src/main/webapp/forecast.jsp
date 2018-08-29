@@ -58,10 +58,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="nav">
 				<ul>
-					<li><a href="./home.do?method=index">首页</a></li>
-					<li><a href="./farm.do?method=control" >数据监控</a></li>
-					<li><a href="./farm.do?method=contrast" >数据查询</a></li>
-					<li><a href="./forecast.do?method=priceFore" class="nav_aclick">价格预测</a></li>
+					<li><a href="./index.jsp">首页</a></li>
+					<li><a href="./control.jsp" >数据监控</a></li>
+					<li><a href="./contrast.jsp" >数据查询</a></li>
+					<li><a href="./forecast.jsp" class="nav_aclick">价格预测</a></li>
 					<li><a href="javascript:">企业地图</a></li>
 				</ul>
 			</div>
