@@ -91,6 +91,7 @@ public class TocSearchServiceImpl implements TocSearchService {
         return reList;
     }
 
+
     @Override
     public ArrayList getTypeList() {
         CountryViewExample example = new CountryViewExample();
