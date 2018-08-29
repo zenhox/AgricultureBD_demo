@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.seu.agriculture.dao.DatePriceMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.seu.agriculture.entity.DatePrice">
+<mapper namespace="cn.edu.seu.agriculture.dao.CountryViewMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.seu.agriculture.entity.CountryView">
     <constructor>
-      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="market" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="price" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <idArg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.edu.seu.agriculture.entity.CountryView">
+    <constructor>
+      <idArg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="average_price" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,15 +73,20 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    date, province, market, type, name, price
+    type, name
   </sql>
-  <select id="selectByExample" parameterType="cn.edu.seu.agriculture.entity.DatePriceExample" resultMap="BaseResultMap">
+  <sql id="Blob_Column_List">
+    average_price
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="cn.edu.seu.agriculture.entity.CountryViewExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from date_price
+    ,
+    <include refid="Blob_Column_List" />
+    from country_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,103 +94,125 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.edu.seu.agriculture.entity.DatePriceExample">
-    delete from date_price
+  <select id="selectByExample" parameterType="cn.edu.seu.agriculture.entity.CountryViewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from country_view
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="cn.edu.seu.agriculture.entity.CountryViewKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from country_view
+    where type = #{type,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.edu.seu.agriculture.entity.CountryViewKey">
+    delete from country_view
+    where type = #{type,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.edu.seu.agriculture.entity.CountryViewExample">
+    delete from country_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
-    insert into date_price (date, province, market, 
-      type, name, price)
-    values (#{date,jdbcType=DATE}, #{province,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
+  <insert id="insert" parameterType="cn.edu.seu.agriculture.entity.CountryView">
+    insert into country_view (type, name, average_price
+      )
+    values (#{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{averagePrice,jdbcType=LONGVARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.seu.agriculture.entity.DatePrice">
-    insert into date_price
+  <insert id="insertSelective" parameterType="cn.edu.seu.agriculture.entity.CountryView">
+    insert into country_view
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="date != null">
-        date,
-      </if>
-      <if test="province != null">
-        province,
-      </if>
-      <if test="market != null">
-        market,
-      </if>
       <if test="type != null">
         type,
       </if>
       <if test="name != null">
         name,
       </if>
-      <if test="price != null">
-        price,
+      <if test="averagePrice != null">
+        average_price,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="date != null">
-        #{date,jdbcType=DATE},
-      </if>
-      <if test="province != null">
-        #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="market != null">
-        #{market,jdbcType=VARCHAR},
-      </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="price != null">
-        #{price,jdbcType=DOUBLE},
+      <if test="averagePrice != null">
+        #{averagePrice,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.edu.seu.agriculture.entity.DatePriceExample" resultType="java.lang.Long">
-    select count(*) from date_price
+  <select id="countByExample" parameterType="cn.edu.seu.agriculture.entity.CountryViewExample" resultType="java.lang.Long">
+    select count(*) from country_view
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update date_price
+    update country_view
     <set>
-      <if test="record.date != null">
-        date = #{record.date,jdbcType=DATE},
-      </if>
-      <if test="record.province != null">
-        province = #{record.province,jdbcType=VARCHAR},
-      </if>
-      <if test="record.market != null">
-        market = #{record.market,jdbcType=VARCHAR},
-      </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.price != null">
-        price = #{record.price,jdbcType=DOUBLE},
+      <if test="record.averagePrice != null">
+        average_price = #{record.averagePrice,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
-    update date_price
-    set date = #{record.date,jdbcType=DATE},
-      province = #{record.province,jdbcType=VARCHAR},
-      market = #{record.market,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update country_view
+    set type = #{record.type,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DOUBLE}
+      average_price = #{record.averagePrice,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update country_view
+    set type = #{record.type,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.seu.agriculture.entity.CountryView">
+    update country_view
+    <set>
+      <if test="averagePrice != null">
+        average_price = #{averagePrice,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where type = #{type,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.seu.agriculture.entity.CountryView">
+    update country_view
+    set average_price = #{averagePrice,jdbcType=LONGVARCHAR}
+    where type = #{type,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
   </update>
 </mapper>

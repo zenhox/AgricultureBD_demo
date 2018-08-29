@@ -38,4 +38,15 @@ public interface TocSearchService {
      * @return
      */
     public ArrayList getNameByAreaAndType(String province,String market,String type);
+
+    /**
+     * 功能实现：　全国视图查询,下拉框获取品类列表
+     * @return　　　返回TYPE 列表
+     */
+    public ArrayList getTypeList();
+    /**
+     * 功能实现：　全国视图查询,根据品类获取name列表
+     * @return　　　返回NAME 列表
+     */
+    public ArrayList getNameByList(String type);
 }
