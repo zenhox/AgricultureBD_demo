@@ -41,4 +41,8 @@ public class ServiceTest extends BaseTest{
 //        }
     }
 
+    @Test void CountryViewServiceTest(){
+
+    }
+
 }

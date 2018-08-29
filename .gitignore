@@ -3,4 +3,7 @@ target/
 .settings/
 .project
 .classpath
+<<<<<<< HEAD
 agricultureBD_demo.iml
+=======
+>>>>>>> 0e6c550625132210194dbd3a06400168e827137f

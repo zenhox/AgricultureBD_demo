@@ -1,4 +1,3 @@
-import cn.edu.seu.agriculture.dao.DatePriceMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
