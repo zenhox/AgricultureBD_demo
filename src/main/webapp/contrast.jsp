@@ -68,10 +68,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</c:if>
 			<div class="nav">
 				<ul>
-					<li><a href="./home.do?method=index">首页</a></li>
-					<li><a href="./farm.do?method=control" >数据监控</a></li>
-					<li><a href="./farm.do?method=contrast" class="nav_aclick">数据查询</a></li>
-					<li><a href="./forecast.do?method=priceFore">价格预测</a></li>
+					<li><a href="./index.jsp">首页</a></li>
+					<li><a href="./control.jsp" >数据监控</a></li>
+					<li><a href="./contrast.jsp" class="nav_aclick">数据查询</a></li>
+					<li><a href="./forecast.jsp">价格预测</a></li>
 					<li><a href="javascript:">企业地图</a></li>
 				</ul>
 			</div>
@@ -140,71 +140,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					</div>
 				</div>
-				
 				<div class="content box_content_hidden" >
-					<div class="search">
-						<div class="fields">
-							<form id="exportForm" method="post">
-								<select name="province2" id="province2" style="width: 160px;height:30px;"
-								onchange="getMarket2(this);" tabindex="2" id="province2">
-									<option value="">省份</option>
-									<c:forEach items="${proList }" var="f">
-										<option value="${f }">${f }</option>
-									</c:forEach>
-								</select> 
-								<select name="market2" style="width: 240px;height:30px;"
-									onchange="getType2(this);" tabindex="2" id="market2">
-									<option value="">批发市场</option>
-									<c:forEach items="${marketList }" var="f">
-									<option value="${f }">${f }</option>
-								</c:forEach>
-								</select> <select name="type" style="width:160px;height:30px;"
-									id="typeMarket2" onchange="getName(this)" tabindex="2">
-									<option value="">产品种类</option>
-								</select> <select name="name" style="width:160px;height:30px;"
-									id="nameMarket2" tabindex="2">
-									<option value="">品种</option>
-								</select> 
-								<input type="button" value="开始查询" id="startQuery2" onclick="pieQuery(this)" class="search_btn"  />
-								<input type="button" value="数据导出"  class="search_btn" onclick="exportFarm()" />
-							</form>
-						</div>
-					</div>
-					<div id="container2" style="min-width:600px;height:300px"></div>
-					﻿
-					<div id="sliders"
-						style="min-width:310px;max-width: 800px;margin: 0 auto;">
-						<table>
-							<tr>
-								<td>纬度</td>
-								<td><input id="R0" type="range" min="0" max="45" value="15" />
-									<span id="R0-value" class="value"></span></td>
-							</tr>
-							<tr>
-								<td>经度</td>
-								<td><input id="R1" type="range" min="0" max="45" value="15" />
-									<span id="R1-value" class="value"></span></td>
-							</tr>
-						</table>
-					</div>
-					<!-- -------------排行榜---------------  -->
-				    <div class="Top_Record">
-						<div class="topRec_List">
-							<dl>
-								<dd>品种名称</dd>
-								<dd>均价(元/千克)</dd>
-								<dd>批发市场名称</dd>
-								<dd>时间</dd>
-							</dl>
-							<div class="maquee" >
-								<ul id="maqueeUl">
-									
-								</ul>
-							</div>
-						</div>
-					</div> 
-				
-				
+					<jsp:include page="datePrice.jsp"></jsp:include>
+
+					<%--排行榜和数据到处按钮在以下注释之中--%>
+					<%--<input type="button" value="开始查询" id="startQuery2" onclick="pieQuery(this)" class="search_btn"  />--%>
+					<%--<input type="button" value="数据导出"  class="search_btn" onclick="exportFarm()" />--%>
+					<%--<!-- -------------排行榜---------------  -->--%>
+				    <%--<div class="Top_Record">--%>
+						<%--<div class="topRec_List">--%>
+							<%--<dl>--%>
+								<%--<dd>品种名称</dd>--%>
+								<%--<dd>均价(元/千克)</dd>--%>
+								<%--<dd>批发市场名称</dd>--%>
+								<%--<dd>时间</dd>--%>
+							<%--</dl>--%>
+							<%--<div class="maquee" >--%>
+								<%--<ul id="maqueeUl">--%>
+									<%----%>
+								<%--</ul>--%>
+							<%--</div>--%>
+						<%--</div>--%>
+					<%--</div> --%>
 				</div>
 		
 				
@@ -686,93 +643,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 			
 		}
-	    	
-	    /** 查找品类
-				*/
-		function getType(obj) {
-			var name = obj.value;
-			$("#typeMarket").empty();
-			$("#typeMarket").append(
-					"<option value=''>产品种类</option>");
-			if(name.length>0){
-				$.ajax({
-					type : "POST",
-					async : false, //同步执行
-					url : "farm.do",
-					data : {
-						method : "queryType",
-						market : name
-					},
-					dataType : "json", //返回数据形式为json
-					success : function(data) {
-						for ( var i = 0; i < data.length; i++) {
-							$("#typeMarket").append(
-									"<option value='"+data[i]+"' >" + data[i]
-											+ "</option>");
-						}
-					}
-				});
-			}
-		}
-		 /** 查找品类2
-				*/
-		function getType2(obj) {
-			var name = obj.value;
-			$("#typeMarket2").empty();
-			$("#typeMarket2").append(
-					"<option value=''>产品种类</option>");
-			$("#nameMarket2").empty();
-			$("#nameMarket2").append(
-					"<option value=''>品种</option>");
-			if(name.length>0){
-				$.ajax({
-					type : "POST",
-					async : false, //同步执行
-					url : "farm.do",
-					data : {
-						method : "queryType",
-						market : name
-					},
-					dataType : "json", //返回数据形式为json
-					success : function(data) {
-						for ( var i = 0; i < data.length; i++) {
-							$("#typeMarket2").append(
-									"<option value='"+data[i]+"' >" + data[i]
-											+ "</option>");
-						}
-					}
-				});
-			}
-		}
-		
-		 /** 查找品
-				*/
-		function getName(obj) {
-			var name = obj.value;
-			$("#nameMarket2").empty();
-			$("#nameMarket2").append(
-					"<option value=''>品种</option>");
-			if(name.length>0){
-				$.ajax({
-					type : "POST",
-					async : false, //同步执行
-					url : "farm.do",
-					data : {
-						method : "queryName",
-						market : $("#market2").val(),
-						type : name
-					},
-					dataType : "json", //返回数据形式为json
-					success : function(data) {
-						for ( var i = 0; i < data.length; i++) {
-							$("#nameMarket2").append(
-									"<option value='"+data[i]+"' >" + data[i]
-											+ "</option>");
-						}
-					}
-				});
-			}
-		}
+
 		/**
 		* 折线参数
 		*/

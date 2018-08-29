@@ -81,58 +81,119 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<div class="nav">
 				<ul>
-					<li><a href="./home.do?method=index" class="nav_aclick">首页</a></li>
-					<li><a href="./farm.do?method=control" >数据监控</a></li>
-					<li><a href="./datePrice.jsp" >数据查询</a></li>
-					<li><a href="./forecast.do?method=priceFore">价格预测</a></li>
-					<li><a href="javascript:">企业地图</a></li>
+					<li><a href="./index.jsp" class="nav_aclick">首页</a></li>
+					<li><a href="./control.jsp" >数据监控</a></li>
+					<li><a href="./contrast.jsp" >数据查询</a></li>
+					<li><a href="./forecast.jsp">价格预测</a></li>
+					<li><a href="./datePrice.jsp">企业地图</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	
-	 <div class="main">
-		<div class="main_center">
-			<div class="price_1">
-				<div id="fsD1" class="focus" >  
-				    <div id="D1pic1" class="fPic">  
-				        <div class="fcon">
-				          <img src="images/1.jpg" />
-				        </div>
-				        <div class="fcon" >
-						<img src="images/2.jpg"  />
-				        </div>
-				        <div class="fcon">
-				         <img src="images/3.jpg"  />
-				        </div>
-				         
-				          
-				    </div>
-				    <div class="fbg">  
-				    <div class="D1fBt" id="D1fBt">  
-				        <a href="javascript:void(0)" class=""></a>  
-				        <a href="javascript:void(0)" class=""></a>
-				        <a href="javascript:void(0)" class=""></a>  
-				    </div>  
-				    </div>  
-				   
-				</div>  
-			</div>
-			<div class="price_5">
-				<div class="title">
-					<br />
-					<h2>
-						<font color="black" size="4" ><b>全国农业市场信息分布</b>
-						</font>
-					</h2>
-				</div>
-				<div class="content">
-					<div id="bMap" style="width: 1200px;height:626px;"></div>
-				</div>
-			</div>
-			<jsp:include page="bottom.jsp"></jsp:include>
+
+
+        <!-- 页面动画 -->
+        <div class="main">
+            <div class="main_center">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <div class="price_1">
+            <div id="fsD1" class="focus" >
+            <!-- <div id="D1pic1" class="fPic">
+
+            <div class="fcon">
+            <<img src="image/1.png" />
+            </div>
+            <div class="fcon" >
+            <img src="images/2.jpg"  />
+            </div>
+            <div class="fcon">
+            <img src="images/3.jpg"  />
+            </div>
+
+
+            </div>-->
+
+            <script type="text/javascript" src="js/1.js">
+	</script>
+		<!--
+        <div class="title">
+            <br />
+            <h2>
+                <font color="black" size="4" ><b>全国农业市场信息分布</b>
+                </font>
+            </h2>
+        </div>-->
+		<ul>
+			<li>
+				<a href="images/1.png" id="PNG1" onclick="show(this);return false;"></a>
+			</li>
+			<li>
+				<a href="images/2.jpg" id="PNG2" onclick="show(this);return false;"></a>
+			</li>
+			<li>
+				<a href="images/3.jpg" id="PNG3" onclick="show(this);return false;"></a>
+			</li>
+			<li>
+				<a href="images/4.jpg" id="PNG4" onclick="show(this);return false;"></a>
+			</li>
+		</ul>
+		<table border=0 cellpadding=0 cellspacing=0 align="center">
+			<tr>
+				<!--<td>
+                  <div align="right" style="padding-right:20px">
+                    <img id="pic1" src="images/3.jpg" height="160px" class="blur" onclick="show3()"/>
+                  </div>
+                </td>图片3选1的其中一个-->
+				<td>
+					<div style="position:relative;width:500px;height:320px;">
+						<div align="center" style="position:absolute;">
+							<img id="pic" src="images/1.png" alt="my image gallery" height="320px"/>
+						</div>
+						<div align="center" style="position:absolute;height:320px;width:500px;z-index:1" onmousedown="get()" onmouseup="change()">
+
+						</div>
+					</div>
+				</td>
+				<!--<td>
+                  <div align="left" style="padding-left:20px">
+                    <img id="pic2" src="images/2.jpg" height="160px" class="blur" onclick="show4()"/>
+                  </div>
+                </td>图片3选1的其中一个-->
+			</tr>
+			<!--<tr>
+              <td colspan=3 width="100%">
+                <div align="center" style="padding-top:30px">
+                  <table width="70%">
+                    <tr>
+                      <td height="15px" style="background-color:#d3d3d3">
+
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>下面的条子-->
+		</table>
+		<!--
+        <div class="fbg">
+        <div class="D1fBt" id="D1fBt">
+            <a href="javascript:void(0)" class=""></a>
+            <a href="javascript:void(0)" class=""></a>
+            <a href="javascript:void(0)" class=""></a>
+        </div>
+        </div>
+       -->
+	</div>
+	</div>
+	<div class="price_5">
+
+		<div class="content">
+			<div id="bMap" style="width: 1200px;height:626px;"></div>
 		</div>
 	</div>
+	<jsp:include page="bottom.jsp"></jsp:include>
+	</div>
+
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/highcharts.js"></script>
 	<script type="text/javascript" src="js/radialIndicator.min.js"></script>
@@ -142,73 +203,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--  -->
 	<script type="text/javascript" src="js/koala.min.1.5.js"></script>
 	<script type="text/javascript">
-	
-		Qfast.add('widgets', { path: "js/terminator2.2.min.js", type: "js", requires: ['fx'] });  
-		Qfast(false, 'widgets', function () {
-			K.tabs({
-				id: 'fsD1',    
-				conId: "D1pic1",  
-				tabId:"D1fBt",  
-				tabTn:"a",
-				conCn: '.fcon',     
-				auto: 1,   
-				effect: 'fade',   
-				eType: 'click', 
-				pageBt:true,
-				bns: ['.prev', '.next'],                       
-				interval: 5000                
-			}) 
-		}) ;
-		var html='<form action="" autocomplete="off"  ><p class="dialog_p"><input class="dialog_input" type="text" id="username" name="username" autocomplete="off" placeholder="用户名" required=""/></p>';
-		html+='<p class="dialog_p"><input class="dialog_input" type="password" id="password" name="password" placeholder="密码" required="" autocomplete="off"/></p></form>';
-		function loginUser(){
-			$('#type-dialogBox').dialogBox({
-				type: 'normal',  //three type:'normal'(default),'correct','error',
-				width: 400,
-				height: 280,
-				hasMask: true,
-				hasClose: true,
-				confirmValue: "登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录",  //确定按钮文字内容
-				confirm: function(){
-					var pwd=$("#password").val();
-					var username=$("#username").val();
-					if(username.trim().length>0 && pwd.trim().length>0){
-						login(username.trim(),pwd.trim());
-					}else{
-						alert("用户名或密码不能为空");
-					}
-				}, //点击确定后回调函数
-				hasBtn: true,
-				effect: 'fade', //动画效果：fade(默认),newspaper,fall,scaled,flip-horizontal,flip-vertical,sign,
-				title: '<b style="font-size:18px;color:#fff;">登录系统</b>',
-				content: html
-			});
-		}
-		var url="${sessionUrl}";
-		function login(username,pwd){
-			if(url==""){
-				url="./home.do?method=index";
-			}
-			$.ajax({
-				type : "POST",
-				url : "user.do",
-				data : {
-					method : "login",
-					username : username,
-					password : pwd
-				},
-				success : function(data) {
-					if(data=="success"){
-						window.location.href=url;
-					}else{
-						alert(data);
-					}
-				}
-			});
-		};
-		
-		
-		var da = ${mapData};
+
+        Qfast.add('widgets', { path: "js/terminator2.2.min.js", type: "js", requires: ['fx'] });
+        Qfast(false, 'widgets', function () {
+            K.tabs({
+                id: 'fsD1',
+                conId: "D1pic1",
+                tabId:"D1fBt",
+                tabTn:"a",
+                conCn: '.fcon',
+                auto: 1,
+                effect: 'fade',
+                eType: 'click',
+                pageBt:true,
+                bns: ['.prev', '.next'],
+                interval: 5000
+            })
+        }) ;
+        var html='<form action="" autocomplete="off"  ><p class="dialog_p"><input class="dialog_input" type="text" id="username" name="username" autocomplete="off" placeholder="用户名" required=""/></p>';
+        html+='<p class="dialog_p"><input class="dialog_input" type="password" id="password" name="password" placeholder="密码" required="" autocomplete="off"/></p></form>';
+        function loginUser(){
+            $('#type-dialogBox').dialogBox({
+                type: 'normal',  //three type:'normal'(default),'correct','error',
+                width: 400,
+                height: 280,
+                hasMask: true,
+                hasClose: true,
+                confirmValue: "登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录",  //确定按钮文字内容
+                confirm: function(){
+                    var pwd=$("#password").val();
+                    var username=$("#username").val();
+                    if(username.trim().length>0 && pwd.trim().length>0){
+                        login(username.trim(),pwd.trim());
+                    }else{
+                        alert("用户名或密码不能为空");
+                    }
+                }, //点击确定后回调函数
+                hasBtn: true,
+                effect: 'fade', //动画效果：fade(默认),newspaper,fall,scaled,flip-horizontal,flip-vertical,sign,
+                title: '<b style="font-size:18px;color:#fff;">登录系统</b>',
+                content: html
+            });
+        }
+        var url="${sessionUrl}";
+        function login(username,pwd){
+            if(url==""){
+                url="./home.do?method=index";
+            }
+            $.ajax({
+                type : "POST",
+                url : "user.do",
+                data : {
+                    method : "login",
+                    username : username,
+                    password : pwd
+                },
+                success : function(data) {
+                    if(data=="success"){
+                        window.location.href=url;
+                    }else{
+                        alert(data);
+                    }
+                }
+            });
+        };
+
+
+        var da = ${mapData};
 	</script>
 	<script type="text/javascript" src="js/example2.js"></script>
 </body>

@@ -5,6 +5,10 @@
 <%@ page import="java.util.*" %>
 
 <html>
+<head>
+    <title>全国农业市场信息大数据分析平台</title>
+    <link rel="shortcut icon" href="images/yn.png"  />
+</head>
  <script src="./js/echarts.js"></script>
  <script src="./js/jquery-3.3.1.min.js"></script>
 <body>
@@ -16,12 +20,14 @@
  <script>
  var myChart = echarts.init(document.getElementById('main'));
 myChart.setOption({
-	 title: { text: '农产品'},
+	 title: { text: '农产品数据查询'},
      tooltip: {},
      legend: {data:['价格']},
      xAxis: { data: []},
      yAxis: {},
+     dataZoom:[{type:'inside',start:10,end:60},{type:'slider',start:10,end:60}],
      series: [{ name: '价格', type:"line", data: []  }]
+
 });
 
     window.onload = function(){
@@ -107,16 +113,17 @@ myChart.setOption({
             })
         }
         function getGraph(){
+
             name = $("#select_4").find("option:selected").text();
             console.log(province+market+type+name);
             $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
                 success:function(result) {
                     result = eval("("+result+")");
+                    console.log(result);
                     myChart.setOption({
                         xAxis:{data: result.date},
                         series:[{name:'价格',data:result.price}]
                     });
-                    console.log(result);
                     $("#div1").html(result);
                 },error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("选项有误，请检查选项是否有问题或与系统管理员联系");
@@ -132,10 +139,10 @@ myChart.setOption({
     }
 </script>
 <div id="div1"></div>
-<div id="div2">
-    <label>省份:</label>
-    <select id="select_1">
-        <option value=1 selected="selected">请选择</option>
+<div id="div2" style="margin-left:150px;">
+    <label style="font-size:15px;">省份:</label>
+    <select id="select_1" style="width: 160px;height:30px;">
+        <option value=1 selected="selected" >请选择</option>
         <option value=2>新疆</option>
         <option value=3>江苏</option>
         <option value=4>江西</option>
@@ -168,16 +175,16 @@ myChart.setOption({
         <option value=31>安徽</option>
 
     </select>
-    <label>市场:</label>
-    <select id="select_2" style='width:200px;'>
+    <label style="font-size:15px;">市场:</label>
+    <select id="select_2" style="width: 240px;height:30px;">
         <option value=1 selected="selected">请选择</option>
     </select>
-    <label>品类:</label>
-    <select id="select_3">
+    <label style="font-size:15px;">品类:</label>
+    <select id="select_3" style="width:160px;height:30px;">
         <option value=1 selected="selected">请选择</option>
     </select>
-    <label>品名:</label>
-    <select id="select_4">
+    <label style="font-size: 15px;">品名:</label>
+    <select id="select_4" style="width:160px;height:30px;">
       <option value=1 selected="selected">请选择</option>
     </select>
 </div>
