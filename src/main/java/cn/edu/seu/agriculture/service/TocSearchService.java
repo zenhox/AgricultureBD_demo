@@ -1,7 +1,5 @@
 package cn.edu.seu.agriculture.service;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
 import java.util.ArrayList;
 
 public interface TocSearchService {

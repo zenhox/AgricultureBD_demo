@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -26,6 +27,9 @@ public class TocSearchServiceImpl implements TocSearchService {
         for(CategoryRelated pm : provinceMarketList){
             reList.add(pm.getProvince());
         }
+        HashSet h = new HashSet(reList);
+        reList.clear();
+        reList.addAll(h);
         return reList;
     }
 
@@ -39,6 +43,9 @@ public class TocSearchServiceImpl implements TocSearchService {
         for(CategoryRelated pm : provinceMarketList){
             reList.add(pm.getMarket());
         }
+        HashSet h = new HashSet(reList);
+        reList.clear();
+        reList.addAll(h);
         return reList;
     }
 
@@ -54,6 +61,9 @@ public class TocSearchServiceImpl implements TocSearchService {
         for(CategoryRelated pm : provinceMarketList){
             reList.add(pm.getType());
         }
+        HashSet h = new HashSet(reList);
+        reList.clear();
+        reList.addAll(h);
         return reList;
     }
 
@@ -70,6 +80,9 @@ public class TocSearchServiceImpl implements TocSearchService {
         for(CategoryRelated pm : provinceMarketList){
             reList.add(pm.getName());
         }
+        HashSet h = new HashSet(reList);
+        reList.clear();
+        reList.addAll(h);
         return reList;
     }
 }

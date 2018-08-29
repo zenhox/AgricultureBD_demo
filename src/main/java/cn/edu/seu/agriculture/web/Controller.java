@@ -4,6 +4,7 @@ import cn.edu.seu.agriculture.exception.DataNotExistException;
 import cn.edu.seu.agriculture.exception.PathInvalidException;
 import cn.edu.seu.agriculture.service.DatePriceService;
 import cn.edu.seu.agriculture.service.ReTypeService;
+import cn.edu.seu.agriculture.service.TocSearchService;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +28,10 @@ public class Controller {
     private DatePriceService datePriceService;
     @Autowired
     private ReTypeService reTypeService;
+    @Autowired
+    private TocSearchService tocSearchService;
 
-    @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET)
+    @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
     public String datePriceHandler(@PathVariable("province")String province,
                                        @PathVariable("market")String market,
@@ -39,7 +43,7 @@ public class Controller {
         return reTypeService.toJson(reList).toString();
     }
 
-    @RequestMapping(value = "/datePrice",method = RequestMethod.GET)
+    @RequestMapping(value = "/datePrice",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
     public ModelAndView datePricePage(){
         ModelAndView retMap = new ModelAndView();  //返回新的ModelAndView
@@ -47,37 +51,15 @@ public class Controller {
         return retMap;
     }
 
-
-
-//    @RequestMapping(value = "/list", method = RequestMethod.GET)
-//    private String list(Model model) {
-//        List<Book> list = bookService.getList();
-//        model.addAttribute("list", list);
-//        // list.jsp + model = ModelAndView
-//        return "list";// WEB-INF/jsp/"list".jsp
-//    }
-//
-
-//    //ajax json
-//    @RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
-//            "application/json; charset=utf-8" })
-//    @ResponseBody
-//    private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId, @RequestParam("studentId") Long studentId) {
-//        if (studentId == null || studentId.equals("")) {
-//            return new Result<>(false, "学号不能为空");
-//        }
-//        //AppointExecution execution = bookService.appoint(bookId, studentId);//错误写法，不能统一返回，要处理异常（失败）情况
-//        AppointExecution execution = null;
-//        try {
-//            execution = bookService.appoint(bookId, studentId);
-//        } catch (NoNumberException e1) {
-//            execution = new AppointExecution(bookId, AppointStateEnum.NO_NUMBER);
-//        } catch (RepeatAppointException e2) {
-//            execution = new AppointExecution(bookId, AppointStateEnum.REPEAT_APPOINT);
-//        } catch (Exception e) {
-//            execution = new AppointExecution(bookId, AppointStateEnum.INNER_ERROR);
-//        }
-//        return new Result<AppointExecution>(true, execution);
-//    }
+    //下拉栏获取市场名
+    @RequestMapping(value = "/getMarket",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String datePriceHandler(String province) {
+        System.out.println(province);
+        ArrayList reList = tocSearchService.getMarketByProvince(province);
+        logger.info(reList.toString());
+        System.out.println(reList.toString());
+        return reList.toString();
+    }
 
 }
