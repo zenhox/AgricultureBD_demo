@@ -1,7 +1,8 @@
 ﻿(function () {
     require.config({
+        //默认情况下从这个文件开始拉去取资源
         paths: {
-            echarts: './js'
+            echarts: './js',
         },
         packages: [
             {
