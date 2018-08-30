@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -26,8 +25,8 @@ public class ServiceTest extends BaseTest{
                 province,market,type,name);
         logger.info(reList.toString());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-        String src = "2018-08-11";
-        String dst = "2018-08-19";
+        String src = "2018-8-11";
+        String dst = "2018-8-19";
         reList = datePriceService.getPriceListByInfo(
                 province,market,type,name,src,dst);
         logger.info(reList.toString());

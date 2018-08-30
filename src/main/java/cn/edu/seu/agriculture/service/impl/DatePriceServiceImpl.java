@@ -56,13 +56,9 @@ public class DatePriceServiceImpl implements DatePriceService {
             List<Map<String,Object>> json = new ArrayList<>();
             List<String> dateList = new ArrayList<>();
             List<Double> priceList = new ArrayList<>();
-            int count = 0;
             for(DatePrice dp : list){
-                if(count > 30)  //只取近三十天的数据
-                    break;
                 dateList.add(new Date(dp.getDate().getTime()).toString());
                 priceList.add(dp.getPrice());
-                count += 1;
             }
             Map<String,Object> xMap = new HashMap<>();
             Map<String,Object> yMap = new HashMap<>();
@@ -108,7 +104,7 @@ public class DatePriceServiceImpl implements DatePriceService {
                         .andDateBetween(srcDate,dstDate);
                 example.setOrderByClause("date DESC");
             } catch (ParseException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
             List<DatePrice> list = datePriceMapper.selectByExample(example);
             /**
