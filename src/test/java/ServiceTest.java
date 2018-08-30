@@ -1,10 +1,12 @@
 import cn.edu.seu.agriculture.service.DatePriceService;
+import cn.edu.seu.agriculture.service.PriceForecastService;
 import cn.edu.seu.agriculture.service.TocSearchService;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -13,10 +15,13 @@ public class ServiceTest extends BaseTest{
     private DatePriceService datePriceService;
     @Autowired
     private TocSearchService tocSearchService;
+
+    @Autowired
+    private PriceForecastService priceForecastService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
-    public void DatePriceServiceTest(){
+    public void DatePriceServiceTest1(){
         String province = "山西";
         String market = "山西省太原市河西农产品有限公司";
         String type = "蔬菜";
@@ -29,6 +34,16 @@ public class ServiceTest extends BaseTest{
         String dst = "2018-8-19";
         reList = datePriceService.getPriceListByInfo(
                 province,market,type,name,src,dst);
+        logger.info(reList.toString());
+    }
+    @Test
+    public void DatePriceServiceTest2(){
+        String province = "山西";
+        String market = "山西省太原市河西农产品有限公司";
+        String type = "蔬菜";
+        String name = "油麦菜";
+        List<Map<String,Object>> reList = datePriceService.getPriceListByInfo(
+                province,market,type,name,7);
         logger.info(reList.toString());
     }
 
@@ -53,4 +68,14 @@ public class ServiceTest extends BaseTest{
 
     }
 
+    @Test
+    public void  ForecastServiceTest() throws ParseException {
+        String province = "山西";
+        String market = "山西省太原市河西农产品有限公司";
+        String type = "蔬菜";
+        String name = "油麦菜";
+        List<Map<String,Object>> reList = priceForecastService.forecast(province,market,type,name);
+        logger.info("预测结果");
+        logger.info(reList.toString());
+    }
 }
