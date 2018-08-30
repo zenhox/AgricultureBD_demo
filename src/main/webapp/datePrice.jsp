@@ -22,6 +22,9 @@
 myChart.setOption({
 	 title: { text: '农产品数据查询'},
      tooltip: {},
+     toolbox:{show : true, feature : { mark : {show: true},
+              dataView : {show: true, readOnly: false}, magicType : {show: true, type: ['line', 'bar']},
+              restore : {show: true}, saveAsImage : {show: true}}},
      legend: {data:['价格']},
      xAxis: { data: []},
      yAxis: {},

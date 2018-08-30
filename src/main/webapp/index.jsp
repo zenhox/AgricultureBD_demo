@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    font-size:16px;
 		     /* color: #003399; */
 		     border: 1px #003399 solid;
-		     color:#006699; 
+		     color:#006699;
 		     border-bottom: #93bee2 1px solid;
 		     border-left: #93bee2 1px solid;
 		     border-right: #93bee2 1px solid;
@@ -49,19 +49,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			width:90%;
 			font-size: 16px;
 			font-weight: 500;
-		} 
-		
+		}
+
 		.anchorBL{
 			display: none;
-		} 
-
-		
-
+		}
 	</style>
 </head>
 <body>
 	<!----------------------------- 导航栏部分----------------------- -->
-	<div id="type-dialogBox"></div>
+	<div id="type-dialogBox">  </div>
 	<div class="top_t">
 		<div class="top_tittle">
 			<div class="logo" style="font-size: 22px">
@@ -91,39 +88,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 
-
         <!-- 页面动画 -->
-        <div class="main">
-            <div class="main_center">
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <div class="main">
+        <div class="main_center">
+            <%--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">--%>
             <div class="price_1">
-            <div id="fsD1" class="focus" >
-            <!-- <div id="D1pic1" class="fPic">
-
-            <div class="fcon">
-            <<img src="image/1.png" />
-            </div>
-            <div class="fcon" >
-            <img src="images/2.jpg"  />
-            </div>
-            <div class="fcon">
-            <img src="images/3.jpg"  />
-            </div>
-
-
-            </div>-->
-
-            <script type="text/javascript" src="js/1.js">
-	</script>
-		<!--
-        <div class="title">
-            <br />
-            <h2>
-                <font color="black" size="4" ><b>全国农业市场信息分布</b>
-                </font>
-            </h2>
-        </div>-->
-		<ul>
+                <div id="fsD1" class="focus" >
+                    <script type="text/javascript" src="js/1.js"></script>
+                    <ul>
 			<li>
 				<a href="images/1.png" id="PNG1" onclick="show(this);return false;"></a>
 			</li>
@@ -137,13 +109,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="images/4.jpg" id="PNG4" onclick="show(this);return false;"></a>
 			</li>
 		</ul>
-		<table border=0 cellpadding=0 cellspacing=0 align="center">
+                    <table border=0 cellpadding=0 cellspacing=0 align="center">
 			<tr>
-				<!--<td>
-                  <div align="right" style="padding-right:20px">
-                    <img id="pic1" src="images/3.jpg" height="160px" class="blur" onclick="show3()"/>
-                  </div>
-                </td>图片3选1的其中一个-->
 				<td>
 					<div style="position:relative;width:500px;height:320px;">
 						<div align="center" style="position:absolute;">
@@ -154,46 +121,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 				</td>
-				<!--<td>
-                  <div align="left" style="padding-left:20px">
-                    <img id="pic2" src="images/2.jpg" height="160px" class="blur" onclick="show4()"/>
-                  </div>
-                </td>图片3选1的其中一个-->
 			</tr>
-			<!--<tr>
-              <td colspan=3 width="100%">
-                <div align="center" style="padding-top:30px">
-                  <table width="70%">
-                    <tr>
-                      <td height="15px" style="background-color:#d3d3d3">
-
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </td>
-            </tr>下面的条子-->
 		</table>
-		<!--
-        <div class="fbg">
-        <div class="D1fBt" id="D1fBt">
-            <a href="javascript:void(0)" class=""></a>
-            <a href="javascript:void(0)" class=""></a>
-            <a href="javascript:void(0)" class=""></a>
+                </div>
+            </div>
+            <div class="price_5">
+                <div class="content">
+                    <div id="bMap" style="width: 1200px;height:626px;"></div>
+                </div>
+            </div>
+            <jsp:include page="bottom.jsp"></jsp:include>
         </div>
-        </div>
-       -->
-	</div>
-	</div>
-	<div class="price_5">
-
-		<div class="content">
-			<div id="bMap" style="width: 1200px;height:626px;"></div>
-		</div>
-	</div>
-	<jsp:include page="bottom.jsp"></jsp:include>
-	</div>
-
+    </div>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/highcharts.js"></script>
 	<script type="text/javascript" src="js/radialIndicator.min.js"></script>
