@@ -84,5 +84,4 @@ public class Controller {
         System.out.println(reList.toString());
         return reList.toString().replace(" ","");
     }
-
 }

@@ -5,3 +5,4 @@ target/
 .classpath
 AgricultureBD_demo.iml
 agricultureBD_demo.iml
+*.properties
