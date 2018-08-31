@@ -132,23 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <jsp:include page="bottom.jsp"></jsp:include>
         </div>
-<<<<<<< HEAD
-       -->
-	</div>
-	</div>
-	<div class="price_5">
-		<div class="content">
-			<div id="bMap" style="width: 1200px;height:626px;"></div>
-		</div>
-	</div>
-
-	<div>
-		<jsp:include page="bottom.jsp"></jsp:include>
-	</div>
-
-=======
     </div>
->>>>>>> origin/dev
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/highcharts.js"></script>
 	<script type="text/javascript" src="js/radialIndicator.min.js"></script>

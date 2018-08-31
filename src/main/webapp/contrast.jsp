@@ -118,186 +118,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 				</div>
 				<div class="content box_content_hidden">
-					<div class="search">
-							<select name="province" id="province" style="width: 160px;height:30px;"
-								onchange="getMarket(this);" tabindex="2" id="province">
-								<option value="">省份</option>
-								<c:forEach items="${proList }" var="f">
-									<option value="${f }">${f }</option>
-								</c:forEach>
-							</select> 
-							<select name="country" id="market" style="width: 240px;height:30px;"
-								onchange="getType(this);" tabindex="2" id="market">
-								<option value="">批发市场</option>
-							</select> 
-							<select name="type" style="width:160px;height:30px;"
-								id="typeMarket" tabindex="2">
-								<option value="">产品种类</option>
-							</select> <input type="button" value="开始查询" class="search_btn" id="startQuery" onclick="compareType(this)"
-								  />
-					</div>
+					<%--<div class="search">--%>
+							<%--<select name="province" id="province" style="width: 160px;height:30px;"--%>
+								<%--onchange="getMarket(this);" tabindex="2" id="province">--%>
+								<%--<option value="">省份</option>--%>
+								<%--<c:forEach items="${proList }" var="f">--%>
+									<%--<option value="${f }">${f }</option>--%>
+								<%--</c:forEach>--%>
+							<%--</select> --%>
+							<%--<select name="country" id="market" style="width: 240px;height:30px;"--%>
+								<%--onchange="getType(this);" tabindex="2" id="market">--%>
+								<%--<option value="">批发市场</option>--%>
+							<%--</select> --%>
+							<%--<select name="type" style="width:160px;height:30px;"--%>
+								<%--id="typeMarket" tabindex="2">--%>
+								<%--<option value="">产品种类</option>--%>
+							<%--</select> <input type="button" value="开始查询" class="search_btn" id="startQuery" onclick="compareType(this)"--%>
+								  <%--/>--%>
+					<%--</div>--%>
 					<div id="container" style="height:570px;width:1200px;" >
-					
+                        <jsp:include page="animateVisual.jsp"></jsp:include>
 					</div>
 				</div>
 				<div class="content box_content_hidden" >
 					<jsp:include page="datePrice.jsp"></jsp:include>
-
-					<%--排行榜和数据到处按钮在以下注释之中--%>
-					<%--<input type="button" value="开始查询" id="startQuery2" onclick="pieQuery(this)" class="search_btn"  />--%>
-					<%--<input type="button" value="数据导出"  class="search_btn" onclick="exportFarm()" />--%>
-					<%--<!-- -------------排行榜---------------  -->--%>
-				    <%--<div class="Top_Record">--%>
-						<%--<div class="topRec_List">--%>
-							<%--<dl>--%>
-								<%--<dd>品种名称</dd>--%>
-								<%--<dd>均价(元/千克)</dd>--%>
-								<%--<dd>批发市场名称</dd>--%>
-								<%--<dd>时间</dd>--%>
-							<%--</dl>--%>
-							<%--<div class="maquee" >--%>
-								<%--<ul id="maqueeUl">--%>
-									<%----%>
-								<%--</ul>--%>
-							<%--</div>--%>
-						<%--</div>--%>
-					<%--</div> --%>
-				</div>
-		
-				
-				
-			<!-- 	<div class="content box_content_hidden">
-					<div class="search">
-							<select name="year" id="year" style="width: 80px;height:30px;" tabindex="2" >
-								<option value="">年份</option>
-								<option value="2010">2010年</option><option value="2011">2011年</option><option value="2012">2012年</option>
-								<option value="2013">2013年</option><option value="2014">2014年</option>
-								<option value="2015" selected="selected">2015年</option>
-								<option value="2016" >2016年</option>
-							</select> 
-							<select name="month" id="month" style="width: 60px;height:30px;">
-								<option value="">月份</option>
-								<option value="1" selected="selected">1月</option><option value="2">2月</option><option value="3">3月</option>
-								<option value="4">4月</option><option value="5">5月</option><option value="6">6月</option>
-								<option value="7">7月</option><option value="8">8月</option><option value="9">9月</option>
-								<option value="10">10月</option><option value="11">11月</option><option value="12">12月</option>
-							</select> 
-							<select name="ttName" style="width:140px;height:30px;"
-								id="ttName" tabindex="2">
-								<option value="">品种</option>
-								<option value="土豆" selected="selected">土豆</option><option value="番茄">番茄</option>
-								<option value="豌豆">豌豆</option>
-							</select> 
-							<input type="button" value="开始查询" class="search_btn"  onclick="lineReq()"
-								  />
-							
-					</div>
-					<div id="lineDa" style="height:570px;width:1200px;" >
-					</div>
-				</div>
-		
-			</div> -->
-			
-			<%-- <div class="price_2">
-				<div class="title">
-					<br />
-					<h2>
-						<font color="black" size="4" ><b>品种对比</b>
-						</font>
-					</h2>
-				</div>
-				<div class="content">
-					<div class="search">
-							<select name="country" id="market" style="width: 240px;height:30px;"
-								onchange="getType(this);" tabindex="2" id="market">
-								<option value="">批发市场</option>
-								<c:forEach items="${marketList }" var="f">
-									<option value="${f }">${f }</option>
-								</c:forEach>
-							</select> 
-							<select name="type" style="width:160px;height:30px;"
-								id="typeMarket" tabindex="2">
-								<option value="">产品种类</option>
-							</select> <input type="button" value="开始查询" class="search_btn" id="startQuery" onclick="compareType(this)"
-								  />
-					</div>
-					<div id="container" style="height:400px;width:1200px;" >
-					
-					</div>
-				</div>
-			</div> --%>
-			
-			<!-- -------------当天数据查询监控---------------  -->
-			<%-- <div class="price_6">
-				<div class="title">
-					<br />
-					<h2>
-						<font color="black" size="4"><b>数据查询</b>
-						</font>
-					</h2>
-				</div>
-				<div class="content">
-					<div class="search">
-						<div class="fields">
-							<form id="exportForm" method="post">
-								<select name="market" style="width: 240px;height:30px;"
-									onchange="getType2(this);" tabindex="2" id="market2">
-									<option value="">批发市场</option>
-									<c:forEach items="${marketList }" var="f">
-									<option value="${f }">${f }</option>
-								</c:forEach>
-								</select> <select name="type" style="width:160px;height:30px;"
-									id="typeMarket2" onchange="getName(this)" tabindex="2">
-									<option value="">产品种类</option>
-								</select> <select name="name" style="width:160px;height:30px;"
-									id="nameMarket2" tabindex="2">
-									<option value="">品种</option>
-								</select> 
-								<input type="button" value="开始查询" id="startQuery2" onclick="pieQuery(this)" class="search_btn"  />
-								<input type="button" value="数据导出"  class="search_btn" onclick="exportFarm()" />
-							</form>
-						</div>
-					</div>
-					<div id="container2" style="min-width:600px;height:350px"></div>
-					﻿
-					<div id="sliders"
-						style="min-width:310px;max-width: 800px;margin: 0 auto;">
-						<table>
-							<tr>
-								<td>纬度</td>
-								<td><input id="R0" type="range" min="0" max="45" value="15" />
-									<span id="R0-value" class="value"></span></td>
-							</tr>
-							<tr>
-								<td>经度</td>
-								<td><input id="R1" type="range" min="0" max="45" value="15" />
-									<span id="R1-value" class="value"></span></td>
-							</tr>
-						</table>
-					</div>
-					<!-- -------------排行榜---------------  -->
-				    <div class="Top_Record">
-						<div class="topRec_List">
-							<dl>
-								<dd>品种名称</dd>
-								<dd>均价(元/千克)</dd>
-								<dd>批发市场名称</dd>
-								<dd>时间</dd>
-							</dl>
-							<div class="maquee" >
-								<ul id="maqueeUl">
-									
-								</ul>
-							</div>
-						</div>
-					</div> 
-				
-				
-				</div>
-			</div> --%>
-			
-			<jsp:include page="bottom.jsp"></jsp:include>
+                </div>
 		</div>
+            <jsp:include page="bottom.jsp"></jsp:include>
 	</div>
 	<script type="text/javascript" src="js/jquery.min.js"></script> 
 	<script type="text/javascript" src="js/highcharts.js"></script>
