@@ -93,6 +93,26 @@ public class DatePriceServiceImpl implements DatePriceService {
                                                         String src,
                                                         String dst) {
         try{
+            List<DatePrice> list = this.getDetailPriceListByInfo(province,market,type,name,src,dst);
+            return this.toListMap(list);
+        }catch (PathInvalidException | DataNotExistException e1){
+            logger.error(e1.getMessage());
+            throw e1;
+        } catch (Exception e2){
+            logger.error(e2.getMessage(),e2);
+            throw e2;
+        }
+    }
+
+    @Override
+    public List<DatePrice> getDetailPriceListByInfo(String province,
+                                                    String market,
+                                                    String type,
+                                                    String name,
+                                                    String src,
+                                                    String dst)
+    {
+        try{
             if(province == null || province.equals("")
                     || market == null|| market.equals("")
                     || type == null || type.equals("")
@@ -123,7 +143,7 @@ public class DatePriceServiceImpl implements DatePriceService {
                 throw new DataNotExistException("No data is stored in database!");
             }
             Collections.reverse(list);
-            return this.toListMap(list);
+            return  list;
         }catch (PathInvalidException | DataNotExistException e1){
             logger.error(e1.getMessage());
             throw e1;
