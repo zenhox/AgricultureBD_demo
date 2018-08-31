@@ -14,8 +14,7 @@
 <body>
 
 <!-script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"->
-<script src="./js/jquery.min.js">
-</script>
+<script src="./js/jquery.min.js"></script>
  <div id="main" style="width: 1200px;height:400px;"></div>
  <script>
  var myChart = echarts.init(document.getElementById('main'));
