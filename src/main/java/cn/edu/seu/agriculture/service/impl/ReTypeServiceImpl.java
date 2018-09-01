@@ -38,10 +38,11 @@ public class ReTypeServiceImpl implements ReTypeService {
     }
 
     @Override
-    public String toCsv(String head, List<DatePrice> body) {
+    public String toCsv( List<DatePrice> body) {
 
-
-        String reCsv = head + SYMBOL_RETURN;
+        //动画所需的head可以手动添加，为方便数据查询，删除了头部的功能
+        //String reCsv = head + SYMBOL_RETURN;
+        String reCsv = "";
         for (DatePrice dp : body){
             String item = dp.getName() + SYMBOL_SPIT_COMMA;
             item = item

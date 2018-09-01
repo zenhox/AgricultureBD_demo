@@ -22,5 +22,5 @@ public interface ReTypeService {
      * @param body
      * @return
      */
-    public String toCsv(String head,List<DatePrice> body);
+    public String toCsv(List<DatePrice> body);
 }

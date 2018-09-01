@@ -1,5 +1,6 @@
 package cn.edu.seu.agriculture.web;
 
+import cn.edu.seu.agriculture.entity.DatePrice;
 import cn.edu.seu.agriculture.exception.DataNotExistException;
 import cn.edu.seu.agriculture.exception.PathInvalidException;
 import cn.edu.seu.agriculture.service.DatePriceService;
@@ -83,6 +84,15 @@ public class Controller {
         logger.info(reList.toString());
         System.out.println(reList.toString());
         return reList.toString().replace(" ","");
+    }
+
+    //用于比较页面查询相应数据
+    @RequestMapping(value = "/getDataForContrast",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String getDataForContrast(String province, String market, String type, String name, String startDate,String endDate) {
+        System.out.println(type+" "+market+" "+province+" "+name+" "+startDate+" "+endDate+"正在对比查询查询******");
+        List<DatePrice> reList = datePriceService.getDetailPriceListByInfo(province,market,type,name,startDate,endDate);
+        return reTypeService.toCsv(reList).toString();
     }
 
 }

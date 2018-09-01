@@ -94,6 +94,6 @@ public class ServiceTest extends BaseTest{
         List<DatePrice> reList = datePriceService.getDetailPriceListByInfo(
                 province,market,type,name,src,dst);
         logger.info("转换结果");
-        System.out.println(reTypeService.toCsv("name,type,price,date",reList));
+        System.out.println(reTypeService.toCsv(reList));
     }
 }

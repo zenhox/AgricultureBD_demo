@@ -79,8 +79,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<!------------------------------- 结束 ----------------------------->
     <div class="main">
-		<div class="main_center">
-			<div class="price_1">
+		<div class="main_center" >
+			<%--此处强行加长了div标签，前端美化的时候可以对此处进行美化--%>
+			<div class="price_1" style="width: 1200px;height:2000px;background:#FFF;">
 				<div class="title">
 					<!-- <br />
 					<h2>
@@ -143,15 +144,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="content box_content_hidden" >
 					<jsp:include page="datePrice.jsp"></jsp:include>
                 </div>
+			</div>
+			<jsp:include page="bottom.jsp"></jsp:include>
 		</div>
-            <jsp:include page="bottom.jsp"></jsp:include>
 	</div>
 	<script type="text/javascript" src="js/jquery.min.js"></script> 
 	<script type="text/javascript" src="js/highcharts.js"></script>
 	<script type="text/javascript" src="js/echarts.js"></script>
 	<script type="text/javascript" src="js/highcharts-3d.js"></script> 
 	<script type="text/javascript">
-		
+
 		function autoScroll(obj) {
 			$(".maquee").find("ul").animate({
 				marginTop : "-39px"
@@ -840,5 +842,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 	</script>
+
+
   </body>
 </html>
