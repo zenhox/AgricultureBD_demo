@@ -271,28 +271,15 @@
         // })
         //   给表格添加数据
 
-        function getName(){
-            type = $("#select_3").find("option:selected").text();
+        function GetMonitorData(){
             $.ajax({
                 type:"GET",
-                url:"http://localhost:8080/agriculture/getName",
-                data:{
-                    province:province,
-                    market:market,
-                    type:type
-                },
+                url:"http://localhost:8080/agriculture/monitor",
                 success:function (data) {
-                    $("#select_4").html('<option value=1 selected="selected">请选择</option>');
                     data=data.substring(1,data.length-1);
                     var arrayData = data.split(",");
-                    console.log(arrayData.length)
-                    console.log(arrayData[0])
-                    for (var i = 0; i < arrayData.length; i++) {
-                        var tempOpt = document.createElement('option');
-                        $(tempOpt).attr('value',i+2);
-                        $(tempOpt).text(arrayData[i])
-                        $("#select_4").append(tempOpt);
-                    }
+                    console.log(arrayData.length);
+                    console.log(arrayData[0]);
                 }
             })
         }

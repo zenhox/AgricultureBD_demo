@@ -84,4 +84,17 @@ public class Controller {
         System.out.println(reList.toString());
         return reList.toString().replace(" ","");
     }
+
+    //获取监控的抓取数据
+    @RequestMapping(value="/monitor",method =RequestMethod.GET,produces = {"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String Monitor(){
+        return "1";
+    }
+    //获取name,market,price,date
+    @RequestMapping(value = "/AllData",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String AllData(){
+        return "5";
+    }
 }
