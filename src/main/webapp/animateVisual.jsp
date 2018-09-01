@@ -82,7 +82,9 @@
             </td>
         </div>
         <%--动画播放标签--%>
-        <svg width="1200" height="800"></svg>
+            <svg id="animatePlayer" width="1200" height="700"></svg>
+
+
 
         <%--引入的js脚本--%>
 		<script src="./js/d3.js"></script>
@@ -200,6 +202,8 @@
                         //console.log(animate_data);
                    }
                    console.log(animate_data);
+                   document.getElementById("animatePlayer").innerHTML="";
+                   // 清空动画播放标签，防止重复播放
                    startAnimate(animate_data);
                    animate_data="name,type,value,date\n";
                }

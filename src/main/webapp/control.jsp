@@ -85,6 +85,11 @@
 			width: 160px;
 			height: 180px;
 		}
+        #MarketCount,#TypeCount,#NameCount,#DrawCount,#todayDrawCount,#Time{
+            font-size: 30px;
+            margin-top: 70px;
+            color: #FFCC33;
+        }
 	</style>
 </head>
 <body>
@@ -139,25 +144,27 @@
 				<ul class="kind_nav">
 					<li class="li_long li_first" >
 						<div class="name">市场总数</div>
+                        <div id="MarketCount"></div>
 					</li>
 					<li class="li_long">
 						<div class="name">品类总数</div>
+                        <div id="TypeCount"></div>
 					</li>
 					<li class="li_long">
 						<div class="name">品种总数</div>
-						<div id="c"></div>
+						<div id="NameCount"></div>
 					</li>
 					<li class="li_long">
 						<div class="name">总抓取量</div>
-						<div id="d"></div>
+						<div id="DrawCount"></div>
 					</li>
 					<li class="li_long">
 						<div class="name">当天抓取量</div>
-						<div id="e"></div>
+						<div id="todayDrawCount"></div>
 					</li>
 					<li class="li_long">
 						<div class="name">抓取时间</div>
-						<div id="f"></div>
+						<div id="Time"></div>
 					</li>
 
 				</ul>
@@ -262,14 +269,23 @@
     window.onload = function (ev) {
         //   执行函数，获得data
         var mydata = JSON.parse(localStorage.getItem('mydata'));
+
         function GetMonitorData() {
             $.ajax({
                 type: "GET",
                 url: "http://localhost:8080/agriculture/AllData",
                 success: function (data) {
+                    data=data.substring(1,data.length-1);
                     console.log(data);
                     var arrayAllData = data.split(",");
                     console.log(arrayAllData);
+                    document.getElementById("MarketCount").innerText=arrayAllData[0];
+                    document.getElementById("TypeCount").innerText=arrayAllData[1];
+                    document.getElementById("NameCount").innerText=arrayAllData[2];
+                    document.getElementById("DrawCount").innerText=arrayAllData[3];
+                    document.getElementById("todayDrawCount").innerText=arrayAllData[4];
+                    document.getElementById("Time").innerText=arrayAllData[5];
+
                 }
             }
         )}

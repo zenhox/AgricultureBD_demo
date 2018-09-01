@@ -31,7 +31,7 @@
     item_x : 400,
 
     // 时间点间隔时间。
-    interval_time : 2,
+    interval_time : 1,
 
     // 上方文字水平高度。
     text_y : -50,
@@ -67,8 +67,8 @@
     bottom_margin : 0,
 
     // 时间标签坐标。
-    dateLabel_x : 800,
-    dateLabel_y : 750,
+    dateLabel_x : 600,
+    dateLabel_y : -50,
     
     // 允许大于平均值的条消失时上浮。
     allow_up : true,
