@@ -20,6 +20,7 @@ public class ServiceTest extends BaseTest{
     @Autowired
     private ReTypeService reTypeService;
 
+
     @Autowired
     private PriceForecastService priceForecastService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -83,7 +84,7 @@ public class ServiceTest extends BaseTest{
         logger.info(reList.toString());
     }
 
-    @Test
+//    @Test
     public  void csvReTypeTest(){
         String province = "山西";
         String market = "山西省太原市河西农产品有限公司";
@@ -95,5 +96,14 @@ public class ServiceTest extends BaseTest{
                 province,market,type,name,src,dst);
         logger.info("转换结果");
         System.out.println(reTypeService.toCsv(reList));
+    }
+
+    @Test
+    public  void counterTest(){
+        logger.info("最新数据");
+        List<DatePrice> datePrices =  datePriceService.getNewPriceList();
+        logger.info(reTypeService.toCsv(datePrices));
+        logger.info("最新统计");
+        logger.info(datePriceService.getRecentlyCounter().toString());
     }
 }

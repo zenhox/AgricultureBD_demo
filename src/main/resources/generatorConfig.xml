@@ -114,6 +114,11 @@
             <!--enableDeleteByExample="false" enableSelectByExample="false"-->
             <!--selectByExampleQueryId="false"-->
         </table>
+        <table schema="agriculture" tableName="counter" domainObjectName="Counter">
+            <!--enableCountByExample="false" enableUpdateByExample="false"-->
+            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+            <!--selectByExampleQueryId="false"-->
+        </table>
         <!--<table schema="test_db" tableName="appointment" domainObjectName="Appointment">-->
             <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
             <!--&lt;!&ndash;enableDeleteByExample="false" enableSelectByExample="false"&ndash;&gt;-->

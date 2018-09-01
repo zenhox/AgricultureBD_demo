@@ -1,5 +1,6 @@
 package cn.edu.seu.agriculture.service;
 
+import cn.edu.seu.agriculture.entity.Counter;
 import cn.edu.seu.agriculture.entity.DatePrice;
 
 import java.sql.Date;
@@ -74,5 +75,16 @@ public interface DatePriceService {
                                                        String name,
                                                        int  day);
 
+    /**
+     * 返回近期的一些数据
+     * @return
+     */
+    public List<DatePrice> getNewPriceList();
+
+    /**
+     * 返回最近的数据统计
+     * @return
+     */
+    public List<String> getRecentlyCounter();
 
 }
