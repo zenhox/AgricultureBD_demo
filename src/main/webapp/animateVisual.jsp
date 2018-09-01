@@ -65,6 +65,8 @@
             <input type="button" id="cleanButton" style="width:70px;height:30px;" value="清空"></button>
             <input type="button" id="queryButton" style="width:70px;height:30px;" value="查询"></button>
         </div>
+            <label for="staDate">开始日期：</label><input id="staDate" type="date" value="2017-01-01"/>
+            <label for="endDate">结束日期：</label><input id="endDate" type="date" value="2018-08-01"/>
         <div class="Top_Record" >
             <table id= "allInf" width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#d8d8d8" class="m_t_5">
                 <tr>
@@ -169,6 +171,8 @@
 
                // 根据表格获取所有数据
                function getAllInf(){
+                   var start_Date = $('#staDate').val();
+                   var end_Date = $("#endDate").val();
                    for (var i=0;i<currentInf;i++){
                        $.ajax({
                            async: false,
@@ -179,8 +183,8 @@
                                market:data[i].market,
                                type:data[i].type,
                                name:data[i].name,
-                               startDate:"2018-01-01",//data[i].startDate,
-                               endDate:"2018-08-01"//data[i].endDate
+                               startDate:start_Date,
+                               endDate:end_Date
                            },
                            success:function (data) {
                                animate_data = animate_data + data;

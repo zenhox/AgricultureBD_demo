@@ -205,12 +205,33 @@ public class DatePriceServiceImpl implements DatePriceService {
     public List<DatePrice> getNewPriceList() {
         //创建查询模板
         DatePriceExample example = new DatePriceExample();
+        ArrayList<String>  provinces = new ArrayList<>();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = null;
+        try {
+            date = format.parse("2018-5-10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date down_date = new Date(date.getTime());
+        provinces.add("山西");
+        provinces.add("山东");
+        provinces.add("南京");
+        provinces.add("湖北");
+        provinces.add("北京");
+        provinces.add("上海");
+        example.createCriteria()
+                .andProvinceIn(provinces)
+                .andTypeEqualTo("蔬菜")
+                .andDateGreaterThan(down_date)
+                .andMarketIsNotNull()
+                .andPriceIsNotNull();
         example.setOrderByClause("date DESC"); //倒着取数据
-        example.setDistinct(true);
+//        example.setDistinct(true);
         List<DatePrice> list = datePriceMapper.selectByExample(example);
-        Collections.reverse(list);
-        if(list.size() > 250)
-            return list.subList(0,250);
+        if(list.size() > 180)
+            return list.subList(0,180);
         else
             return list;
     }
@@ -218,6 +239,7 @@ public class DatePriceServiceImpl implements DatePriceService {
     @Override
     public List<String> getRecentlyCounter() {
         CounterExample example = new CounterExample();
+        example.createCriteria().andCrawtimeIsNotNull();
         example.setOrderByClause("crawTime DESC");
         List<Counter> list = counterMapper.selectByExample(example);
         Counter newCounter = list.get(0);

@@ -261,28 +261,20 @@
 <script>
     window.onload = function (ev) {
         //   执行函数，获得data
-        var mydata = [];
-        mydata.push();
-        // $.ajax({
-        //
-        // 	success:function(data){
-        // 	    mydata = data
-        // 	}
-        // })
-        //   给表格添加数据
-
-        function GetMonitorData(){
+        var mydata = JSON.parse(localStorage.getItem('mydata'));
+        function GetMonitorData() {
             $.ajax({
-                type:"GET",
-                url:"http://localhost:8080/agriculture/monitor",
-                success:function (data) {
-                    data=data.substring(1,data.length-1);
-                    var arrayData = data.split(",");
-                    console.log(arrayData.length);
-                    console.log(arrayData[0]);
+                type: "GET",
+                url: "http://localhost:8080/agriculture/AllData",
+                success: function (data) {
+                    console.log(data);
+                    var arrayAllData = data.split(",");
+                    console.log(arrayAllData);
                 }
-            })
-        }
+            }
+        )}
+        GetMonitorData();
+
         function showTable(data) {
             var flagment = document.createDocumentFragment();
             for (var i = 0; i < data.length; i++) {
@@ -321,7 +313,6 @@
             $('#show').append(flagment);
         }
         showTable(mydata);
-
         function goPage(pno,psize) {
             var itable = document.getElementById("show");
             var num = itable.rows.length;//表格所有行数(所有记录数)
@@ -397,8 +388,7 @@
                 templi6.innerText="尾页";
             }
         }
-
-        goPage(1,3);
+        goPage(1,10);
 
 
     }

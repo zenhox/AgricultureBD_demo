@@ -90,13 +90,16 @@ public class Controller {
     @RequestMapping(value="/monitor",method =RequestMethod.GET,produces = {"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
     public String Monitor(){
-        return "1";
+        List<DatePrice> datePrices =  datePriceService.getNewPriceList();
+        logger.info(datePrices.toString());
+        return reTypeService.toCsv(datePrices).toString();
     }
     //获取name,market,price,date
     @RequestMapping(value = "/AllData",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
     public String AllData() {
-        return "5";
+        List<String> AllDataList = datePriceService.getRecentlyCounter();
+        return AllDataList.toString().replace(" ","");
     }
 
     //用于比较页面查询相应数据
