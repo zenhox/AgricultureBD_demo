@@ -1,6 +1,9 @@
 package cn.edu.seu.agriculture.service.impl;
 
+import cn.edu.seu.agriculture.dao.CounterMapper;
 import cn.edu.seu.agriculture.dao.DatePriceMapper;
+import cn.edu.seu.agriculture.entity.Counter;
+import cn.edu.seu.agriculture.entity.CounterExample;
 import cn.edu.seu.agriculture.entity.DatePrice;
 import cn.edu.seu.agriculture.entity.DatePriceExample;
 import cn.edu.seu.agriculture.exception.DataNotExistException;
@@ -22,6 +25,8 @@ public class DatePriceServiceImpl implements DatePriceService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private DatePriceMapper datePriceMapper;
+    @Autowired
+    private CounterMapper counterMapper;
 
     /**
      * 工具函数, 将从数据库返回的结果翻译成可以转为json object的对象
@@ -194,5 +199,35 @@ public class DatePriceServiceImpl implements DatePriceService {
             logger.error(e2.getMessage(),e2);
             throw e2;
         }
+    }
+
+    @Override
+    public List<DatePrice> getNewPriceList() {
+        //创建查询模板
+        DatePriceExample example = new DatePriceExample();
+        example.setOrderByClause("date DESC"); //倒着取数据
+        example.setDistinct(true);
+        List<DatePrice> list = datePriceMapper.selectByExample(example);
+        Collections.reverse(list);
+        if(list.size() > 250)
+            return list.subList(0,250);
+        else
+            return list;
+    }
+
+    @Override
+    public List<String> getRecentlyCounter() {
+        CounterExample example = new CounterExample();
+        example.setOrderByClause("crawTime DESC");
+        List<Counter> list = counterMapper.selectByExample(example);
+        Counter newCounter = list.get(0);
+        List<String> reList = new ArrayList<>();
+        reList.add(newCounter.getMarketcounter().toString());
+        reList.add(newCounter.getTypecounter().toString());
+        reList.add(newCounter.getNamecounter().toString());
+        reList.add(newCounter.getCrawcounter().toString());
+        reList.add(newCounter.getDailycounter().toString());
+        reList.add(new Date(newCounter.getCrawtime().getTime()) .toString());
+        return reList;
     }
 }

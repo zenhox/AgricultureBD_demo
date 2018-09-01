@@ -18,7 +18,6 @@ public interface ReTypeService {
 
     /**
      * 例如: 将 List<></>
-     * @param head
      * @param body
      * @return
      */
