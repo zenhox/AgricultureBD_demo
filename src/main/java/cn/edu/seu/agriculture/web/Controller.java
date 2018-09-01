@@ -94,5 +94,4 @@ public class Controller {
         List<DatePrice> reList = datePriceService.getDetailPriceListByInfo(province,market,type,name,startDate,endDate);
         return reTypeService.toCsv(reList).toString();
     }
-
 }
