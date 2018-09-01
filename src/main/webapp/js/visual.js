@@ -5,18 +5,22 @@
  * @modify date 2018-07-25 10:33:55
  * @desc 可视化核心代码
  */
-$('#inputfile').change(function () {
-    $('#inputfile').attr('hidden', true);
-    var r = new FileReader();
-    r.readAsText(this.files[0], config.encoding);
-    r.onload = function () {
-		//读取完成后，数据保存在对象的result属性中
-        var data = d3.csvParse(this.result);
-        console.log(this.result);
-		console.log(data);
-		draw(data);
-    }
-});
+
+// $('#inputfile').change(function () {
+//     $('#inputfile').attr('hidden', true);
+//     var r = new FileReader();
+//     r.readAsText(this.files[0], config.encoding);
+//     r.onload = function () {
+//         //读取完成后，数据保存在对象的result属性中
+//         var data = d3.csvParse(this.result);
+//         draw(data);
+//     }
+// });
+function startAnimate(animateData) {
+    //读取完成后，数据保存在传入的animateData中
+    var data = d3.csvParse(animateData);
+    draw(data);
+};
 
 function draw(data) {
     var color = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",

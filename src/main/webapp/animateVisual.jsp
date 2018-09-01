@@ -11,7 +11,7 @@
 <script src="./js/jquery-3.3.1.min.js"></script>
 <body>
     <center>
-        <input type="file" id="inputfile" name="fileContent">
+        <%--<input type="file" id="inputfile" name="fileContent">--%>
         <%--下拉框--%>
         <div id="div2" style="margin-left:auto">
             <label style="font-size:15px;">省份:</label>
@@ -76,24 +76,6 @@
             </table>
             <td height="30" colspan="5" valign="top">
                 <table width="100%" border="0" align="center" id="showInfTable" cellpadding="0" cellspacing="0" class="f_s_14">
-                    <tr>
-                        <td width="10%" height="30" align="center" class="province">上海</td>
-                        <td width="10%" height="30" align="center" class="market">上海市江桥批发市场经营管理有限公司</td>
-                        <td width="10%" height="30" align="center" class="type">蔬菜</td>
-                        <td width="12%" height="30" align="center" class="name">萝卜</td>
-                    </tr>
-                    <tr>
-                        <td width="10%" height="30" align="center" class="province">黑龙江</td>
-                        <td width="10%" height="30" align="center" class="market">哈尔滨哈达农副产品股份有限公司</td>
-                        <td width="10%" height="30" align="center" class="type">蔬菜</td>
-                        <td width="12%" height="30" align="center" class="name">大白菜</td>
-                    </tr>
-                    <tr>
-                        <td width="10%" height="30" align="center" class="province">新疆</td>
-                        <td width="10%" height="30" align="center" class="market">新疆兵团农五师三和农副产品综合批发市场</td>
-                        <td width="10%" height="30" align="center" class="type">蔬菜</td>
-                        <td width="12%" height="30" align="center" class="name">大葱</td>
-                    </tr>
                 </table>
             </td>
         </div>
@@ -110,11 +92,11 @@
                var animate_market=null;
                var animate_type=null;
                var animate_name=null;
-               var currentRow=0;
+               var currentInf=0;
                var data = [];
+               var animate_data="name,type,value,date\n";
 
                function animate_getMarket(){
-                   console.log(1)
                    animate_province = $("#animate_select_1").find("option:selected").text();
                    $.ajax({
                        type:"GET",
@@ -126,8 +108,6 @@
                        success:function (data) {
                            data=data.substring(1,data.length-1);
                            var arrayData = data.split(",");
-                           console.log(arrayData)
-                           console.log(arrayData[0])
                            $("#animate_select_2").html('<option value=1 selected="selected">请选择</option>');
                            $("#animate_select_3").html('<option value=1 selected="selected">请选择</option>');
                            $("#animate_select_4").html('<option value=1 selected="selected">请选择</option>');
@@ -154,8 +134,6 @@
                            $("#animate_select_4").html('<option value=1 selected="selected">请选择</option>');
                            data=data.substring(1,data.length-1);
                            var arrayData = data.split(",");
-                           console.log(arrayData.length)
-                           console.log(arrayData[0])
                            for (var i = 0; i < arrayData.length; i++) {
                                var tempOpt = document.createElement('option');
                                $(tempOpt).attr('value',i+2);
@@ -179,8 +157,6 @@
                            $("#animate_select_4").html('<option value=1 selected="selected">请选择</option>');
                            data=data.substring(1,data.length-1);
                            var arrayData = data.split(",");
-                           console.log(arrayData.length)
-                           console.log(arrayData[0])
                            for (var i = 0; i < arrayData.length; i++) {
                                var tempOpt = document.createElement('option');
                                $(tempOpt).attr('value',i+2);
@@ -193,43 +169,35 @@
 
                // 根据表格获取所有数据
                function getAllInf(){
-                   var arrData=new Array();
-                   var objTable=document.getElementById("showInfTable");
-                   if(objTable)
-                   {
-                       for(var i=0;i<objTable.rows.length;i++)
-                       {
-                           for(var j=0;j<objTable.rows[i].cells.length;j++)
-                           {
-                               arrData[i]=objTable.rows[i].cells[j].innerHTML;
+                   for (var i=0;i<currentInf;i++){
+                       $.ajax({
+                           async: false,
+                           type:"GET",
+                           url:"http://localhost:8080/agriculture/getDataForContrast.do",
+                           data:{
+                               province:data[i].province,
+                               market:data[i].market,
+                               type:data[i].type,
+                               name:data[i].name,
+                               startDate:"2018-01-01",//data[i].startDate,
+                               endDate:"2018-08-01"//data[i].endDate
+                           },
+                           success:function (data) {
+                               animate_data = animate_data + data;
+                               //console.log(animate_data);
+                               // if(i==currentInf-1){
+                               //     console.log("所有数据获取完毕");
+                               //     console.log(animate_data);
+                               //     startAnimate(animate_data);
+                               //
+                               // }
                            }
-                       }
+                       })
+                        //console.log(animate_data);
                    }
-                   alert(arrData.join(","));
-                   console.log(arrData);
-
-                   // $.ajax({
-                   //     type:"GET",
-                   //     url:"http://localhost:8080/agriculture/getName",
-                   //     data:{
-                   //         province:province,
-                   //         market:market,
-                   //         type:type
-                   //     },
-                   //     success:function (data) {
-                   //         $("#select_4").html('<option value=1 selected="selected">请选择</option>');
-                   //         data=data.substring(1,data.length-1);
-                   //         var arrayData = data.split(",");
-                   //         console.log(arrayData.length)
-                   //         console.log(arrayData[0])
-                   //         for (var i = 0; i < arrayData.length; i++) {
-                   //             var tempOpt = document.createElement('option');
-                   //             $(tempOpt).attr('value',i+2);
-                   //             $(tempOpt).text(arrayData[i])
-                   //             $("#select_4").append(tempOpt);
-                   //         }
-                   //     }
-                   // })
+                   console.log(animate_data);
+                   startAnimate(animate_data);
+                   animate_data="name,type,value,date\n";
                }
                function showTable(data) {
                    var flagment = document.createDocumentFragment();
@@ -270,9 +238,11 @@
                }
                function addOneInf(){
                    animate_name = $("#animate_select_4").find("option:selected").text();
-                   if (animate_province=="请选择" ||animate_market=="请选择"||animate_type=="请选择"||animate_name=="请选择" ){
-                       alert("选择有误，请重新选择");
+
+                   if (animate_province=="请选择" ||animate_market=="请选择"||animate_type=="请选择"||animate_name=="请选择" || currentInf>=10){
+                       alert("选择有误或选择条目超过10个，请重新选择");
                    }else{
+                       document.getElementById("showInfTable").innerHTML = "";
                        data.push(
                            {
                                province:animate_province,
@@ -282,8 +252,14 @@
                            }
                        )
                        showTable(data);
+                       currentInf++;
                    }
 
+               }
+               function delAllInf(){
+                   document.getElementById("showInfTable").innerHTML = "";
+                   data=[];
+                   currentInf=0;
                }
 
 
@@ -291,7 +267,8 @@
                $("#animate_select_2").change(animate_getType);
                $("#animate_select_3").change(animate_getName);
                $("#queryButton").click(getAllInf);
-               $("#addButton").click(addOneInf)
+               $("#addButton").click(addOneInf);
+               $("#cleanButton").click(delAllInf);
            })
         </script>
         <link rel="stylesheet" href="./css/stylesheet.css">
