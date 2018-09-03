@@ -1,4 +1,3 @@
-import cn.edu.seu.agriculture.entity.CountryView;
 import cn.edu.seu.agriculture.entity.DatePrice;
 import cn.edu.seu.agriculture.service.*;
 import org.junit.Test;
@@ -51,20 +50,36 @@ public class ServiceTest extends BaseTest{
         logger.info(reList.toString());
     }
 
-//    @Test
+    /**
+     * 棉和棉和， 我在这里
+     ////////////////////////////////////////////////////////////////////
+     //                          _ooOoo_                               //
+     //                         o8888888o                              //
+     //                         88" . "88                              //
+     //                         (| ^_^ |)                              //
+     //                         O\  =  /O                              //
+     //                      ____/`---'\____                           //
+     //                    .'  \\|     |//  `.                         //
+     //                   /  \\|||  :  |||//  \                        //
+     //                  /  _||||| -:- |||||-  \                       //
+     //                  |   | \\\  -  /// |   |                       //
+     //                  | \_|  ''\---/''  |   |                       //
+     //                  \  .-\__  `-`  ___/-. /                       //
+     //                ___`. .'  /--.--\  `. . ___                     //
+     //              ."" '<  `.___\_<|>_/___.'  >'"".                  //
+     //            | | :  `- \`.;`\ _ /`;.`/ - ` : | |                 //
+     //            \  \ `-.   \_ __\ /__ _/   .-` /  /                 //
+     //      ========`-.____`-.___\_____/___.-`____.-'========         //
+     //                           `=---='                              //
+     //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
+     //            佛祖保佑       永不宕机     永无BUG                  //
+     ////////////////////////////////////////////////////////////////////
+     */
+    @Test
     public void CategoryRelatedTest(){
-//        Scanner in = new Scanner(System.in);    //Scanner类
-//        while (true){
-//            System.out.println("province list:"+tocSearchService.getProvinceList());
-//            String province = in.next();
-//            System.out.println("market list in["+province+"]:" + tocSearchService.getMarketByProvince(province));
-//            String market = in.next();
-//            System.out.println("type list in["+province+"|"+market+"]:" + tocSearchService.getTypeByArea(province,market));
-//            String type = in.next();
-//            System.out.println("name list in["+province+"|"+market+"|"+type+"]:" + tocSearchService.getNameByAreaAndType(province,market,type));
-//            String name = in.next();
-//            System.out.println("re list : "+ datePriceService.getPriceListByInfo(province,market,type,name));
-//        }
+        logger.info(tocSearchService.getTypeByDate("2018-6-20").toString());
+        logger.info(tocSearchService.getNameByType("2018-6-20","蔬菜").toString());
+
     }
 
 //    @Test
@@ -72,7 +87,7 @@ public class ServiceTest extends BaseTest{
 
     }
 
-    @Test
+//    @Test
     public void  ForecastServiceTest() throws ParseException {
         String province = "山西";
         String market = "山西省太原市河西农产品有限公司";

@@ -13,6 +13,9 @@ public class CountryView extends CountryViewKey {
     public CountryView() {
         super();
     }
+    public CountryView(Date date, String type, String name) {
+        super(date, type, name);
+    }
 
     public String getAveragePrice() {
         return averagePrice;

@@ -51,11 +51,11 @@ public interface DatePriceService {
      * @return
      */
     public List<DatePrice> getDetailPriceListByInfo(String province,
-                                              String market,
-                                              String type,
-                                              String name,
-                                              String src,  // "yyyy-mm-dd"
-                                              String dst); // "yyyy-mm-dd"
+                                                    String market,
+                                                    String type,
+                                                    String name,
+                                                    String src,  // "yyyy-mm-dd"
+                                                    String dst); // "yyyy-mm-dd"
 
     /**
      * 根据地域和品种，返回近 ** day ** 天的数据

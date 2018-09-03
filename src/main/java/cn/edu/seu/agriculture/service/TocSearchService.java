@@ -44,10 +44,10 @@ public interface TocSearchService {
      * 功能实现：　全国视图查询,下拉框获取品类列表
      * @return　　　返回TYPE 列表
      */
-    public ArrayList getTypeList();
+    public ArrayList getTypeByDate(String date);
     /**
      * 功能实现：　全国视图查询,根据品类获取name列表
      * @return　　　返回NAME 列表
      */
-    public ArrayList getNameByList(String type);
+    public ArrayList getNameByType(String date,String type);
 }

@@ -2,23 +2,26 @@ package cn.edu.seu.agriculture.service.impl;
 
 import cn.edu.seu.agriculture.dao.CategoryRelatedMapper;
 import cn.edu.seu.agriculture.dao.CountryViewMapper;
-import cn.edu.seu.agriculture.entity.CategoryRelated;
-import cn.edu.seu.agriculture.entity.CategoryRelatedExample;
-import cn.edu.seu.agriculture.entity.CountryView;
-import cn.edu.seu.agriculture.entity.CountryViewExample;
+import cn.edu.seu.agriculture.entity.*;
 import cn.edu.seu.agriculture.service.TocSearchService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 @Service
 public class TocSearchServiceImpl implements TocSearchService {
-
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private CategoryRelatedMapper provinceMarketMapper;
+
     @Autowired
     private CountryViewMapper countryViewMapper;
 
@@ -92,15 +95,20 @@ public class TocSearchServiceImpl implements TocSearchService {
     }
 
 
+
     @Override
-    public ArrayList getTypeList() {
+    public ArrayList getTypeByDate(String date_str) {
         CountryViewExample example = new CountryViewExample();
-        example.createCriteria()
-                .andTypeIsNotNull()
-                .andNameIsNotNull();
-        List<CountryView> list =  countryViewMapper.selectByExample(example);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            java.util.Date date = format.parse(date_str);
+            example.createCriteria().andDateEqualTo(date);
+        } catch (ParseException e) {
+            logger.error(e.getMessage());
+        }
+        List<CountryView>  query = countryViewMapper.selectByExample(example);
         ArrayList<String> reList = new ArrayList<>();
-        for(CountryView cv : list){
+        for (CountryView cv : query){
             reList.add(cv.getType());
         }
         HashSet h = new HashSet(reList);
@@ -110,13 +118,20 @@ public class TocSearchServiceImpl implements TocSearchService {
     }
 
     @Override
-    public ArrayList getNameByList(String type) {
+    public ArrayList getNameByType(String date_str, String  type) {
         CountryViewExample example = new CountryViewExample();
-        example.createCriteria()
-                .andTypeEqualTo(type);
-        List<CountryView> list =  countryViewMapper.selectByExample(example);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            java.util.Date date = format.parse(date_str);
+            example.createCriteria()
+                    .andDateEqualTo(date)
+                    .andTypeEqualTo(type);
+        } catch (ParseException e) {
+            logger.error(e.getMessage());
+        }
+        List<CountryView>  query = countryViewMapper.selectByExample(example);
         ArrayList<String> reList = new ArrayList<>();
-        for(CountryView cv : list){
+        for (CountryView cv : query){
             reList.add(cv.getName());
         }
         HashSet h = new HashSet(reList);

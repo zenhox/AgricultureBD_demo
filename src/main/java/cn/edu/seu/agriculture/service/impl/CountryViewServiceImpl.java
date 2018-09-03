@@ -2,7 +2,6 @@ package cn.edu.seu.agriculture.service.impl;
 
 import cn.edu.seu.agriculture.dao.CountryViewMapper;
 import cn.edu.seu.agriculture.entity.CountryView;
-import cn.edu.seu.agriculture.entity.CountryViewExample;
 import cn.edu.seu.agriculture.entity.CountryViewKey;
 import cn.edu.seu.agriculture.exception.PathInvalidException;
 import cn.edu.seu.agriculture.service.CountryViewService;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class CountryViewServiceImpl implements CountryViewService {
@@ -33,6 +30,7 @@ public class CountryViewServiceImpl implements CountryViewService {
             throw new PathInvalidException("日期输入有误!");
         }
         CountryViewKey countryViewKey = new CountryViewKey(dt,type,name);
+
         CountryView countryView =  countryViewMapper.selectByPrimaryKey(countryViewKey);
         String query = countryView.getAveragePrice();
         /**
