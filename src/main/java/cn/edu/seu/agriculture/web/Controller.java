@@ -106,4 +106,17 @@ public class Controller {
         return reTypeService.toCsv(reList).toString();
 
     }
+
+
+    //获取区域行情品名
+    @RequestMapping(value = "/areaGetName",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String areaGetName(String type) {
+        ArrayList reList = tocSearchService.getNameByList(type);
+        System.out.println(reList.toString()+"******************");
+        logger.info(reList.toString());
+        return reList.toString().replace(" ","");
+    }
+
+
 }
