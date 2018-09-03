@@ -72,15 +72,18 @@ public class ServiceTest extends BaseTest{
 
     }
 
-//    @Test
+    @Test
     public void  ForecastServiceTest() throws ParseException {
         String province = "山西";
         String market = "山西省太原市河西农产品有限公司";
         String type = "蔬菜";
         String name = "油麦菜";
-        List<Map<String,Object>> reList = priceForecastService.forecast(province,market,type,name);
-        logger.info("预测结果");
-        logger.info(reList.toString());
+        logger.info("\n原结果");
+        List<Map<String,Object>> reList1 = datePriceService.getPriceListByInfo(province,market,type,name);
+        logger.info(reList1.toString());
+        List<Map<String,Object>> reList2 = priceForecastService.forecast(province,market,type,name);
+        logger.info("\n预测结果");
+        logger.info(reList2.toString());
     }
 
 //    @Test
@@ -105,7 +108,7 @@ public class ServiceTest extends BaseTest{
         logger.info("最新统计");
         logger.info(datePriceService.getRecentlyCounter().toString());
     }
-    @Test
+//    @Test
     public  void countryViewTest(){
         logger.info("\n 进行全国视图测试。。。。");
         System.out.println(countryViewService.getCountryViewPrice("2017-02-16","蔬菜","大白菜"));
