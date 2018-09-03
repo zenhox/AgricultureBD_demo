@@ -61,11 +61,11 @@
                 <option value=1 selected="selected">请选择</option>
             </select>
 
-            <input type="button" id="addButton" style="width:70px;height:30px;" value="添加"></input>
-            <input type="button" id="cleanButton" style="width:70px;height:30px;" value="清空"></button>
-            <input type="button" id="queryButton" style="width:70px;height:30px;" value="查询"></button>
+            <input type="button" id="addButton" style="width:70px;height:30px;" value="添加"/>
+            <input type="button" id="cleanButton" style="width:70px;height:30px;" value="清空"/>
+            <input type="button" id="queryButton" style="width:70px;height:30px;" value="查询"/>
         </div>
-            <label for="staDate">开始日期：</label><input id="staDate" type="date" value="2017-01-01"/>
+            <label for="staDate">开始日期：</label><input id="staDate" type="date" value="2018-01-01"/>
             <label for="endDate">结束日期：</label><input id="endDate" type="date" value="2018-08-01"/>
         <div class="Top_Record" >
             <table id= "allInf" width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#d8d8d8" class="m_t_5">
