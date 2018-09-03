@@ -100,25 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   </div> 
 				</div>
 				<div class="content box_content_block">
-					<div class="search">
-						<select name="selt" style="height:30px; width:150px;" id="seltType" onchange="changeType(this)">
-							<option value="">产品种类</option>
-							<c:forEach items="${dynaList }" var="d">
-								<option value="${d}">${d }</option>
-							</c:forEach>
-						</select>
-						<select name="seltName" style="height:30px; width:150px;" id="seltName" onchange="changeTypeName(this)">
-							<option value="">品种</option>
-							<%-- <c:forEach items="${dynaList }" var="d">
-								<option value="${d}">${d }</option>
-							</c:forEach> --%>
-						</select>
-					</div>
-					<div id="price-zhu"  >
-					</div>
-					<div id="price-map"  >
-					</div>
-					
+                    <jsp:include page="areaPrice.jsp"></jsp:include>
 				</div>
 				<div class="content box_content_hidden">
 					<div id="container" style="height:800px;width:1200px;" >
@@ -160,11 +142,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		// Step:3 conifg ECharts's path, link to echarts.js from current page.
 	    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
-	    require.config({
-	        paths: {
-	            echarts: './js'
-	        }
-	    });
+	    // require.config({
+	    //     paths: {
+	    //         echarts: './js'
+	    //     }
+	    // });
 	    
 	    /**
 	    地图加载
