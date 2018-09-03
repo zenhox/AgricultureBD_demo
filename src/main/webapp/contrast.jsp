@@ -81,7 +81,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="main">
 		<div class="main_center" >
 			<%--此处强行加长了div标签，前端美化的时候可以对此处进行美化--%>
-			<div class="price_1" style="width: 1200px;height:2000px;background:#FFF;">
+			<div class="price_1" style="width: 1200px;height:1500px;background:#FFF;">
+
 				<div class="title">
 					<!-- <br />
 					<h2>
@@ -90,10 +91,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</h2> -->
 					<div id="box">  
 				     <ul id="tab">  
-				         <li class="three on" id="tab_1" onClick="switchTab(this,0)">区域行情</li>  
-				         <li class="three" id="tab_2" onClick="switchTab(this,1)">品种对比</li>  
-				         <li class="three" id="tab_3" onClick="switchTab(this,2)">数据查询</li> 
-				         <!-- <li class="three" id="tab_4" onClick="switchTab(this,3)" style="margin:0;">价格走势</li>   -->
+				         <li class="four on" id="tab_1" onClick="switchTab(this,0)">区域行情</li>
+				         <li class="four" id="tab_2" onClick="switchTab(this,1)">动态对比</li>
+				         <li class="four" id="tab_3" onClick="switchTab(this,2)">静态对比</li>
+						 <li class="four" id="tab_4" onClick="switchTab(this,3)">数据查询</li>
+						 <!-- <li class="three" id="tab_4" onClick="switchTab(this,3)" style="margin:0;">价格走势</li>   -->
 				     </ul>
 				   </div> 
 				</div>
@@ -119,27 +121,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 				</div>
 				<div class="content box_content_hidden">
-					<%--<div class="search">--%>
-							<%--<select name="province" id="province" style="width: 160px;height:30px;"--%>
-								<%--onchange="getMarket(this);" tabindex="2" id="province">--%>
-								<%--<option value="">省份</option>--%>
-								<%--<c:forEach items="${proList }" var="f">--%>
-									<%--<option value="${f }">${f }</option>--%>
-								<%--</c:forEach>--%>
-							<%--</select> --%>
-							<%--<select name="country" id="market" style="width: 240px;height:30px;"--%>
-								<%--onchange="getType(this);" tabindex="2" id="market">--%>
-								<%--<option value="">批发市场</option>--%>
-							<%--</select> --%>
-							<%--<select name="type" style="width:160px;height:30px;"--%>
-								<%--id="typeMarket" tabindex="2">--%>
-								<%--<option value="">产品种类</option>--%>
-							<%--</select> <input type="button" value="开始查询" class="search_btn" id="startQuery" onclick="compareType(this)"--%>
-								  <%--/>--%>
-					<%--</div>--%>
-					<div id="container" style="height:570px;width:1200px;" >
+					<div id="container" style="height:800px;width:1200px;" >
                         <jsp:include page="animateVisual.jsp"></jsp:include>
 					</div>
+				</div>
+				<div class="content box_content_hidden">
+						<jsp:include page="dataCompare.jsp"></jsp:include>
 				</div>
 				<div class="content box_content_hidden" >
 					<jsp:include page="datePrice.jsp"></jsp:include>
@@ -839,8 +826,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			window.setInterval(autoScroll, 3000);
 			
 		});
-		
-		
 	</script>
 
 
