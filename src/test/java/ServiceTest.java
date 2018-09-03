@@ -1,7 +1,6 @@
-import cn.edu.seu.agriculture.service.DatePriceService;
-import cn.edu.seu.agriculture.service.PriceForecastService;
-import cn.edu.seu.agriculture.service.ReTypeService;
-import cn.edu.seu.agriculture.service.TocSearchService;
+import cn.edu.seu.agriculture.entity.CountryView;
+import cn.edu.seu.agriculture.entity.DatePrice;
+import cn.edu.seu.agriculture.service.*;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,8 @@ public class ServiceTest extends BaseTest{
     private TocSearchService tocSearchService;
     @Autowired
     private ReTypeService reTypeService;
-
+    @Autowired
+    private CountryViewService countryViewService;
 
     @Autowired
     private PriceForecastService priceForecastService;
@@ -51,7 +51,7 @@ public class ServiceTest extends BaseTest{
         logger.info(reList.toString());
     }
 
-    @Test
+//    @Test
     public void CategoryRelatedTest(){
 //        Scanner in = new Scanner(System.in);    //Scanner类
 //        while (true){
@@ -97,12 +97,17 @@ public class ServiceTest extends BaseTest{
         System.out.println(reTypeService.toCsv(reList));
     }
 
-    @Test
+//    @Test
     public  void counterTest(){
         logger.info("最新数据");
         List<DatePrice> datePrices =  datePriceService.getNewPriceList();
         logger.info(reTypeService.toCsv(datePrices));
         logger.info("最新统计");
         logger.info(datePriceService.getRecentlyCounter().toString());
+    }
+    @Test
+    public  void countryViewTest(){
+        logger.info("\n 进行全国视图测试。。。。");
+        System.out.println(countryViewService.getCountryViewPrice("2017-02-16","蔬菜","大白菜"));
     }
 }
