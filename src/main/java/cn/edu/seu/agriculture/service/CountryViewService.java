@@ -2,6 +2,9 @@ package cn.edu.seu.agriculture.service;
 
 import org.json.JSONObject;
 
+import java.util.List;
+import java.util.Map;
+
 public interface CountryViewService {
 
     /**
@@ -10,5 +13,5 @@ public interface CountryViewService {
      * @param name　名字
      * @return : 格式如　"山西" : 3.8　的json对象
      */
-    public JSONObject getCountryViewPrice(String type,String name);
+    public String  getCountryViewPrice(String date,String type, String name);
 }

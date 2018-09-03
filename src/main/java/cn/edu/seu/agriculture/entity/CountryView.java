@@ -1,10 +1,12 @@
 package cn.edu.seu.agriculture.entity;
 
+import java.util.Date;
+
 public class CountryView extends CountryViewKey {
     private String averagePrice;
 
-    public CountryView(String type, String name, String averagePrice) {
-        super(type, name);
+    public CountryView(Date date, String type, String name, String averagePrice) {
+        super(date, type, name);
         this.averagePrice = averagePrice;
     }
 

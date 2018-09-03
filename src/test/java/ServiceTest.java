@@ -1,4 +1,3 @@
-import cn.edu.seu.agriculture.entity.DatePrice;
 import cn.edu.seu.agriculture.service.DatePriceService;
 import cn.edu.seu.agriculture.service.PriceForecastService;
 import cn.edu.seu.agriculture.service.ReTypeService;
