@@ -18,7 +18,7 @@ public class PriceForecastServiceImpl implements PriceForecastService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static final double Alpha = 0.3;
-    private static final int HISTORY_LEN = 15;
+    private static final int HISTORY_LEN = 30;
 
     @Autowired
     private DatePriceService datePriceService;
