@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="price_5">
                 <div class="content">
-                    <div id="bMap" style="width: 1200px;height:626px;"></div>
+                    <div id="text" style="width: 1200px;height:626px;"></div>
                 </div>
             </div>
             <jsp:include page="bottom.jsp"></jsp:include>
@@ -138,7 +138,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/radialIndicator.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dialogBox.js"></script>
 	<script type="text/javascript" src="js/echarts.js"></script>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
 	<!--  -->
 	<script type="text/javascript" src="js/koala.min.1.5.js"></script>
 	<script type="text/javascript">
@@ -212,28 +211,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 
 	<script type="text/javascript">
-		// 百度地图API功能
-
-        // 创建Map实例
-		var map = new BMap.Map("bMap");
-        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-
-        map.enableScrollWheelZoom(true);
-        function myFun(result){
-            console.log(result);
-            var cityName = result.name;
-
-            map.setCenter(cityName);
-            var local = new BMap.LocalSearch(cityName, {
-                renderOptions: {map: map},
-            });
-            local.search("农贸市场");
-        }
-        var myCity = new BMap.LocalCity();
-        myCity.get(myFun);
-
-
-
         // 设置地图显示的城市 此项是必须设置的
             $.ajax({
                 type:"GET",
@@ -261,8 +238,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     localStorage.setItem('mydata',JSON.stringify(mydata));
                 }
             })
-
-
 	</script>
 </body>
 </html>
