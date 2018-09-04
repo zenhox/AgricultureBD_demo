@@ -32,7 +32,7 @@
             feature : {
                 mark : {show: true},
                 dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                magicType : {show: true, type: ['bar', 'stack', ]},
                 restore : {show: true},
                 saveAsImage : {show: true}
             }
@@ -55,7 +55,7 @@
             {
                 name:'1',
                 type:'line',
-                stack: '总量',
+                tiled: '总量',
                 symbol: 'none',
                 emphasis : {
                     label : {show: true}},
@@ -66,7 +66,7 @@
             {
                 name:'2',
                 type:'line',
-                stack: '总量',
+                tiled: '总量',
                 smooth: true,
                 emphasis : {
                     label : {show: true}},
@@ -78,7 +78,7 @@
             {
                 name:'3',
                 type:'line',
-                stack: '总量',
+                tiled: '总量',
                 emphasis : {
                     label : {show: true}},
                 itemStyle : {
@@ -174,10 +174,10 @@
 
         function getGraphStep3(){
 
-            var province = static_data[1].province;
-            var market = static_data[1].market;
-            var type = static_data[1].type;
-            var name = static_data[1].name;
+            var province = static_data[2].province;
+            var market = static_data[2].market;
+            var type = static_data[2].type;
+            var name = static_data[2].name;
 
             console.log("条目3" + province+market+type+name);
             $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",

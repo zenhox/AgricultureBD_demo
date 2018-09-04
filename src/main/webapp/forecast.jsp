@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             title: { text: '价格预测'},
             tooltip: {},
             toolbox:{show : true, feature : { mark : {show: true},
-                    dataView : {show: true, readOnly: false}, magicType : {show: true, type: ['line', 'bar']},
+                    dataView : {show: true, readOnly: false}, magicType : {show: true, type: ['bar','stack']},
                     restore : {show: true}, saveAsImage : {show: true}}},
             legend: {data:['历史价格','预测价格']},
             xAxis: { data: []},
@@ -151,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             series: [{
                 name:'历史价格',
                 type:'line',
-                stack: '总量',
+                tiled: '总量',
                 symbol: 'none',
                 emphasis : {
                     label : {show: true}},
@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'预测价格',
                     type:'line',
-                    stack: '总量',
+                    tiled: '总量',
                     smooth: true,
                     emphasis : {
                         label : {show: true}},
