@@ -32,17 +32,20 @@
         $(document).ready(function () {
 
             function area_getName(){
-                console.log("嘤嘤嘤嘤嘤");
+                //查询的日期
+                var area_Date = $('#areaQueryDate').val();
                 var area_type = $("#area_select_1").find("option:selected").text();
                 $.ajax({
                     type:"GET",
                     url:"http://localhost:8080/agriculture/areaGetName",
                     contentType:"UTF-8",
                     data:{
-                        type:area_type
+                        type:area_type,
+                        date:area_Date
                     },
                     success:function (data) {
                         data=data.substring(1,data.length-1);
+                        console.log(data);
                         var arrayData = data.split(",");
                         for (var i = 0; i < arrayData.length; i++) {
                             var tempOpt = document.createElement('option');
@@ -60,7 +63,7 @@
             }
 
             // 接口尚未实现，先行注释
-            // $("#area_select_1").change(area_getName);
+            $("#area_select_1").change(area_getName);
             $("#area_queryButton").click(getAreaPriceData);
         })
     </script>

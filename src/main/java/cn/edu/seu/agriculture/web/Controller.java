@@ -111,9 +111,8 @@ public class Controller {
     //获取区域行情品名
     @RequestMapping(value = "/areaGetName",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
-    public String areaGetName(String type) {
-        ArrayList reList = tocSearchService.getNameByList(type);
-        System.out.println(reList.toString()+"******************");
+    public String areaGetName(String type,String date) {
+        ArrayList reList = tocSearchService.getNameByType(date,type);
         logger.info(reList.toString());
         return reList.toString().replace(" ","");
     }
