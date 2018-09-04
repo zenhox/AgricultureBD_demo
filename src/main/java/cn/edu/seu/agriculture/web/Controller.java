@@ -4,6 +4,7 @@ import cn.edu.seu.agriculture.entity.DatePrice;
 import cn.edu.seu.agriculture.service.DatePriceService;
 import cn.edu.seu.agriculture.service.ReTypeService;
 import cn.edu.seu.agriculture.service.TocSearchService;
+import cn.edu.seu.agriculture.service.CountryViewService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class Controller {
     private ReTypeService reTypeService;
     @Autowired
     private TocSearchService tocSearchService;
+    @Autowired
+    private CountryViewService countryViewService;
 
     @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
@@ -117,5 +120,10 @@ public class Controller {
         return reList.toString().replace(" ","");
     }
 
+    @RequestMapping(value = "/areaGetAllData",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String areaGetAllData(String date,String type, String name){
+        return countryViewService.getCountryViewPrice(date,type,name);
+    }
 
 }
