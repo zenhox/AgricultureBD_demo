@@ -60,14 +60,14 @@
 		}
 		.content_left{
 			float:left;
-			width:58%;
+			width:49%;
 			margin-left:8px;
 			border-right: 1px solid #dfdfdf;
 			border-top:1px solid #dfdfdf;
 		}
 		.content_right{
 			float:left;
-			width:40%;
+			width:49%;
 			border-top:1px solid #dfdfdf;
 		}
 		.content h3{
@@ -90,6 +90,16 @@
             margin-top: 70px;
             color: #FFCC33;
         }
+		#pie{
+			flex:1 1 auto;
+			width: 100%;
+			height: 400px;
+		}
+		#ndgr{
+			flex:1 1 auto;
+			width: 100%;
+			height: 400px;
+		}
 	</style>
 </head>
 <body>
@@ -261,14 +271,14 @@
 						</font>
 					</h3>
 					<!--------------数据查询的部分 ---------------->
-					<div id="show-search"></div>
+					<div id="pie" ></div>
 				</div>
 				<div class="content_right">
 					<h3>
 						<font color="black" >所占记录数
 						</font>
 					</h3>
-					<div id="main" style="" ></div>
+					<div id="ndgr" style="" ></div>
 				</div>
 			</div>
 		</div>
@@ -497,28 +507,245 @@
 
         function getData(){
             type = $("#typeMarket").find("option:selected").text();
-            $.ajax({
-                type:"GET",
-                url:"http://localhost:8080/agriculture/getMarket",
-                contentType:"UTF-8",
-                data:{
-                    province:province
+
+
+
+            /*---------------------初始化----------------------------*/
+            var myChart_pie = echarts.init(document.getElementById('pie'));
+
+            /*---------------------数据----------------------------*/
+
+			//初始化数据，
+            var echartData = [{
+                value: 200,//时间
+                name: '交卷时间'
+            }, {
+                value: 100,
+                name: '未交卷时间'
+            }];
+
+
+            /*---------------------颜色变量----------------------------*/
+			//蓝色
+            var innerColor = '#2bff8f'; //内层颜色
+            var outColor = "#50e0ff"; //外层边框色粗
+            var textColor = '#50e0ff'; //文字颜色
+            var startColor = 'rgba(73,223,240,0.1)'; //中间饼图渐变开始颜色
+            var endColor = 'rgba(73,223,240,0.8)'; //中间饼图渐变结束颜色
+			//绿色
+			// var innerColor = '#50e0ff'; //内层颜色
+			// var outColor = "#2bff8f"; //外层边框色粗
+			// var textColor = '#50e0ff'; //文字颜色
+			// var startColor = 'rgba(43,255,143,0.1)'; //中间饼图渐变开始颜色
+			// var endColor = 'rgba(43,255,143,0.8)'; //中间饼图渐变结束颜色
+
+
+            /*---------------------缩放----------------------------*/
+            var scale = 1;
+
+
+            /*---------------------颜色配置----------------------------*/
+            var color = [{
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                    offset: 0,
+                    color: startColor // 0% 处的颜色
+                }, {
+                    offset: 1,
+                    color: endColor // 100% 处的颜色
+                }],
+                globalCoord: false // 缺省为 false
+            }, 'none'];
+            /*---------------------富文本----------------------------*/
+            var rich = {
+                time: {
+                    color: innerColor,
+                    fontSize: 32 * scale,
+                    padding: [0, 0],
+                    fontWeight:'bold'
                 },
-                success:function (data) {
-                    data=data.substring(1,data.length-1);
-                    var arrayData = data.split(",");
-                    console.log(arrayData)
-                    console.log(arrayData[0])
-                    $("#market").html('<option value=1 selected="selected">请选择</option>');
-                    $("#typeMarket").html('<option value=1 selected="selected">请选择</option>');
-                    for (var i = 0; i < arrayData.length; i++) {
-                        var tempOpt = document.createElement('option');
-                        $(tempOpt).attr('value',i+2);
-                        $(tempOpt).text(arrayData[i]);
-                        $("#market").append(tempOpt);
-                    }
+                unit:{
+                    color: innerColor,
+                    fontSize: 14 * scale,
+                    padding: [0,0,0, 0],
+                    verticalAlign:'bottom',
                 }
-            })
+            }
+
+
+            option1 = {
+                backgroundColor: '#031f2d',
+                title: [{
+                    text: '占比情况',
+                    x: '50%',
+                    y: '90%',
+                    textAlign: 'center',
+                    textStyle: {
+                        color: '#fff',
+                        textAlign: 'center',
+                        fontSize: 24 * scale,
+                        fontWeight: 'bold'
+                    },
+                }],
+
+                series: [
+                    //内圈圆环
+                    {
+                        name: 'Line 0',
+                        type: 'pie',
+                        clockWise: false, //顺时加载
+                        hoverAnimation: false, //鼠标移入变大
+                        center: ['50%', '50%'],
+                        radius: ['50%', '51.5%'],
+                        itemStyle: {
+                            normal: {
+                                color: innerColor
+                            }
+                        },
+                        //只是为了百分百显示圆环
+                        data: [{
+                            value: 0,
+                            name: '',
+                        }],
+                        label: {
+                            normal: {
+                                formatter: function(params) {
+                                    var time = echartData[0].value;
+                                    return '{time|' + (100+200)/200 + '}{unit|%}';
+                                },
+                                position: 'center',
+                                textStyle: {
+                                    fontSize: 38 * scale,
+                                    fontWeight: 'bold',
+                                    color: textColor
+                                },
+                                rich:rich
+                            }
+                        }
+                    },
+                    //中间圆环
+                    {
+                        name: 'Line 1',
+                        type: 'pie',
+                        clockWise: false, //顺时加载
+                        hoverAnimation: true, //鼠标移入变大
+                        center: ['50%', '50%'],
+                        radius: ['75%', '65%'],
+                        color: color,
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                            }
+                        },
+                        data:echartData,
+                    },
+                    //外层圆环
+                    {
+                        name: 'Line 2',
+                        type: 'pie',
+                        clockWise: false, //顺时加载
+                        hoverAnimation: false, //鼠标移入变大
+                        center: ['50%', '50%'],
+                        radius: ['75%', '75%'],
+                        itemStyle: {
+                            normal: {
+                                borderWidth: 2* scale,
+                                borderColor: outColor,
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                            }
+                        },
+                        //只是为了百分百显示圆环
+                        data: [{
+                            value: 10,
+                            name: '',
+                        }]
+                    }
+                ],
+            };
+            myChart_pie.setOption(option1);
+
+            var myChart_ndgr = echarts.init(document.getElementById('ndgr'));
+            option2 = {
+                backgroundColor: '#2c343c',
+
+                title: {
+                    text: 'Customized Pie',
+                    left: 'center',
+                    top: 20,
+                    textStyle: {
+                        color: '#ccc'
+                    }
+                },
+
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+
+                visualMap: {
+                    show: false,
+                    min: 80,
+                    max: 600,
+                    inRange: {
+                        colorLightness: [0, 1]
+                    }
+                },
+                series : [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius : '55%',
+                        center: ['50%', '50%'],
+                        data:[
+                            {value:335, name:'直接访问'},
+                            {value:310, name:'邮件营销'},
+                            {value:274, name:'联盟广告'},
+                            {value:235, name:'视频广告'},
+                            {value:400, name:'搜索引擎'}
+                        ].sort(function (a, b) { return a.value - b.value}),
+                        roseType: 'angle',
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    color: 'rgba(255, 255, 255, 0.3)'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                lineStyle: {
+                                    color: 'rgba(255, 255, 255, 0.3)'
+                                },
+                                smooth: 0.2,
+                                length: 10,
+                                length2: 20
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#c23531',
+                                shadowBlur: 200,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            myChart_ndgr.setOption(option2);
 
         }
 
