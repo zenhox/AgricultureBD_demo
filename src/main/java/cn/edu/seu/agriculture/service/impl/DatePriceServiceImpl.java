@@ -252,4 +252,35 @@ public class DatePriceServiceImpl implements DatePriceService {
         reList.add(new Date(newCounter.getCrawtime().getTime()) .toString());
         return reList;
     }
+
+    @Override
+    public List<Map<String, Object>> getCounter(String province, String market, String type) {
+        DatePriceExample example = new DatePriceExample();
+        example.createCriteria()
+                .andProvinceEqualTo(province)
+                .andMarketEqualTo(market)
+                .andTypeEqualTo(type);
+        List<DatePrice> query = datePriceMapper.selectByExample(example);
+        List<String> nameList = new ArrayList<>();
+        List<Integer> countList = new ArrayList<>();
+        for (DatePrice dp : query){
+            String name = dp.getName();
+            if(nameList.contains(name)){
+                Integer counter = countList.get(nameList.indexOf(name));
+                logger.debug("contains:  index is "+nameList.indexOf(name));
+                countList.set(nameList.indexOf(name),counter+1);
+            }else {
+                nameList.add(dp.getName());
+                countList.add(nameList.indexOf(name),1);
+            }
+        }
+        List<Map<String,Object>> json = new ArrayList<>();
+        Map<String,Object> xMap = new HashMap<>();
+        Map<String,Object> yMap = new HashMap<>();
+        xMap.put("name",nameList);
+        yMap.put("counter",countList);
+        json.add(xMap);   // [0] 是日期
+        json.add(yMap);   // [1] 是价格
+        return json;
+    }
 }
