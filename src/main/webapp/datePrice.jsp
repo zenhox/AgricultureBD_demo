@@ -18,7 +18,7 @@
  <div id="main" style="width: 1200px;height:400px;"></div>
  <script>
  var myChart = echarts.init(document.getElementById('main'));
-myChart.setOption({
+ myChart.setOption({
 	 title: { text: '农产品数据查询'},
      tooltip: {},
      toolbox:{show : true, feature : { mark : {show: true},

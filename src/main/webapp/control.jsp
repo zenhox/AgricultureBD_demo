@@ -60,14 +60,14 @@
 		}
 		.content_left{
 			float:left;
-			width:58%;
+			width:49%;
 			margin-left:8px;
 			border-right: 1px solid #dfdfdf;
 			border-top:1px solid #dfdfdf;
 		}
 		.content_right{
 			float:left;
-			width:40%;
+			width:49%;
 			border-top:1px solid #dfdfdf;
 		}
 		.content h3{
@@ -90,6 +90,16 @@
             margin-top: 70px;
             color: #FFCC33;
         }
+		#pie{
+			flex:1 1 auto;
+			width: 100%;
+			height: 400px;
+		}
+		#ndgr{
+			flex:1 1 auto;
+			width: 100%;
+			height: 400px;
+		}
 	</style>
 </head>
 <body>
@@ -186,13 +196,17 @@
                         <table width="60%" align="right">
                             <tr>
 								<td>
-									<div id="barcon" name="barcon">
-                                        <a id="h_text"></a>
-                                        <br>
-                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                                        <a href="" id="up" ></a>
-                                        <a href="" id="down"></a>
-                                    </div>
+									<div id="barcon"  name="barcon">
+										   <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+										<a href="" id="up" style="text-align:center"></a>
+										<a id="h_text2"></a>
+										<a href="" id="down"></a>
+										<br>
+										<a id="h_text"></a>
+										到第<input id="pageJump_id" size =2 type="text"  />页
+
+										<input type="submit" id="pageJump_button">
+									</div>
 								</td>
 							</tr>
                         </table>
@@ -203,23 +217,55 @@
 			<div class="content box_content_hidden">
 				<div class="search">
 					<div class="fields">
+						<label style="font-size:15px;">省份:</label>
 						<select name="province" style="width: 160px;height:30px;"
-								onchange="getMarket(this);" tabindex="2" id="province">
-							<option value="">省份</option>
-							<c:forEach items="${farm.provinceList }" var="f">
-								<option value="${f }">${f }</option>
-							</c:forEach>
+								tabindex="2" id="province">
+							<option value=1 selected="selected" >请选择</option>
+							<option value=2>新疆</option>
+							<option value=3>江苏</option>
+							<option value=4>江西</option>
+							<option value=5>河北</option>
+							<option value=6>河南</option>
+							<option value=7>浙江</option>
+							<option value=8>山东</option>
+							<option value=9>山西</option>
+							<option value=10>广东</option>
+							<option value=11>广西</option>
+							<option value=12>海南</option>
+							<option value=13>湖北</option>
+							<option value=14>湖南</option>
+							<option value=15>甘肃</option>
+							<option value=16>福建</option>
+							<option value=17>贵州</option>
+							<option value=18>辽宁</option>
+							<option value=19>重庆</option>
+							<option value=20>陕西</option>
+							<option value=21>青海</option>
+							<option value=22>黑龙江</option>
+							<option value=23>上海</option>
+							<option value=24>云南</option>
+							<option value=25>内蒙古</option>
+							<option value=26>北京</option>
+							<option value=27>吉林</option>
+							<option value=28>四川</option>
+							<option value=29>天津</option>
+							<option value=30>宁夏</option>
+							<option value=31>安徽</option>
 						</select>
+
+						<label style="font-size:15px;">市场:</label>
 						<select name="country" style="width: 240px;height:30px;"
-								onchange="getType(this);" tabindex="2" id="market">
-							<option value="">批发市场</option>
+								tabindex="2" id="market">
+							<option value=1 selected="selected">请选择</option>
 						</select>
+
+						<label style="font-size:15px;">品类:</label>
 						<select name="type" style="width:160px;height:30px;"
 								id="typeMarket" tabindex="2">
-							<option value="">产品种类</option>
+							<option value=1 selected="selected">请选择</option>
 						</select>
 						<input type="button" value="开始查询"
-							   onclick="getCount(this);" class="search_btn"
+							   class="search_btn" id="queryButton"
 						/>
 					</div>
 				</div>
@@ -229,18 +275,17 @@
 						</font>
 					</h3>
 					<!--------------数据查询的部分 ---------------->
-					<div id="show-search"></div>
+					<div id="pie" ></div>
 				</div>
 				<div class="content_right">
 					<h3>
 						<font color="black" >所占记录数
 						</font>
 					</h3>
-					<div id="main" style="" ></div>
+					<div id="ndgr" style="" ></div>
 				</div>
 			</div>
 		</div>
-
 		<jsp:include page="bottom.jsp"></jsp:include>
 	</div>
 
@@ -264,6 +309,8 @@
         $(".content").eq(i).siblings().removeClass("box_content_block").addClass("box_content_hidden");
     }
 </script>
+
+
 
 <script>
     window.onload = function (ev) {
@@ -363,38 +410,51 @@
             }
 
 
-            var tempStr = "共" + num + "条记录 分" + totalPage + "页 当前第" + currentPage + "页";
+            var tempStr = "共" + totalPage + "页 "+num + "条记录" ;
             var tempStr_id=document.getElementById("h_text");
             tempStr_id.innerText=tempStr;
+            var tempStr2="当前第" + currentPage + "页";
+            var tempStr2_id=document.getElementById("h_text2");
+            tempStr2_id.innerText=tempStr2;
 
+            var pageJump=document.getElementById("pageJump_button")
             if (currentPage > 1 && currentPage <totalPage) {
                 var templi1 = document.getElementById("up");
-                templi1.href="#";
+                templi1.href="#show";
                 templi1.onclick=function(){
                     goPage(currentPage-1,pageSize);
                 }
                 templi1.innerText="上一页";
 
                 var templi2=document.getElementById("down");
-                templi2.href="#";
+                templi2.href="#show";
                 templi2.onclick=function () {
                     goPage(currentPage+1,pageSize);
                 }
                 templi2.innerText="下一页";
+
+                pageJump.href="#";
+                pageJump.onclick=function(){
+                    goPage(document.getElementById("pageJump_id").value,pageSize);
+                }
             } else if(currentPage == 1){
                 var templi3=document.getElementById('up');
                 templi3.innerText="首页";
 
 
                 var templi4=document.getElementById('down');
-                templi4.href="#";
+                templi4.href="#show";
                 templi4.innerText="下一页";
                 templi4.onclick=function () {
                     goPage(currentPage+1,pageSize);
                 }
+                pageJump.href="#";
+                pageJump.onclick=function(){
+                    goPage(document.getElementById("pageJump_id").value,pageSize);
+                }
             }else if(currentPage == totalPage){
                 var templi5 = document.getElementById('up');
-                templi5.href="#";
+                templi5.href="#show";
                 templi5.onclick=function(){
                     goPage(currentPage-1,pageSize);
                 }
@@ -402,14 +462,321 @@
 
                 var templi6=document.getElementById('down');
                 templi6.innerText="尾页";
+
+                pageJump.href="#";
+                pageJump.onclick=function(){
+                    goPage(document.getElementById("pageJump_id").value,pageSize);
+                }
             }
         }
         goPage(1,10);
 
 
+        var province=null;
+        var market=null;
+        var type=null;
+
+        function getMarket(){
+            province = $("#province").find("option:selected").text();
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/agriculture/getMarket",
+                contentType:"UTF-8",
+                data:{
+                    province:province
+                },
+                success:function (data) {
+                    data=data.substring(1,data.length-1);
+                    var arrayData = data.split(",");
+                    console.log(arrayData)
+                    console.log(arrayData[0])
+                    $("#market").html('<option value=1 selected="selected">请选择</option>');
+                    $("#typeMarket").html('<option value=1 selected="selected">请选择</option>');
+                    for (var i = 0; i < arrayData.length; i++) {
+                        var tempOpt = document.createElement('option');
+                        $(tempOpt).attr('value',i+2);
+                        $(tempOpt).text(arrayData[i]);
+                        $("#market").append(tempOpt);
+                    }
+                }
+            })
+        }
+
+        function getType(){
+            market = $("#market").find("option:selected").text();
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/agriculture/getType",
+                data:{
+                    province:province,
+                    market:market
+                },
+                success:function (data) {
+                    $("#typeMarket").html('<option value=1 selected="selected">请选择</option>');
+                    data=data.substring(1,data.length-1);
+                    var arrayData = data.split(",");
+                    console.log(arrayData.length)
+                    console.log(arrayData[0])
+                    for (var i = 0; i < arrayData.length; i++) {
+                        var tempOpt = document.createElement('option');
+                        $(tempOpt).attr('value',i+2);
+                        $(tempOpt).text(arrayData[i]);
+                        $("#typeMarket").append(tempOpt);
+                    }
+                }
+            })
+        }
+
+        function getData(){
+            type = $("#typeMarket").find("option:selected").text();
+
+
+
+            /*---------------------初始化----------------------------*/
+            var myChart_pie = echarts.init(document.getElementById('pie'));
+
+            /*---------------------数据----------------------------*/
+
+			//初始化数据，
+            var echartData = [{
+                value: 200,//时间
+                name: '交卷时间'
+            }, {
+                value: 100,
+                name: '未交卷时间'
+            }];
+
+
+            /*---------------------颜色变量----------------------------*/
+			//蓝色
+            var innerColor = '#2bff8f'; //内层颜色
+            var outColor = "#50e0ff"; //外层边框色粗
+            var textColor = '#50e0ff'; //文字颜色
+            var startColor = 'rgba(73,223,240,0.1)'; //中间饼图渐变开始颜色
+            var endColor = 'rgba(73,223,240,0.8)'; //中间饼图渐变结束颜色
+			//绿色
+			// var innerColor = '#50e0ff'; //内层颜色
+			// var outColor = "#2bff8f"; //外层边框色粗
+			// var textColor = '#50e0ff'; //文字颜色
+			// var startColor = 'rgba(43,255,143,0.1)'; //中间饼图渐变开始颜色
+			// var endColor = 'rgba(43,255,143,0.8)'; //中间饼图渐变结束颜色
+
+
+            /*---------------------缩放----------------------------*/
+            var scale = 1;
+
+
+            /*---------------------颜色配置----------------------------*/
+            var color = [{
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                    offset: 0,
+                    color: startColor // 0% 处的颜色
+                }, {
+                    offset: 1,
+                    color: endColor // 100% 处的颜色
+                }],
+                globalCoord: false // 缺省为 false
+            }, 'none'];
+            /*---------------------富文本----------------------------*/
+            var rich = {
+                time: {
+                    color: innerColor,
+                    fontSize: 32 * scale,
+                    padding: [0, 0],
+                    fontWeight:'bold'
+                },
+                unit:{
+                    color: innerColor,
+                    fontSize: 14 * scale,
+                    padding: [0,0,0, 0],
+                    verticalAlign:'bottom',
+                }
+            }
+
+
+            option1 = {
+                backgroundColor: '#031f2d',
+                title: [{
+                    text: '占比情况',
+                    x: '50%',
+                    y: '90%',
+                    textAlign: 'center',
+                    textStyle: {
+                        color: '#fff',
+                        textAlign: 'center',
+                        fontSize: 24 * scale,
+                        fontWeight: 'bold'
+                    },
+                }],
+
+                series: [
+                    //内圈圆环
+                    {
+                        name: 'Line 0',
+                        type: 'pie',
+                        clockWise: false, //顺时加载
+                        hoverAnimation: false, //鼠标移入变大
+                        center: ['50%', '50%'],
+                        radius: ['50%', '51.5%'],
+                        itemStyle: {
+                            normal: {
+                                color: innerColor
+                            }
+                        },
+                        //只是为了百分百显示圆环
+                        data: [{
+                            value: 0,
+                            name: '',
+                        }],
+                        label: {
+                            normal: {
+                                formatter: function(params) {
+                                    var time = echartData[0].value;
+                                    return '{time|' + (100+200)/200 + '}{unit|%}';
+                                },
+                                position: 'center',
+                                textStyle: {
+                                    fontSize: 38 * scale,
+                                    fontWeight: 'bold',
+                                    color: textColor
+                                },
+                                rich:rich
+                            }
+                        }
+                    },
+                    //中间圆环
+                    {
+                        name: 'Line 1',
+                        type: 'pie',
+                        clockWise: false, //顺时加载
+                        hoverAnimation: true, //鼠标移入变大
+                        center: ['50%', '50%'],
+                        radius: ['75%', '65%'],
+                        color: color,
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                            }
+                        },
+                        data:echartData,
+                    },
+                    //外层圆环
+                    {
+                        name: 'Line 2',
+                        type: 'pie',
+                        clockWise: false, //顺时加载
+                        hoverAnimation: false, //鼠标移入变大
+                        center: ['50%', '50%'],
+                        radius: ['75%', '75%'],
+                        itemStyle: {
+                            normal: {
+                                borderWidth: 2* scale,
+                                borderColor: outColor,
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                            }
+                        },
+                        //只是为了百分百显示圆环
+                        data: [{
+                            value: 10,
+                            name: '',
+                        }]
+                    }
+                ],
+            };
+            myChart_pie.setOption(option1);
+
+            var myChart_ndgr = echarts.init(document.getElementById('ndgr'));
+            option2 = {
+                backgroundColor: '#2c343c',
+
+                title: {
+                    text: 'Customized Pie',
+                    left: 'center',
+                    top: 20,
+                    textStyle: {
+                        color: '#ccc'
+                    }
+                },
+
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+
+                visualMap: {
+                    show: false,
+                    min: 80,
+                    max: 600,
+                    inRange: {
+                        colorLightness: [0, 1]
+                    }
+                },
+                series : [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius : '55%',
+                        center: ['50%', '50%'],
+                        data:[
+                            {value:335, name:'直接访问'},
+                            {value:310, name:'邮件营销'},
+                            {value:274, name:'联盟广告'},
+                            {value:235, name:'视频广告'},
+                            {value:400, name:'搜索引擎'}
+                        ].sort(function (a, b) { return a.value - b.value}),
+                        roseType: 'angle',
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    color: 'rgba(255, 255, 255, 0.3)'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                lineStyle: {
+                                    color: 'rgba(255, 255, 255, 0.3)'
+                                },
+                                smooth: 0.2,
+                                length: 10,
+                                length2: 20
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#c23531',
+                                shadowBlur: 200,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            myChart_ndgr.setOption(option2);
+
+        }
+
+
+        $("#province").change(getMarket);
+        $("#market").change(getType);
+        $("#queryButton").click(getData);
+
     }
 </script>
-
-
 </body>
 </html>
