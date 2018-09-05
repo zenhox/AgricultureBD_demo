@@ -127,7 +127,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="price_5">
                 <div class="content">
-                    <div id="text" style="width: 1200px;height:626px;"></div>
+                    <div id="text" style="width: 1200px;height:626px;">
+						<a href="http://sousuo.gov.cn/s.htm?t=govall&q=%E4%B8%89%E5%86%9C%E6%94%BF%E7%AD%96" target="_blank">三农政策</a>
+					</div>
                 </div>
             </div>
             <jsp:include page="bottom.jsp"></jsp:include>
@@ -206,12 +208,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         };
 
-
-        <%--var da = ${mapData};--%>
 	</script>
 
 	<script type="text/javascript">
-        // 设置地图显示的城市 此项是必须设置的
             $.ajax({
                 type:"GET",
                 url:"http://localhost:8080/agriculture/monitor",

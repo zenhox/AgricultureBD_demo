@@ -203,23 +203,55 @@
 			<div class="content box_content_hidden">
 				<div class="search">
 					<div class="fields">
+						<label style="font-size:15px;">省份:</label>
 						<select name="province" style="width: 160px;height:30px;"
-								onchange="getMarket(this);" tabindex="2" id="province">
-							<option value="">省份</option>
-							<c:forEach items="${farm.provinceList }" var="f">
-								<option value="${f }">${f }</option>
-							</c:forEach>
+								tabindex="2" id="province">
+							<option value=1 selected="selected" >请选择</option>
+							<option value=2>新疆</option>
+							<option value=3>江苏</option>
+							<option value=4>江西</option>
+							<option value=5>河北</option>
+							<option value=6>河南</option>
+							<option value=7>浙江</option>
+							<option value=8>山东</option>
+							<option value=9>山西</option>
+							<option value=10>广东</option>
+							<option value=11>广西</option>
+							<option value=12>海南</option>
+							<option value=13>湖北</option>
+							<option value=14>湖南</option>
+							<option value=15>甘肃</option>
+							<option value=16>福建</option>
+							<option value=17>贵州</option>
+							<option value=18>辽宁</option>
+							<option value=19>重庆</option>
+							<option value=20>陕西</option>
+							<option value=21>青海</option>
+							<option value=22>黑龙江</option>
+							<option value=23>上海</option>
+							<option value=24>云南</option>
+							<option value=25>内蒙古</option>
+							<option value=26>北京</option>
+							<option value=27>吉林</option>
+							<option value=28>四川</option>
+							<option value=29>天津</option>
+							<option value=30>宁夏</option>
+							<option value=31>安徽</option>
 						</select>
+
+						<label style="font-size:15px;">市场:</label>
 						<select name="country" style="width: 240px;height:30px;"
-								onchange="getType(this);" tabindex="2" id="market">
-							<option value="">批发市场</option>
+								tabindex="2" id="market">
+							<option value=1 selected="selected">请选择</option>
 						</select>
+
+						<label style="font-size:15px;">品类:</label>
 						<select name="type" style="width:160px;height:30px;"
 								id="typeMarket" tabindex="2">
-							<option value="">产品种类</option>
+							<option value=1 selected="selected">请选择</option>
 						</select>
 						<input type="button" value="开始查询"
-							   onclick="getCount(this);" class="search_btn"
+							   class="search_btn" id="queryButton"
 						/>
 					</div>
 				</div>
@@ -240,7 +272,6 @@
 				</div>
 			</div>
 		</div>
-
 		<jsp:include page="bottom.jsp"></jsp:include>
 	</div>
 
@@ -264,6 +295,8 @@
         $(".content").eq(i).siblings().removeClass("box_content_block").addClass("box_content_hidden");
     }
 </script>
+
+
 
 <script>
     window.onload = function (ev) {
@@ -369,14 +402,14 @@
 
             if (currentPage > 1 && currentPage <totalPage) {
                 var templi1 = document.getElementById("up");
-                templi1.href="#";
+                templi1.href="#show";
                 templi1.onclick=function(){
                     goPage(currentPage-1,pageSize);
                 }
                 templi1.innerText="上一页";
 
                 var templi2=document.getElementById("down");
-                templi2.href="#";
+                templi2.href="#show";
                 templi2.onclick=function () {
                     goPage(currentPage+1,pageSize);
                 }
@@ -387,14 +420,14 @@
 
 
                 var templi4=document.getElementById('down');
-                templi4.href="#";
+                templi4.href="#show";
                 templi4.innerText="下一页";
                 templi4.onclick=function () {
                     goPage(currentPage+1,pageSize);
                 }
             }else if(currentPage == totalPage){
                 var templi5 = document.getElementById('up');
-                templi5.href="#";
+                templi5.href="#show";
                 templi5.onclick=function(){
                     goPage(currentPage-1,pageSize);
                 }
@@ -407,9 +440,94 @@
         goPage(1,10);
 
 
+        var province=null;
+        var market=null;
+        var type=null;
+
+        function getMarket(){
+            province = $("#province").find("option:selected").text();
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/agriculture/getMarket",
+                contentType:"UTF-8",
+                data:{
+                    province:province
+                },
+                success:function (data) {
+                    data=data.substring(1,data.length-1);
+                    var arrayData = data.split(",");
+                    console.log(arrayData)
+                    console.log(arrayData[0])
+                    $("#market").html('<option value=1 selected="selected">请选择</option>');
+                    $("#typeMarket").html('<option value=1 selected="selected">请选择</option>');
+                    for (var i = 0; i < arrayData.length; i++) {
+                        var tempOpt = document.createElement('option');
+                        $(tempOpt).attr('value',i+2);
+                        $(tempOpt).text(arrayData[i]);
+                        $("#market").append(tempOpt);
+                    }
+                }
+            })
+        }
+
+        function getType(){
+            market = $("#market").find("option:selected").text();
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/agriculture/getType",
+                data:{
+                    province:province,
+                    market:market
+                },
+                success:function (data) {
+                    $("#typeMarket").html('<option value=1 selected="selected">请选择</option>');
+                    data=data.substring(1,data.length-1);
+                    var arrayData = data.split(",");
+                    console.log(arrayData.length)
+                    console.log(arrayData[0])
+                    for (var i = 0; i < arrayData.length; i++) {
+                        var tempOpt = document.createElement('option');
+                        $(tempOpt).attr('value',i+2);
+                        $(tempOpt).text(arrayData[i]);
+                        $("#typeMarket").append(tempOpt);
+                    }
+                }
+            })
+        }
+
+        function getData(){
+            type = $("#typeMarket").find("option:selected").text();
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/agriculture/getMarket",
+                contentType:"UTF-8",
+                data:{
+                    province:province
+                },
+                success:function (data) {
+                    data=data.substring(1,data.length-1);
+                    var arrayData = data.split(",");
+                    console.log(arrayData)
+                    console.log(arrayData[0])
+                    $("#market").html('<option value=1 selected="selected">请选择</option>');
+                    $("#typeMarket").html('<option value=1 selected="selected">请选择</option>');
+                    for (var i = 0; i < arrayData.length; i++) {
+                        var tempOpt = document.createElement('option');
+                        $(tempOpt).attr('value',i+2);
+                        $(tempOpt).text(arrayData[i]);
+                        $("#market").append(tempOpt);
+                    }
+                }
+            })
+
+        }
+
+
+        $("#province").change(getMarket);
+        $("#market").change(getType);
+        $("#queryButton").click(getData);
+
     }
 </script>
-
-
 </body>
 </html>
