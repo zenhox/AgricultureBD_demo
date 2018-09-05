@@ -1,9 +1,11 @@
 package cn.edu.seu.agriculture.web;
 
 import cn.edu.seu.agriculture.entity.DatePrice;
+import cn.edu.seu.agriculture.service.*;
 import cn.edu.seu.agriculture.service.DatePriceService;
 import cn.edu.seu.agriculture.service.ReTypeService;
 import cn.edu.seu.agriculture.service.TocSearchService;
+import cn.edu.seu.agriculture.service.CountryViewService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,10 @@ public class Controller {
     private ReTypeService reTypeService;
     @Autowired
     private TocSearchService tocSearchService;
+    @Autowired
+    private CountryViewService countryViewService;
+    @Autowired
+    private PriceForecastService priceForecastService;
 
     @RequestMapping(value = "/datePrice/{province}/{market}/{type}/{name}",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
@@ -117,5 +124,25 @@ public class Controller {
         return reList.toString().replace(" ","");
     }
 
+    @RequestMapping(value = "/areaGetAllData",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String areaGetAllData(String date,String type, String name){
+        return countryViewService.getCountryViewPrice(date,type,name);
+    }
+
+    //获取过去30天及未来7天的预测价格
+    @RequestMapping(value = "/getForecastPrice",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String getForecast(String province,String market,String type,String name ) {
+        List<Map<String, Object>> reList = null;
+        try{
+            reList = priceForecastService.forecast(province, market, type, name);
+        }catch (ParseException exception){
+            System.out.println("价格预测服务出错");
+            exception.printStackTrace();
+        }
+        logger.info(reList.toString());
+        return reTypeService.toJson(reList).toString();
+    }
 
 }

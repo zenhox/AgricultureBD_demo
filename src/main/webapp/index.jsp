@@ -81,17 +81,140 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
     <script type="text/javascript" src="js/jquery.min.js"></script>
+=======
+
+        <!-- 页面动画 -->
+    <div class="main">
+        <div class="main_center">
+            <%--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">--%>
+            <div class="price_1">
+                <div id="fsD1" class="focus" >
+                    <script type="text/javascript" src="js/1.js"></script>
+                    <ul>
+			<li>
+				<a href="images/1.png" id="PNG1" onclick="show(this);return false;"></a>
+			</li>
+			<li>
+				<a href="images/2.jpg" id="PNG2" onclick="show(this);return false;"></a>
+			</li>
+			<li>
+				<a href="images/3.jpg" id="PNG3" onclick="show(this);return false;"></a>
+			</li>
+			<li>
+				<a href="images/4.jpg" id="PNG4" onclick="show(this);return false;"></a>
+			</li>
+		</ul>
+                    <table border=0 cellpadding=0 cellspacing=0 align="center">
+			<tr>
+				<td>
+					<div style="position:relative;width:500px;height:320px;">
+						<div align="center" style="position:absolute;">
+							<img id="pic" src="images/1.png" alt="my image gallery" height="320px"/>
+						</div>
+						<div align="center" style="position:absolute;height:320px;width:500px;z-index:1" onmousedown="get()" onmouseup="change()">
+
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+                </div>
+            </div>
+            <div class="price_5">
+                <div class="content">
+                    <div id="text" style="width: 1200px;height:626px;">
+						<a href="http://sousuo.gov.cn/s.htm?t=govall&q=%E4%B8%89%E5%86%9C%E6%94%BF%E7%AD%96" target="_blank">三农政策</a>
+					</div>
+                </div>
+            </div>
+            <jsp:include page="bottom.jsp"></jsp:include>
+        </div>
+    </div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+>>>>>>> 7cf0f93dd7dca765b2ba5749c04d1ddf1bc81b5a
 	<script type="text/javascript" src="js/highcharts.js"></script>
 	<script type="text/javascript" src="js/radialIndicator.min.js"></script>
 	<script type="text/javascript" src="js/jquery.dialogBox.js"></script>
 	<script type="text/javascript" src="js/echarts.js"></script>
+<<<<<<< HEAD
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
 	<script type="text/javascript" src="js/animalbuttoncolor.js"></script>
 	<!--  -->
 	<script type="text/javascript" src="js/koala.min.1.5.js"></script>
 	<script type="text/javascript">
         <%--var da = ${mapData};--%>
+=======
+	<!--  -->
+	<script type="text/javascript" src="js/koala.min.1.5.js"></script>
+	<script type="text/javascript">
+
+        Qfast.add('widgets', { path: "js/terminator2.2.min.js", type: "js", requires: ['fx'] });
+        Qfast(false, 'widgets', function () {
+            K.tabs({
+                id: 'fsD1',
+                conId: "D1pic1",
+                tabId:"D1fBt",
+                tabTn:"a",
+                conCn: '.fcon',
+                auto: 1,
+                effect: 'fade',
+                eType: 'click',
+                pageBt:true,
+                bns: ['.prev', '.next'],
+                interval: 5000
+            })
+        }) ;
+        var html='<form action="" autocomplete="off"  ><p class="dialog_p"><input class="dialog_input" type="text" id="username" name="username" autocomplete="off" placeholder="用户名" required=""/></p>';
+        html+='<p class="dialog_p"><input class="dialog_input" type="password" id="password" name="password" placeholder="密码" required="" autocomplete="off"/></p></form>';
+        function loginUser(){
+            $('#type-dialogBox').dialogBox({
+                type: 'normal',  //three type:'normal'(default),'correct','error',
+                width: 400,
+                height: 280,
+                hasMask: true,
+                hasClose: true,
+                confirmValue: "登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录",  //确定按钮文字内容
+                confirm: function(){
+                    var pwd=$("#password").val();
+                    var username=$("#username").val();
+                    if(username.trim().length>0 && pwd.trim().length>0){
+                        login(username.trim(),pwd.trim());
+                    }else{
+                        alert("用户名或密码不能为空");
+                    }
+                }, //点击确定后回调函数
+                hasBtn: true,
+                effect: 'fade', //动画效果：fade(默认),newspaper,fall,scaled,flip-horizontal,flip-vertical,sign,
+                title: '<b style="font-size:18px;color:#fff;">登录系统</b>',
+                content: html
+            });
+        }
+        var url="${sessionUrl}";
+        function login(username,pwd){
+            if(url==""){
+                url="./home.do?method=index";
+            }
+            $.ajax({
+                type : "POST",
+                url : "user.do",
+                data : {
+                    method : "login",
+                    username : username,
+                    password : pwd
+                },
+                success : function(data) {
+                    if(data=="success"){
+                        window.location.href=url;
+                    }else{
+                        alert(data);
+                    }
+                }
+            });
+        };
+
+>>>>>>> 7cf0f93dd7dca765b2ba5749c04d1ddf1bc81b5a
 	</script>
     <div class="main">
 
@@ -106,6 +229,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
 	<script type="text/javascript">
+<<<<<<< HEAD
 		// 百度地图API功能
 
         // 创建Map实例
@@ -169,5 +293,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 	</script><%--客服脚本--%>
 
+=======
+            $.ajax({
+                type:"GET",
+                url:"http://localhost:8080/agriculture/monitor",
+                success:function (data) {
+                    var mydata = [];
+                    console.log(data);
+                    var arrayAllData = data.split("\n");
+                    console.log(arrayAllData);//272
+                    for(var num=0;num<arrayAllData.length-1;num++){
+                        console.log(arrayAllData[num]);
+                        var arrayData=arrayAllData[num].split(",");
+                        var Data={
+                            type:null,
+                            market:null,
+                            price:null,
+                            date:null
+                        };
+                        Data.type=arrayData[0];
+                        Data.market=arrayData[1];
+                        Data.price=arrayData[2];
+                        Data.date=arrayData[3];
+                        mydata.push(Data);
+                    }
+                    localStorage.setItem('mydata',JSON.stringify(mydata));
+                }
+            })
+	</script>
+>>>>>>> 7cf0f93dd7dca765b2ba5749c04d1ddf1bc81b5a
 </body>
 </html>

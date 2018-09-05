@@ -6,12 +6,12 @@
 			</li>
 			<li><a class="Guide_a_normal" href="javascript:">使用指南 </a>
 			</li>
-			<li><a class="Contact_a_normal" href="javascript:">友情链接 </a>
+			<li><a class="Contact_a_normal" href="zenhox.github.io">友情链接 </a>
 			</li>
 			<div class="code"></div>
 			<div class="bottom_button">
 				<div>
-					<a title="关注公众号"></a>
+					<a title="关注公众号">关注公众号</a>
 				</div>
 				<div>
 					<a  href="javascript:"> <img border="0"
@@ -21,7 +21,7 @@
 					<a  href="javascript:" title="访问微博主页"></a>
 				</div>
 				<div>
-					<a href="javascript:" title="联系我们"></a>
+					<a href="javascript:" title="联系我们">联系我们</a>
 				</div>
 			</div>
 		</ul>

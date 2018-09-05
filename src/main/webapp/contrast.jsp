@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li><a href="./control.jsp" >数据监控</a></li>
 					<li><a href="./contrast.jsp" class="nav_aclick">数据查询</a></li>
 					<li><a href="./forecast.jsp">价格预测</a></li>
-					<li><a href="javascript:">企业地图</a></li>
+					<li><a href="./EnterpriseMap.jsp">企业地图</a></li>
 				</ul>
 			</div>
 		</div>
