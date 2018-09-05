@@ -1,0 +1,21 @@
+@charset "utf-8";
+body{margin:0;padding:0;list-style:none}
+img{vertical-align:bottom}
+
+.rotateBanner-BG-effect{background-image:url(../images/1.jpg);background-repeat:no-repeat;background-size:100% 100%;position:absolute;top:0;left:0;width:100%;height:100%;filter:url(blur.svg#blur);-webkit-filter:blur(2px);-moz-filter:blur(2px);-ms-filter:blur(2px);filter:blur(2px);opacity:.9}
+.RotateBannerAll{width:100%;height:425px;position:relative;margin-bottom:5px;background-color:#efefef}
+.rotateBanner-BG{width:100%;height:425px;position:relative;background-color:initial}
+.rotateBanner-BG .rotateBanner-Main{width:60%;height:100%;position:relative;margin:0 auto}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-Banner{position:absolute;top:0;left:0;width:100%;height:100%;height:auto;top:32.5px}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-Box{border-radius:4px;overflow:hidden;position:absolute;top:0;left:0;width:100%;height:100%;height:auto}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-Box.rotateBanner-switchLeft{transform:perspective(1000px) rotateY(-180deg)}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-Box.rotateBanner-switchRight{transform:perspective(1000px) rotateY(180deg)}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-Box.active{border:thin solid #e1e1e1;transform:perspective(1000px) rotateY(0);transition:transform .7s;background-image:url(../images/icon/loading.gif);background-repeat:no-repeat;background-size:8%;background-position:center;box-shadow:0 0 15px rgba(0,0,0,.8);z-index:9}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-icon{position:absolute;top:0;left:0;width:100%;height:100%;height:10px;top:inherit;bottom:1%;margin:0 auto;width:30%;left:50%;margin-left:-15%}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-icon>span{display:block;float:left;width:20%;height:100%;margin-right:6.36%;cursor:pointer;background:#ccc}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-icon>span.active{background:orange}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-icon>span:last-child{margin-right:0!important}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-btn{position:absolute;top:0;left:0;width:100%;height:100%;width:100px;cursor:pointer;opacity:.4;transition:opacity .5s;background-position:center}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-btn:hover{opacity:.8;transition:opacity .5s}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-Left{left:-100px;background-image:url(../images/icon/prev.png);background-repeat:no-repeat}
+.rotateBanner-BG .rotateBanner-Main .rotateBanner-Right{left:inherit;right:-100px;background-image:url(../images/icon/next.png);background-repeat:no-repeat}

@@ -75,7 +75,7 @@ public class ServiceTest extends BaseTest{
      //            佛祖保佑       永不宕机     永无BUG                  //
      ////////////////////////////////////////////////////////////////////
      */
-    @Test
+//    @Test
     public void CategoryRelatedTest(){
         logger.info(tocSearchService.getTypeByDate("2018-6-20").toString());
         logger.info(tocSearchService.getNameByType("2018-6-20","蔬菜").toString());
@@ -115,13 +115,19 @@ public class ServiceTest extends BaseTest{
         System.out.println(reTypeService.toCsv(reList));
     }
 
-//    @Test
+    @Test
     public  void counterTest(){
-        logger.info("最新数据");
-        List<DatePrice> datePrices =  datePriceService.getNewPriceList();
-        logger.info(reTypeService.toCsv(datePrices));
-        logger.info("最新统计");
-        logger.info(datePriceService.getRecentlyCounter().toString());
+//        logger.info("最新数据");
+//        List<DatePrice> datePrices =  datePriceService.getNewPriceList();
+//        logger.info(reTypeService.toCsv(datePrices));
+//        logger.info("最新统计");
+//        logger.info(datePriceService.getRecentlyCounter().toString());
+        logger.info("统计计数器");
+
+        String province = "山西";
+        String market = "山西省太原市河西农产品有限公司";
+        String type = "蔬菜";
+        logger.info(datePriceService.getCounter(province,market,type).toString());
     }
 //    @Test
     public  void countryViewTest(){

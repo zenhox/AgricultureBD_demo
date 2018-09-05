@@ -161,13 +161,17 @@
                         <table width="60%" align="right">
                             <tr>
 								<td>
-									<div id="barcon" name="barcon">
-                                        <a id="h_text"></a>
-                                        <br>
-                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                                        <a href="" id="up" ></a>
-                                        <a href="" id="down"></a>
-                                    </div>
+									<div id="barcon"  name="barcon">
+										   <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+										<a href="" id="up" style="text-align:center"></a>
+										<a id="h_text2"></a>
+										<a href="" id="down"></a>
+										<br>
+										<a id="h_text"></a>
+										到第<input id="pageJump_id" size =2 type="text"  />页
+
+										<input type="submit" id="pageJump_button">
+									</div>
 								</td>
 							</tr>
                         </table>
@@ -504,10 +508,14 @@
             }
 
 
-            var tempStr = "共" + num + "条记录 分" + totalPage + "页 当前第" + currentPage + "页";
+            var tempStr = "共" + totalPage + "页 "+num + "条记录" ;
             var tempStr_id=document.getElementById("h_text");
             tempStr_id.innerText=tempStr;
+            var tempStr2="当前第" + currentPage + "页";
+            var tempStr2_id=document.getElementById("h_text2");
+            tempStr2_id.innerText=tempStr2;
 
+            var pageJump=document.getElementById("pageJump_button")
             if (currentPage > 1 && currentPage <totalPage) {
                 var templi1 = document.getElementById("up");
                 templi1.href="#show";
@@ -522,6 +530,11 @@
                     goPage(currentPage+1,pageSize);
                 }
                 templi2.innerText="下一页";
+
+                pageJump.href="#";
+                pageJump.onclick=function(){
+                    goPage(document.getElementById("pageJump_id").value,pageSize);
+                }
             } else if(currentPage == 1){
                 var templi3=document.getElementById('up');
                 templi3.innerText="首页";
@@ -533,6 +546,10 @@
                 templi4.onclick=function () {
                     goPage(currentPage+1,pageSize);
                 }
+                pageJump.href="#";
+                pageJump.onclick=function(){
+                    goPage(document.getElementById("pageJump_id").value,pageSize);
+                }
             }else if(currentPage == totalPage){
                 var templi5 = document.getElementById('up');
                 templi5.href="#show";
@@ -543,6 +560,11 @@
 
                 var templi6=document.getElementById('down');
                 templi6.innerText="尾页";
+
+                pageJump.href="#";
+                pageJump.onclick=function(){
+                    goPage(document.getElementById("pageJump_id").value,pageSize);
+                }
             }
         }
         goPage(1,10);

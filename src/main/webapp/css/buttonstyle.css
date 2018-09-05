@@ -1,0 +1,10 @@
+
+ul {
+    list-style: none;
+}
+
+.top_tittle .nav .bg {
+    height: 50px !important;
+    background: rgb(0,159,233) !important;
+    line-height: 50px !important;
+}
