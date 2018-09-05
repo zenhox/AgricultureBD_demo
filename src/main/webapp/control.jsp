@@ -78,18 +78,8 @@
 		.kind_nav{
 			display: flex;
 			width: 1180px;
-			height: 180px;
+			height: 500px;
 		}
-		.kind_nav>li{
-			flex:1 1 auto;
-			width: 160px;
-			height: 180px;
-		}
-        #MarketCount,#TypeCount,#NameCount,#DrawCount,#todayDrawCount,#Time{
-            font-size: 30px;
-            margin-top: 70px;
-            color: #FFCC33;
-        }
 		#pie{
 			flex:1 1 auto;
 			width: 100%;
@@ -136,7 +126,7 @@
 <div class="main">
 	<div class="main_center">
 		<!-- -------------当天数据查询监控---------------  -->
-		<div class="price_1">
+		<div class="price_1" style="width: 1200px;height:1000px;background:#FFF;">
 			<div class="title">
 				<!-- <br />
                 <h2>
@@ -151,33 +141,8 @@
 				</div>
 			</div>
 			<div class="content box_content_block">
-				<ul class="kind_nav">
-					<li class="li_long li_first" >
-						<div class="name">市场总数</div>
-                        <div id="MarketCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">品类总数</div>
-                        <div id="TypeCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">品种总数</div>
-						<div id="NameCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">总抓取量</div>
-						<div id="DrawCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">当天抓取量</div>
-						<div id="todayDrawCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">抓取时间</div>
-						<div id="Time"></div>
-					</li>
-
-				</ul>
+				<div class="kind_nav" id="showdata">
+				</div>
 				<!------------------------- 结束 -------------------------->
 				<!----------------品种排行榜---------------  -->
 				<div class="Top_Record" >
@@ -322,13 +287,146 @@
                     console.log(data);
                     var arrayAllData = data.split(",");
                     console.log(arrayAllData);
-                    document.getElementById("MarketCount").innerText=arrayAllData[0];
-                    document.getElementById("TypeCount").innerText=arrayAllData[1];
-                    document.getElementById("NameCount").innerText=arrayAllData[2];
-                    document.getElementById("DrawCount").innerText=arrayAllData[3];
-                    document.getElementById("todayDrawCount").innerText=arrayAllData[4];
-                    document.getElementById("Time").innerText=arrayAllData[5];
+                    var myChart = echarts.init(document.getElementById('showdata'));
 
+                    var highlight = '#03b7c9';
+
+                    var demoData = [
+                        { name: '市场总数(万)', value: arrayAllData[0]/10000, unit: '', pos: ['16.6%', '25%'], range: [0, 1] },
+                        { name: '品类总数', value: arrayAllData[1], unit: '', pos: ['49.8%', '25%'], range: [0, 100] },
+                        { name: '品种总数(万)', value: arrayAllData[2]/10000, pos: ['83%', '25%'], range: [0, 1], },
+                        { name: '总抓取量(百万)', value: arrayAllData[3]/1000000, unit: '', pos: ['16.6%', '75%'], range: [0, 100] },
+                        { name: '当天抓取量(万)', value: arrayAllData[4]/10000, unit: '', pos: ['49.8%', '75%'], range: [0, 10] },
+                        { name: '抓取时间', value: 5, unit: '号', pos: ['83%', '75%'], range: [1, 31] }
+                    ];
+
+                    option = {
+                        backgroundColor: '#222939',
+
+                        series: (function() {
+                            var result = [];
+
+                            demoData.forEach(function(item) {
+                                result.push(
+                                    // 外围刻度
+                                    {
+                                        type: 'gauge',
+                                        center: item.pos,
+                                        radius: '33.33%',  // 1行3个
+                                        splitNumber: item.splitNum || 10,
+                                        min: item.range[0],
+                                        max: item.range[1],
+                                        startAngle: 225,
+                                        endAngle: -45,
+                                        axisLine: {
+                                            show: true,
+                                            lineStyle: {
+                                                width: 2,
+                                                shadowBlur: 0,
+                                                color: [
+                                                    [1, highlight]
+                                                ]
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: true,
+                                            lineStyle: {
+                                                color: highlight,
+                                                width: 1
+                                            },
+                                            length: -5,
+                                            splitNumber: 10
+                                        },
+                                        splitLine: {
+                                            show: true,
+                                            length: -14,
+                                            lineStyle: {
+                                                color: highlight,
+                                            }
+                                        },
+                                        axisLabel: {
+                                            distance: -20,
+                                            textStyle: {
+                                                color: highlight,
+                                                fontSize: '14',
+                                                fontWeight: 'bold'
+                                            }
+                                        },
+                                        pointer: {
+                                            show: 0
+                                        },
+                                        detail: {
+                                            show: 0
+                                        }
+                                    },
+
+                                    // 内侧指针、数值显示
+                                    {
+                                        name: item.name,
+                                        type: 'gauge',
+                                        center: item.pos,
+                                        radius: '30.33%',
+                                        startAngle: 225,
+                                        endAngle: -45,
+                                        min: item.range[0],
+                                        max: item.range[1],
+                                        axisLine: {
+                                            show: true,
+                                            lineStyle: {
+                                                width: 16,
+                                                color: [
+                                                    [1, 'rgba(255,255,255,.1)']
+                                                ]
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: 0,
+                                        },
+                                        splitLine: {
+                                            show: 0,
+                                        },
+                                        axisLabel: {
+                                            show: 0
+                                        },
+                                        pointer: {
+                                            show: true,
+                                            length: '105%'
+                                        },
+                                        detail: {
+                                            show: true,
+                                            offsetCenter: [0, '100%'],
+                                            textStyle: {
+                                                fontSize: 20,
+                                                color: '#fff'
+                                            },
+                                            formatter: [
+                                                '{value} ' + (item.unit || ''),
+                                                '{name|' + item.name + '}'
+                                            ].join('\n'),
+                                            rich: {
+                                                name: {
+                                                    fontSize: 14,
+                                                    lineHeight: 30,
+                                                    color: '#ddd'
+                                                }
+                                            }
+                                        },
+                                        itemStyle: {
+                                            normal: {
+                                                color: highlight,
+                                            }
+                                        },
+                                        data: [{
+                                            value: item.value
+                                        }]
+                                    }
+                                );
+                            });
+
+                            return result;
+                        })()
+                    };
+                    myChart.setOption(option);
                 }
             }
         )}
