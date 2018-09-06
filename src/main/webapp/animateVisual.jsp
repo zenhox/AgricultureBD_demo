@@ -61,9 +61,9 @@
                 <option value=1 selected="selected">请选择</option>
             </select>
 
-            <input type="button" id="addButton" style="width:70px;height:30px;" value="添加"/>
-            <input type="button" id="cleanButton" style="width:70px;height:30px;" value="清空"/>
-            <input type="button" id="queryButton" style="width:70px;height:30px;" value="查询"/>
+            <button id="addButton" class="slide">添加</button>
+            <button id="cleanButton" class="slide">清空</button>
+            <button id="queryButton" class="slide">查询</button>
         </div>
             <label for="staDate">开始日期：</label><input id="staDate" type="date" value="2018-01-01"/>
             <label for="endDate">结束日期：</label><input id="endDate" type="date" value="2018-08-01"/>

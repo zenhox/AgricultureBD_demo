@@ -8,3 +8,30 @@ ul {
     background: rgb(0,159,233) !important;
     line-height: 50px !important;
 }
+button {
+    background: none;
+    border: 1px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+}
+button {
+    color: var(--color);
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+}
+button:hover, button:focus {
+    border-color: var(--hover);
+    color: #fff;
+}
+.slide {
+    --color:#17181c;
+    /*  --hover: #66c887;*/
+    --hover: #0c0940;
+}
+.slide:hover,
+.slide:focus {
+    box-shadow: inset 6.5em 0 0 0 var(--hover);
+}
+

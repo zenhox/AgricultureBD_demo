@@ -813,9 +813,11 @@
     <select id="static_select_4" style="width:160px;height:30px;">
         <option value=1 selected="selected">请选择</option>
     </select>
-    <input type="button" id="static_addButton" style="width:70px;height:30px;" value="添加"/>
-    <input type="button" id="static_cleanButton" style="width:70px;height:30px;" value="清空"/>
-    <input type="button" id="static_queryButton" style="width:70px;height:30px;" value="查询"/>
+
+    <button id="static_addButton" class="slide">添加</button>
+    <button id="static_cleanButton" class="slide">清空</button>
+    <button id="static_queryButton" class="slide">查询</button>
+
 </div>
 <div class="Top_Record" >
     <table id= "allInf" width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#d8d8d8" class="m_t_5">
