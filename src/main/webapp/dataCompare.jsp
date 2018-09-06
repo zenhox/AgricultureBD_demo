@@ -56,7 +56,7 @@
                 name:'1',
                 type:'line',
                 tiled: '总量',
-                symbol: 'none',
+
                 emphasis : {
                     label : {show: true}},
                 itemStyle : {
@@ -181,7 +181,7 @@
 
                         static_myChart.setOption({
                             xAxis:{data: static_Finaldate},
-                            series:[{name:'1',symbol: 'star',symbolSize: 6,data:static_price1Final}]
+                            series:[{name:'1',symbolSize: 6,data:static_price1Final}]
                         });
                         return;
                     }
@@ -252,7 +252,7 @@
 
                         static_myChart.setOption({
                             xAxis:{data: static_Finaldate},
-                            series:[{name:'1',symbol: 'star',symbolSize: 6,data:static_price1Final},{name:'2',symbol: 'emptyCircle',symbolSize: 6,data:static_price2Final}]
+                            series:[{name:'1',symbolSize: 6,data:static_price1Final},{name:'2',symbolSize: 6,data:static_price2Final}]
                         });
                         return;
                     }
@@ -337,12 +337,11 @@
 
                         static_myChart.setOption({
                             xAxis: {data: static_Finaldate},
-                            series: [{name: '1', symbol: 'star', symbolSize: 6, data: static_price1Final}, {
+                            series: [{name: '1', symbolSize: 6, data: static_price1Final}, {
                                 name: '2',
-                                symbol: 'emptyCircle',
                                 symbolSize: 6,
                                 data: static_price2Final
-                            }, {name: '3', symbol: 'arrow', symbolSize: 6, data: static_price3Final}]
+                            }, {name: '3', symbolSize: 6, data: static_price3Final}]
                         });
                         return;
                     }
@@ -439,13 +438,13 @@
 
                         static_myChart.setOption({
                             xAxis: {data: static_Finaldate},
-                            series: [{name: '1', symbol: 'star', symbolSize: 6, data: static_price1Final}, {
+                            series: [{name: '1', symbolSize: 6, data: static_price1Final}, {
                                 name: '2',
-                                symbol: 'emptyCircle',
+
                                 symbolSize: 6,
                                 data: static_price2Final
-                            }, {name: '3', symbol: 'arrow', symbolSize: 6, data: static_price3Final},
-                                {name:'4',symbol:'droplet',symbolSize:6,data:static_price4Final}]
+                            }, {name: '3', symbolSize: 6, data: static_price3Final},
+                                {name:'4',symbolSize:6,data:static_price4Final}]
                         });
                         return;
                     }
@@ -555,14 +554,13 @@
 
                         static_myChart.setOption({
                             xAxis: {data: static_Finaldate},
-                            series: [{name: '1', symbol: 'star', symbolSize: 6, data: static_price1Final}, {
+                            series: [{name: '1',  symbolSize: 6, data: static_price1Final}, {
                                 name: '2',
-                                symbol: 'emptyCircle',
                                 symbolSize: 6,
                                 data: static_price2Final
-                            }, {name: '3', symbol: 'arrow', symbolSize: 6, data: static_price3Final},
-                                {name:'4',symbol:'droplet',symbolSize:6,data:static_price4Final},
-                                {name:'5',symbol:'star6',symbolSize:6,data:static_price5Final}]
+                            }, {name: '3',  symbolSize: 6, data: static_price3Final},
+                                {name:'4',symbolSize:6,data:static_price4Final},
+                                {name:'5',symbolSize:6,data:static_price5Final}]
                         });
                         return;
                     }

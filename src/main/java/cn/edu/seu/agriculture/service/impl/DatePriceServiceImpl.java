@@ -256,10 +256,21 @@ public class DatePriceServiceImpl implements DatePriceService {
     @Override
     public List<Map<String, Object>> getCounter(String province, String market, String type) {
         DatePriceExample example = new DatePriceExample();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = null;
+        try {
+            date = format.parse("2018-1-1");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         example.createCriteria()
                 .andProvinceEqualTo(province)
                 .andMarketEqualTo(market)
-                .andTypeEqualTo(type);
+                .andTypeEqualTo(type)
+                .andDateIsNotNull()
+                .andNameIsNotNull()
+                .andDateGreaterThanOrEqualTo(date);
+        example.setDistinct(true);
         List<DatePrice> query = datePriceMapper.selectByExample(example);
         List<String> nameList = new ArrayList<>();
         List<Integer> countList = new ArrayList<>();
@@ -267,7 +278,7 @@ public class DatePriceServiceImpl implements DatePriceService {
             String name = dp.getName();
             if(nameList.contains(name)){
                 Integer counter = countList.get(nameList.indexOf(name));
-                logger.debug("contains:  index is "+nameList.indexOf(name));
+//                logger.debug("contains:  index is "+nameList.indexOf(name));
                 countList.set(nameList.indexOf(name),counter+1);
             }else {
                 nameList.add(dp.getName());

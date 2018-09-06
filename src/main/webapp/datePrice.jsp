@@ -120,6 +120,7 @@
             console.log(province+market+type+name);
             $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
                 success:function(result) {
+                    console.log(result);
                     result = eval("("+result+")");
                     console.log(result);
                     myChart.setOption({

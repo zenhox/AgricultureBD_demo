@@ -278,9 +278,13 @@
 
 
 <script>
+
     window.onload = function (ev) {
         //   执行函数，获得data
         var mydata = JSON.parse(localStorage.getItem('mydata'));
+        var AllCrawNumber=null;
+        var arrayName=null;
+        var arrayNumber=null;
 
         function GetMonitorData() {
             $.ajax({
@@ -303,6 +307,7 @@
                         { name: '当天抓取量(万)', value: arrayAllData[4]/10000, unit: '', pos: ['49.8%', '75%'], range: [0, 10] },
                         { name: '抓取时间', value: 5, unit: '号', pos: ['83%', '75%'], range: [1, 31] }
                     ];
+                    AllCrawNumber=arrayAllData[3];
 
                     option = {
                         backgroundColor: '#222939',
@@ -521,20 +526,20 @@
                 templi1.href="#show";
                 templi1.onclick=function(){
                     goPage(currentPage-1,pageSize);
-                }
+                };
                 templi1.innerText="上一页";
 
                 var templi2=document.getElementById("down");
                 templi2.href="#show";
                 templi2.onclick=function () {
                     goPage(currentPage+1,pageSize);
-                }
+                };
                 templi2.innerText="下一页";
 
                 pageJump.href="#";
                 pageJump.onclick=function(){
                     goPage(document.getElementById("pageJump_id").value,pageSize);
-                }
+                };
             } else if(currentPage == 1){
                 var templi3=document.getElementById('up');
                 templi3.innerText="首页";
@@ -627,7 +632,27 @@
 
         function getData(){
             type = $("#typeMarket").find("option:selected").text();
-
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/agriculture/getMarketCount",
+                data: {
+                    province: province,
+                    market: market,
+                    type:type
+                },
+                success: function (data) {
+                    data = eval("("+data+")");
+                    console.log(data);
+                    arrayName=data["name"];
+                    arrayNumber=data["counter"]
+                    console.log(arrayName);
+                    console.log(arrayNumber);
+                }
+            });
+            var marketAllNumber=0;
+            for(var i=0;i<arrayNumber.length;i++){
+                marketAllNumber=marketAllNumber+arrayNumber[i];
+            }
 
 
             /*---------------------初始化----------------------------*/
@@ -637,10 +662,10 @@
 
 			//初始化数据，
             var echartData = [{
-                value: 200,//时间
+                value: marketAllNumber,//时间
                 name: '交卷时间'
             }, {
-                value: 100,
+                value: AllCrawNumber-marketAllNumber,
                 name: '未交卷时间'
             }];
 
@@ -735,7 +760,7 @@
                             normal: {
                                 formatter: function(params) {
                                     var time = echartData[0].value;
-                                    return '{time|' + (100+200)/200 + '}{unit|%}';
+                                    return '{time|' + (marketAllNumber/AllCrawNumber) + '}{unit|%}';
                                 },
                                 position: 'center',
                                 textStyle: {
