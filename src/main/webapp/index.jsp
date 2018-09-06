@@ -71,8 +71,8 @@
 
 		<div class="nav">
 			<ul class ="menus">
-				<li><a href="./index.jsp">首页</a></li>
-				<li><a href="./control.jsp" >数据监控</a></li>
+				<li><a href="./index.jsp" class="nav_aclick">首页</a></li>
+				<li><a href="./control.jsp"  >数据监控</a></li>
 				<li><a href="./contrast.jsp" >数据查询</a></li>
 				<li><a href="./forecast.jsp">价格预测</a></li>
 				<li><a href="./EnterpriseMap.jsp">企业地图</a></li>
@@ -104,13 +104,6 @@
 		<jsp:include page="bottom.jsp"></jsp:include>
 	</div>
 </div>
-<script type="text/javascript">
-
-
-
-    // 设置地图显示的城市 此项是必须设置的
-
-</script>
 <%--客服--%>
 <style type="text/css">
 	*{margin:0;padding:0;list-style-type:none;}
