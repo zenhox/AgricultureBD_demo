@@ -111,7 +111,6 @@ public class Controller {
         System.out.println(type+" "+market+" "+province+" "+name+" "+startDate+" "+endDate+"正在对比查询查询******");
         List<DatePrice> reList = datePriceService.getDetailPriceListByInfo(province,market,type,name,startDate,endDate);
         return reTypeService.toCsv(reList).toString();
-
     }
 
 
