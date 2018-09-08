@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <properties resource="jdbc.properties" />
     <!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
-    <classPathEntry location="/home/hox/.m2/repository/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar" />
+    <classPathEntry location="C:\Users\zenho\.m2\repository\mysql\mysql-connector-java\5.1.37\mysql-connector-java-5.1.37.jar" />
 
     <context id="test_db_mysql_tables" targetRuntime="MyBatis3">
         <!-- 防止生成的代码中有很多注释，加入下面的配置控制 -->
@@ -94,30 +94,35 @@
             <property name="rootInterface" value=""/>-->
         </javaClientGenerator>
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table schema="agriculture" tableName="date_price" domainObjectName="DatePrice">
-            <!--enableCountByExample="false" enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false"-->
-        </table>
-        <table schema="agriculture" tableName="users" domainObjectName="Users">
-            <!--enableCountByExample="false" enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false"-->
-        </table>
-        <table schema="agriculture" tableName="category_related" domainObjectName="CategoryRelated">
-            <!--enableCountByExample="false" enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false"-->
-        </table>
-        <table schema="agriculture" tableName="country_view" domainObjectName="CountryView">
-            <!--enableCountByExample="false" enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false"-->
-        </table>
-        <table schema="agriculture" tableName="counter" domainObjectName="Counter">
-            <!--enableCountByExample="false" enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false"-->
+        <!--<table schema="agriculture" tableName="date_price" domainObjectName="DatePrice">-->
+            <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;enableDeleteByExample="false" enableSelectByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table schema="agriculture" tableName="users" domainObjectName="Users">-->
+            <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;enableDeleteByExample="false" enableSelectByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table schema="agriculture" tableName="category_related" domainObjectName="CategoryRelated">-->
+            <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;enableDeleteByExample="false" enableSelectByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table schema="agriculture" tableName="country_view" domainObjectName="CountryView">-->
+            <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;enableDeleteByExample="false" enableSelectByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table schema="agriculture" tableName="counter" domainObjectName="Counter">-->
+            <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;enableDeleteByExample="false" enableSelectByExample="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;selectByExampleQueryId="false"&ndash;&gt;-->
+        <!--</table>-->
+        <table schema="agriculture" tableName="user_info" domainObjectName="UserInfo">
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false"-->
         </table>
         <!--<table schema="test_db" tableName="appointment" domainObjectName="Appointment">-->
             <!--&lt;!&ndash;enableCountByExample="false" enableUpdateByExample="false"&ndash;&gt;-->
