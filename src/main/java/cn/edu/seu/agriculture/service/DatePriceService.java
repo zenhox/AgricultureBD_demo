@@ -85,4 +85,12 @@ public interface DatePriceService {
      */
     public List<String> getRecentlyCounter();
 
+    /**
+     * 返回该商品给的 计数
+     * @param province
+     * @param market
+     * @param type
+     * @return
+     */
+    public List<Map<String,Object>> getCounter(String province,String market,String type);
 }

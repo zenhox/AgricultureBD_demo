@@ -123,6 +123,7 @@ public class Controller {
         return reList.toString().replace(" ","");
     }
 
+    //获取局域数据
     @RequestMapping(value = "/areaGetAllData",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
     @ResponseBody
     public String areaGetAllData(String date,String type, String name){
@@ -143,5 +144,13 @@ public class Controller {
         logger.info(reList.toString());
         return reTypeService.toJson(reList).toString();
     }
+
+    //监控市场
+    @RequestMapping(value = "/getMarketCount",method = RequestMethod.GET,produces={"text/html;charset=UTF-8;","application/json;"})
+    @ResponseBody
+    public String getMarketCount(String province,String market,String type){
+        return reTypeService.toJson(datePriceService.getCounter(province,market,type)).toString();
+    }
+
 
 }

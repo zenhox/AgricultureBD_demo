@@ -7,9 +7,9 @@
 <html>
 <head>
     <%--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>--%>
-        <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/jquery-3.3.1.min.js"></script>
     <%--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>--%>
-        <script type="text/javascript" src="./js/echarts.js"></script>
+    <script type="text/javascript" src="./js/echarts.js"></script>
     <title>全国农业市场信息大数据分析平台</title><link rel="shortcut icon" href="images/yn.png"  /></link>
     <script src='http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js'></script>
 </head>
@@ -25,7 +25,7 @@
             trigger: 'axis'
         },
         legend: {
-            data:['1','2','3']
+            data:['1','2','3','4','5']
         },
         toolbox: {
             show : true,
@@ -56,7 +56,7 @@
                 name:'1',
                 type:'line',
                 tiled: '总量',
-                symbol: 'none',
+
                 emphasis : {
                     label : {show: true}},
                 itemStyle : {
@@ -83,9 +83,30 @@
                     label : {show: true}},
                 itemStyle : {
                 },
-                data:[
 
-                ]
+                data:[]
+            },
+            {
+                name:'4',
+                type:'line',
+                tiled: '总量',
+                emphasis : {
+                    label : {show: true}},
+                itemStyle : {
+                },
+
+                data:[]
+            },
+            {
+                name:'5',
+                type:'line',
+                tiled: '总量',
+                emphasis : {
+                    label : {show: true}},
+                itemStyle : {
+                },
+
+                data:[]
             },
         ]
     };
@@ -107,14 +128,20 @@
         var static_date1=[];//获取到的原始数据
         var static_date2=[];
         var static_date3=[];
+        var static_date4=[];
+        var static_date5=[];
         var static_dateCombine=[];//日期合并
         var static_Finaldate=[];//日期去重
         var static_price1=[];//获取到的原始数据
         var static_price2=[];
         var static_price3=[];
+        var static_price4=[];
+        var static_price5=[];
         var static_price1Final=[];//按照Echart要求对应最终日期处理了上述的原始数据
         var static_price2Final=[];
         var static_price3Final=[];
+        var static_price4Final=[];
+        var static_price5Final=[];
         var static_province=null;
         var static_market=null;
         var static_type=null;
@@ -122,12 +149,16 @@
         var static_currentInf=0;
         var static_data=[];
 
+
+
         //以下是获取数据并且绘制折线比较图的界面
         function static_getGraph(){
-            if (static_currentInf!=3){
-                alert("请选择3个品种");
-                return;
-            }
+
+            /* if (static_currentInf!=3){
+                   alert("请选择3个品种");
+                   return;
+               }
+             */
 
             var province = static_data[0].province;
             var market = static_data[0].market;
@@ -135,14 +166,26 @@
             var name = static_data[0].name;
 
             console.log("条目1"+province+market+type+name);
-            $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
+            $.ajax({
+                async: false,
+                url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
                 success:function(result) {
-
                     result = eval("("+result+")");
                     console.log(result);
 
                     static_date1= result.date;
                     static_price1=result.price;
+                    if(static_currentInf==1)
+                    {     static_Finaldate=static_date1;
+                        static_price1Final=static_price1;
+
+                        static_myChart.setOption({
+                            xAxis:{data: static_Finaldate},
+                            series:[{name:'1',symbolSize: 6,data:static_price1Final}]
+                        });
+                        return;
+                    }
+
                 },error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("选项有误，请检查选项是否有问题或与系统管理员联系");
                 }
@@ -151,28 +194,81 @@
         }
 
         function getGraphStep2(){
+
+
+
             var province = static_data[1].province;
             var market = static_data[1].market;
             var type = static_data[1].type;
             var name = static_data[1].name;
 
             console.log("条目2"+province+market+type+name);
-            $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
+            $.ajax({
+                async: false,
+                url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
                 success:function(result) {
 
                     result = eval("("+result+")");
                     console.log(result);
                     static_date2= result.date;
                     static_price2=result.price;
+                    if(static_currentInf==2)
+                    {
+                        static_dateCombine=static_date1.concat(static_date2);
+                        static_Finaldate=static_unique(static_dateCombine);
+                        static_Finaldate.sort(AscSort);
+                        for(var i=0;i<static_Finaldate.length;i++)
+                        {
+
+                            for(var j=0;j<static_date1.length;j++)
+                            {
+                                if(static_Finaldate[i]==static_date1[j])
+                                {
+                                    static_price1Final[i]=static_price1[j];
+                                    break;
+                                }
+                                else {
+                                    static_price1Final[i]="-"
+                                }
+                            }
+                        }
+                        for(var i=0;i<static_Finaldate.length;i++)
+                        {
+
+                            for(var j=0;j<static_date2.length;j++)
+                            {
+                                if(static_Finaldate[i]==static_date2[j])
+                                {
+                                    static_price2Final[i]=static_price2[j];
+                                    break;
+                                }
+                                else {
+                                    static_price2Final[i]="-"
+                                }
+                            }
+                        }
+
+
+
+                        static_myChart.setOption({
+                            xAxis:{data: static_Finaldate},
+                            series:[{name:'1',symbolSize: 6,data:static_price1Final},{name:'2',symbolSize: 6,data:static_price2Final}]
+                        });
+                        return;
+                    }
 
                 },error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("选项有误，请检查选项是否有问题或与系统管理员联系");
                 }
             });
             getGraphStep3();
+            /* 刷新查询 */
+
         }
 
         function getGraphStep3(){
+
+
 
             var province = static_data[2].province;
             var market = static_data[2].market;
@@ -180,7 +276,9 @@
             var name = static_data[2].name;
 
             console.log("条目3" + province+market+type+name);
-            $.ajax({url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
+            $.ajax({
+                async: false,
+                url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
                 success:function(result) {
 
                     result = eval("("+result+")");
@@ -188,70 +286,291 @@
                     console.log(result);
                     static_date3= result.date;
                     static_price3=result.price;
-                    /*日期组合：横坐标更新 生成横坐标参数*/
 
-                    static_dateCombine=static_date1.concat(static_date2);
-                    static_dateCombine=static_dateCombine.concat(static_date3);
-                    static_Finaldate=static_unique(static_dateCombine);
-                    static_Finaldate.sort(AscSort);
+                    if(static_currentInf==3) {
+                        /*日期组合：横坐标更新 生成横坐标参数*/
 
-                    /*生成价格参数*/
-                    for(var i=0;i<static_Finaldate.length;i++)
-                    {
+                        static_dateCombine = static_date1.concat(static_date2);
+                        static_dateCombine = static_dateCombine.concat(static_date3);
+                        static_Finaldate = static_unique(static_dateCombine);
+                        static_Finaldate.sort(AscSort);
 
-                        for(var j=0;j<static_date1.length;j++)
-                        {
-                            if(static_Finaldate[i]==static_date1[j])
-                            {
-                                static_price1Final[i]=static_price1[j];
-                                break;
-                            }
-                            else {
-                                static_price1Final[i]="-"
-                            }
-                        }
-                    }
-                    for(var i=0;i<static_Finaldate.length;i++)
-                    {
+                        /*生成价格参数*/
+                        for (var i = 0; i < static_Finaldate.length; i++) {
 
-                        for(var j=0;j<static_date2.length;j++)
-                        {
-                            if(static_Finaldate[i]==static_date2[j])
-                            {
-                                static_price2Final[i]=static_price2[j];
-                                break;
-                            }
-                            else {
-                                static_price2Final[i]="-"
+                            for (var j = 0; j < static_date1.length; j++) {
+                                if (static_Finaldate[i] == static_date1[j]) {
+                                    static_price1Final[i] = static_price1[j];
+                                    break;
+                                }
+                                else {
+                                    static_price1Final[i] = "-"
+                                }
                             }
                         }
-                    }
-                    for(var i=0;i<static_Finaldate.length;i++)
-                    {
+                        for (var i = 0; i < static_Finaldate.length; i++) {
 
-                        for(var j=0;j<static_date3.length;j++)
-                        {
-                            if(static_Finaldate[i]==static_date3[j])
-                            {
-                                static_price3Final[i]=static_price3[j];
-                                break;
-                            }
-                            else {
-                                static_price3Final[i]="-"
+                            for (var j = 0; j < static_date2.length; j++) {
+                                if (static_Finaldate[i] == static_date2[j]) {
+                                    static_price2Final[i] = static_price2[j];
+                                    break;
+                                }
+                                else {
+                                    static_price2Final[i] = "-"
+                                }
                             }
                         }
-                    }
-                    /*参数赋值 画图*/
-                    static_myChart.setOption({
-                        xAxis:{data: static_Finaldate},
+                        for (var i = 0; i < static_Finaldate.length; i++) {
 
-                        series:[{name:'1',symbol: 'star',symbolSize: 6,data:static_price1Final},{name:'2',symbol: 'emptyCircle',symbolSize: 6,data:static_price2Final},{name:'3',symbol: 'arrow',symbolSize: 6,data:static_price3Final}]
-                    });
+                            for (var j = 0; j < static_date3.length; j++) {
+                                if (static_Finaldate[i] == static_date3[j]) {
+                                    static_price3Final[i] = static_price3[j];
+                                    break;
+                                }
+                                else {
+                                    static_price3Final[i] = "-"
+                                }
+                            }
+                        }
+                        /*参数赋值 画图*/
+
+
+                        static_myChart.setOption({
+                            xAxis: {data: static_Finaldate},
+                            series: [{name: '1', symbolSize: 6, data: static_price1Final}, {
+                                name: '2',
+                                symbolSize: 6,
+                                data: static_price2Final
+                            }, {name: '3', symbolSize: 6, data: static_price3Final}]
+                        });
+                        return;
+                    }
                     $("#static_div1").html(result);
                 },error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("选项有误，请检查选项是否有问题或与系统管理员联系");
                 }
+
             });
+            getGraphStep4();
+        }
+
+        function getGraphStep4(){
+
+
+
+            var province = static_data[3].province;
+            var market = static_data[3].market;
+            var type = static_data[3].type;
+            var name = static_data[3].name;
+
+            console.log("条目4" + province+market+type+name);
+            $.ajax({
+                async: false,
+                url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
+                success:function(result) {
+
+                    result = eval("("+result+")");
+
+                    console.log(result);
+                    static_date4= result.date;
+                    static_price4=result.price;
+
+                    if(static_currentInf==4) {
+                        /*日期组合：横坐标更新 生成横坐标参数*/
+
+                        static_dateCombine = static_date1.concat(static_date2);
+                        static_dateCombine = static_dateCombine.concat(static_date3);
+                        static_dateCombine = static_dateCombine.concat(static_date4);
+                        static_Finaldate = static_unique(static_dateCombine);
+                        static_Finaldate.sort(AscSort);
+
+                        /*生成价格参数*/
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date1.length; j++) {
+                                if (static_Finaldate[i] == static_date1[j]) {
+                                    static_price1Final[i] = static_price1[j];
+                                    break;
+                                }
+                                else {
+                                    static_price1Final[i] = "-"
+                                }
+                            }
+                        }
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date2.length; j++) {
+                                if (static_Finaldate[i] == static_date2[j]) {
+                                    static_price2Final[i] = static_price2[j];
+                                    break;
+                                }
+                                else {
+                                    static_price2Final[i] = "-"
+                                }
+                            }
+                        }
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date3.length; j++) {
+                                if (static_Finaldate[i] == static_date3[j]) {
+                                    static_price3Final[i] = static_price3[j];
+                                    break;
+                                }
+                                else {
+                                    static_price3Final[i] = "-"
+                                }
+                            }
+                        }
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date4.length; j++) {
+                                if (static_Finaldate[i] == static_date4[j]) {
+                                    static_price4Final[i] = static_price4[j];
+                                    break;
+                                }
+                                else {
+                                    static_price4Final[i] = "-"
+                                }
+                            }
+                        }
+                        /*参数赋值 画图*/
+
+
+                        static_myChart.setOption({
+                            xAxis: {data: static_Finaldate},
+                            series: [{name: '1', symbolSize: 6, data: static_price1Final}, {
+                                name: '2',
+
+                                symbolSize: 6,
+                                data: static_price2Final
+                            }, {name: '3', symbolSize: 6, data: static_price3Final},
+                                {name:'4',symbolSize:6,data:static_price4Final}]
+                        });
+                        return;
+                    }
+                    $("#static_div1").html(result);
+                },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("选项有误，请检查选项是否有问题或与系统管理员联系");
+                }
+
+            });
+            getGraphStep5();
+        }
+
+        function getGraphStep5(){
+
+
+
+            var province = static_data[4].province;
+            var market = static_data[4].market;
+            var type = static_data[4].type;
+            var name = static_data[4].name;
+
+            console.log("条目5" + province+market+type+name);
+            $.ajax({
+                async: false,
+                url:"http://localhost:8080/agriculture/datePrice/"+province+"/"+market+"/"+type+"/"+name+".do",
+                success:function(result) {
+
+                    result = eval("("+result+")");
+
+                    console.log(result);
+                    static_date5= result.date;
+                    static_price5=result.price;
+
+                    if(static_currentInf==5) {
+                        /*日期组合：横坐标更新 生成横坐标参数*/
+
+                        static_dateCombine = static_date1.concat(static_date2);
+                        static_dateCombine = static_dateCombine.concat(static_date3);
+                        static_dateCombine = static_dateCombine.concat(static_date4);
+                        static_dateCombine = static_dateCombine.concat(static_date5);
+                        static_Finaldate = static_unique(static_dateCombine);
+                        static_Finaldate.sort(AscSort);
+
+                        /*生成价格参数*/
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date1.length; j++) {
+                                if (static_Finaldate[i] == static_date1[j]) {
+                                    static_price1Final[i] = static_price1[j];
+                                    break;
+                                }
+                                else {
+                                    static_price1Final[i] = "-"
+                                }
+                            }
+                        }
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date2.length; j++) {
+                                if (static_Finaldate[i] == static_date2[j]) {
+                                    static_price2Final[i] = static_price2[j];
+                                    break;
+                                }
+                                else {
+                                    static_price2Final[i] = "-"
+                                }
+                            }
+                        }
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date3.length; j++) {
+                                if (static_Finaldate[i] == static_date3[j]) {
+                                    static_price3Final[i] = static_price3[j];
+                                    break;
+                                }
+                                else {
+                                    static_price3Final[i] = "-"
+                                }
+                            }
+                        }
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date4.length; j++) {
+                                if (static_Finaldate[i] == static_date4[j]) {
+                                    static_price4Final[i] = static_price4[j];
+                                    break;
+                                }
+                                else {
+                                    static_price4Final[i] = "-"
+                                }
+                            }
+                        }
+                        for (var i = 0; i < static_Finaldate.length; i++) {
+
+                            for (var j = 0; j < static_date5.length; j++) {
+                                if (static_Finaldate[i] == static_date5[j]) {
+                                    static_price5Final[i] = static_price5[j];
+                                    break;
+                                }
+                                else {
+                                    static_price5Final[i] = "-"
+                                }
+                            }
+                        }
+                        /*参数赋值 画图*/
+
+
+                        static_myChart.setOption({
+                            xAxis: {data: static_Finaldate},
+                            series: [{name: '1',  symbolSize: 6, data: static_price1Final}, {
+                                name: '2',
+                                symbolSize: 6,
+                                data: static_price2Final
+                            }, {name: '3',  symbolSize: 6, data: static_price3Final},
+                                {name:'4',symbolSize:6,data:static_price4Final},
+                                {name:'5',symbolSize:6,data:static_price5Final}]
+                        });
+                        return;
+                    }
+                    $("#static_div1").html(result);
+                },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("选项有误，请检查选项是否有问题或与系统管理员联系");
+                }
+
+            });
+
         }
 
 
@@ -407,8 +726,8 @@
         function static_addOneInf(){
             static_name = $("#static_select_4").find("option:selected").text();
 
-            if (static_province=="请选择" ||static_market=="请选择"||static_type=="请选择"||static_name=="请选择" || static_currentInf>=3){
-                alert("选择有误或选择条目超过3个，请重新选择");
+            if (static_province=="请选择" ||static_market=="请选择"||static_type=="请选择"||static_name=="请选择" || static_currentInf>=5){
+                alert("选择有误或选择条目超过5个，请重新选择");
             }else{
                 document.getElementById("static_showInfTable").innerHTML = "";
                 static_data.push(
@@ -438,7 +757,9 @@
         $("#static_select_1").change(static_getMarket);
         $("#static_select_2").change(static_getType);
         $("#static_select_3").change(static_getName);
+
         $("#static_queryButton").click(static_getGraph);
+
         $("#static_addButton").click(static_addOneInf);
         $("#static_cleanButton").click(static_delAllInf);
     })
@@ -492,9 +813,11 @@
     <select id="static_select_4" style="width:160px;height:30px;">
         <option value=1 selected="selected">请选择</option>
     </select>
-    <input type="button" id="static_addButton" style="width:70px;height:30px;" value="添加"/>
-    <input type="button" id="static_cleanButton" style="width:70px;height:30px;" value="清空"/>
-    <input type="button" id="static_queryButton" style="width:70px;height:30px;" value="查询"/>
+
+    <button id="static_addButton" class="slide">添加</button>
+    <button id="static_cleanButton" class="slide">清空</button>
+    <button id="static_queryButton" class="slide">查询</button>
+
 </div>
 <div class="Top_Record" >
     <table id= "allInf" width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#d8d8d8" class="m_t_5">

@@ -78,18 +78,8 @@
 		.kind_nav{
 			display: flex;
 			width: 1180px;
-			height: 180px;
+			height: 500px;
 		}
-		.kind_nav>li{
-			flex:1 1 auto;
-			width: 160px;
-			height: 180px;
-		}
-        #MarketCount,#TypeCount,#NameCount,#DrawCount,#todayDrawCount,#Time{
-            font-size: 30px;
-            margin-top: 70px;
-            color: #FFCC33;
-        }
 		#pie{
 			flex:1 1 auto;
 			width: 100%;
@@ -136,7 +126,7 @@
 <div class="main">
 	<div class="main_center">
 		<!-- -------------当天数据查询监控---------------  -->
-		<div class="price_1">
+		<div class="price_1" style="width: 1200px;height:1000px;background:#FFF;">
 			<div class="title">
 				<!-- <br />
                 <h2>
@@ -151,33 +141,8 @@
 				</div>
 			</div>
 			<div class="content box_content_block">
-				<ul class="kind_nav">
-					<li class="li_long li_first" >
-						<div class="name">市场总数</div>
-                        <div id="MarketCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">品类总数</div>
-                        <div id="TypeCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">品种总数</div>
-						<div id="NameCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">总抓取量</div>
-						<div id="DrawCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">当天抓取量</div>
-						<div id="todayDrawCount"></div>
-					</li>
-					<li class="li_long">
-						<div class="name">抓取时间</div>
-						<div id="Time"></div>
-					</li>
-
-				</ul>
+				<div class="kind_nav" id="showdata">
+				</div>
 				<!------------------------- 结束 -------------------------->
 				<!----------------品种排行榜---------------  -->
 				<div class="Top_Record" >
@@ -313,9 +278,13 @@
 
 
 <script>
+
     window.onload = function (ev) {
         //   执行函数，获得data
         var mydata = JSON.parse(localStorage.getItem('mydata'));
+        var AllCrawNumber=null;
+        var arrayName=null;
+        var arrayNumber=null;
 
         function GetMonitorData() {
             $.ajax({
@@ -326,13 +295,147 @@
                     console.log(data);
                     var arrayAllData = data.split(",");
                     console.log(arrayAllData);
-                    document.getElementById("MarketCount").innerText=arrayAllData[0];
-                    document.getElementById("TypeCount").innerText=arrayAllData[1];
-                    document.getElementById("NameCount").innerText=arrayAllData[2];
-                    document.getElementById("DrawCount").innerText=arrayAllData[3];
-                    document.getElementById("todayDrawCount").innerText=arrayAllData[4];
-                    document.getElementById("Time").innerText=arrayAllData[5];
+                    var myChart = echarts.init(document.getElementById('showdata'));
 
+                    var highlight = '#03b7c9';
+
+                    var demoData = [
+                        { name: '市场总数(万)', value: arrayAllData[0]/10000, unit: '', pos: ['16.6%', '25%'], range: [0, 1] },
+                        { name: '品类总数', value: arrayAllData[1], unit: '', pos: ['49.8%', '25%'], range: [0, 100] },
+                        { name: '品种总数(万)', value: arrayAllData[2]/10000, pos: ['83%', '25%'], range: [0, 1], },
+                        { name: '总抓取量(百万)', value: arrayAllData[3]/1000000, unit: '', pos: ['16.6%', '75%'], range: [0, 100] },
+                        { name: '当天抓取量(万)', value: arrayAllData[4]/10000, unit: '', pos: ['49.8%', '75%'], range: [0, 10] },
+                        { name: '抓取时间', value: 5, unit: '号', pos: ['83%', '75%'], range: [1, 31] }
+                    ];
+                    AllCrawNumber=arrayAllData[3];
+
+                    option = {
+                        backgroundColor: '#222939',
+
+                        series: (function() {
+                            var result = [];
+
+                            demoData.forEach(function(item) {
+                                result.push(
+                                    // 外围刻度
+                                    {
+                                        type: 'gauge',
+                                        center: item.pos,
+                                        radius: '33.33%',  // 1行3个
+                                        splitNumber: item.splitNum || 10,
+                                        min: item.range[0],
+                                        max: item.range[1],
+                                        startAngle: 225,
+                                        endAngle: -45,
+                                        axisLine: {
+                                            show: true,
+                                            lineStyle: {
+                                                width: 2,
+                                                shadowBlur: 0,
+                                                color: [
+                                                    [1, highlight]
+                                                ]
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: true,
+                                            lineStyle: {
+                                                color: highlight,
+                                                width: 1
+                                            },
+                                            length: -5,
+                                            splitNumber: 10
+                                        },
+                                        splitLine: {
+                                            show: true,
+                                            length: -14,
+                                            lineStyle: {
+                                                color: highlight,
+                                            }
+                                        },
+                                        axisLabel: {
+                                            distance: -20,
+                                            textStyle: {
+                                                color: highlight,
+                                                fontSize: '14',
+                                                fontWeight: 'bold'
+                                            }
+                                        },
+                                        pointer: {
+                                            show: 0
+                                        },
+                                        detail: {
+                                            show: 0
+                                        }
+                                    },
+
+                                    // 内侧指针、数值显示
+                                    {
+                                        name: item.name,
+                                        type: 'gauge',
+                                        center: item.pos,
+                                        radius: '30.33%',
+                                        startAngle: 225,
+                                        endAngle: -45,
+                                        min: item.range[0],
+                                        max: item.range[1],
+                                        axisLine: {
+                                            show: true,
+                                            lineStyle: {
+                                                width: 16,
+                                                color: [
+                                                    [1, 'rgba(255,255,255,.1)']
+                                                ]
+                                            }
+                                        },
+                                        axisTick: {
+                                            show: 0,
+                                        },
+                                        splitLine: {
+                                            show: 0,
+                                        },
+                                        axisLabel: {
+                                            show: 0
+                                        },
+                                        pointer: {
+                                            show: true,
+                                            length: '105%'
+                                        },
+                                        detail: {
+                                            show: true,
+                                            offsetCenter: [0, '100%'],
+                                            textStyle: {
+                                                fontSize: 20,
+                                                color: '#fff'
+                                            },
+                                            formatter: [
+                                                '{value} ' + (item.unit || ''),
+                                                '{name|' + item.name + '}'
+                                            ].join('\n'),
+                                            rich: {
+                                                name: {
+                                                    fontSize: 14,
+                                                    lineHeight: 30,
+                                                    color: '#ddd'
+                                                }
+                                            }
+                                        },
+                                        itemStyle: {
+                                            normal: {
+                                                color: highlight,
+                                            }
+                                        },
+                                        data: [{
+                                            value: item.value
+                                        }]
+                                    }
+                                );
+                            });
+
+                            return result;
+                        })()
+                    };
+                    myChart.setOption(option);
                 }
             }
         )}
@@ -423,20 +526,20 @@
                 templi1.href="#show";
                 templi1.onclick=function(){
                     goPage(currentPage-1,pageSize);
-                }
+                };
                 templi1.innerText="上一页";
 
                 var templi2=document.getElementById("down");
                 templi2.href="#show";
                 templi2.onclick=function () {
                     goPage(currentPage+1,pageSize);
-                }
+                };
                 templi2.innerText="下一页";
 
                 pageJump.href="#";
                 pageJump.onclick=function(){
                     goPage(document.getElementById("pageJump_id").value,pageSize);
-                }
+                };
             } else if(currentPage == 1){
                 var templi3=document.getElementById('up');
                 templi3.innerText="首页";
@@ -529,246 +632,268 @@
 
         function getData(){
             type = $("#typeMarket").find("option:selected").text();
-
-
-
-            /*---------------------初始化----------------------------*/
-            var myChart_pie = echarts.init(document.getElementById('pie'));
-
-            /*---------------------数据----------------------------*/
-
-			//初始化数据，
-            var echartData = [{
-                value: 200,//时间
-                name: '交卷时间'
-            }, {
-                value: 100,
-                name: '未交卷时间'
-            }];
-
-
-            /*---------------------颜色变量----------------------------*/
-			//蓝色
-            var innerColor = '#2bff8f'; //内层颜色
-            var outColor = "#50e0ff"; //外层边框色粗
-            var textColor = '#50e0ff'; //文字颜色
-            var startColor = 'rgba(73,223,240,0.1)'; //中间饼图渐变开始颜色
-            var endColor = 'rgba(73,223,240,0.8)'; //中间饼图渐变结束颜色
-			//绿色
-			// var innerColor = '#50e0ff'; //内层颜色
-			// var outColor = "#2bff8f"; //外层边框色粗
-			// var textColor = '#50e0ff'; //文字颜色
-			// var startColor = 'rgba(43,255,143,0.1)'; //中间饼图渐变开始颜色
-			// var endColor = 'rgba(43,255,143,0.8)'; //中间饼图渐变结束颜色
-
-
-            /*---------------------缩放----------------------------*/
-            var scale = 1;
-
-
-            /*---------------------颜色配置----------------------------*/
-            var color = [{
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [{
-                    offset: 0,
-                    color: startColor // 0% 处的颜色
-                }, {
-                    offset: 1,
-                    color: endColor // 100% 处的颜色
-                }],
-                globalCoord: false // 缺省为 false
-            }, 'none'];
-            /*---------------------富文本----------------------------*/
-            var rich = {
-                time: {
-                    color: innerColor,
-                    fontSize: 32 * scale,
-                    padding: [0, 0],
-                    fontWeight:'bold'
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/agriculture/getMarketCount",
+                data: {
+                    province: province,
+                    market: market,
+                    type:type
                 },
-                unit:{
-                    color: innerColor,
-                    fontSize: 14 * scale,
-                    padding: [0,0,0, 0],
-                    verticalAlign:'bottom',
-                }
-            }
+                success: function (data) {
+                    data = eval("("+data+")");
+                    console.log(data);
+                    arrayName=data["name"];
+                    arrayNumber=data["counter"];
+                    console.log(arrayName);
+                    console.log(arrayNumber);
 
-
-            option1 = {
-                backgroundColor: '#031f2d',
-                title: [{
-                    text: '占比情况',
-                    x: '50%',
-                    y: '90%',
-                    textAlign: 'center',
-                    textStyle: {
-                        color: '#fff',
-                        textAlign: 'center',
-                        fontSize: 24 * scale,
-                        fontWeight: 'bold'
-                    },
-                }],
-
-                series: [
-                    //内圈圆环
-                    {
-                        name: 'Line 0',
-                        type: 'pie',
-                        clockWise: false, //顺时加载
-                        hoverAnimation: false, //鼠标移入变大
-                        center: ['50%', '50%'],
-                        radius: ['50%', '51.5%'],
-                        itemStyle: {
-                            normal: {
-                                color: innerColor
-                            }
-                        },
-                        //只是为了百分百显示圆环
-                        data: [{
-                            value: 0,
-                            name: '',
-                        }],
-                        label: {
-                            normal: {
-                                formatter: function(params) {
-                                    var time = echartData[0].value;
-                                    return '{time|' + (100+200)/200 + '}{unit|%}';
-                                },
-                                position: 'center',
-                                textStyle: {
-                                    fontSize: 38 * scale,
-                                    fontWeight: 'bold',
-                                    color: textColor
-                                },
-                                rich:rich
-                            }
+                    var marketAllNumber=0;
+                    var marketNameAndCounter=[];
+                    for(var i=0;i<arrayNumber.length;i++){
+                        marketAllNumber=marketAllNumber+arrayNumber[i];
+                        var nameAndCounter={
+                            value:arrayNumber[i],
+                            name:arrayName[i],
                         }
-                    },
-                    //中间圆环
-                    {
-                        name: 'Line 1',
-                        type: 'pie',
-                        clockWise: false, //顺时加载
-                        hoverAnimation: true, //鼠标移入变大
-                        center: ['50%', '50%'],
-                        radius: ['75%', '65%'],
-                        color: color,
-                        itemStyle: {
-                            normal: {
+                        marketNameAndCounter.push(nameAndCounter);
+                    }
+                    console.log(marketNameAndCounter);
+
+
+                    /*---------------------初始化----------------------------*/
+                    var myChart_pie = echarts.init(document.getElementById('pie'));
+
+                    /*---------------------数据----------------------------*/
+
+                    //初始化数据，
+                    var echartData = [{
+                        value: marketAllNumber,//时间
+                        name: '市场数量'
+                    }, {
+                        value: AllCrawNumber-marketAllNumber,
+                        name: '总数量'
+                    }];
+
+
+                    /*---------------------颜色变量----------------------------*/
+                    //蓝色
+                    var innerColor = '#2bff8f'; //内层颜色
+                    var outColor = "#50e0ff"; //外层边框色粗
+                    var textColor = '#50e0ff'; //文字颜色
+                    var startColor = 'rgba(73,223,240,0.1)'; //中间饼图渐变开始颜色
+                    var endColor = 'rgba(73,223,240,0.8)'; //中间饼图渐变结束颜色
+                    //绿色
+                    // var innerColor = '#50e0ff'; //内层颜色
+                    // var outColor = "#2bff8f"; //外层边框色粗
+                    // var textColor = '#50e0ff'; //文字颜色
+                    // var startColor = 'rgba(43,255,143,0.1)'; //中间饼图渐变开始颜色
+                    // var endColor = 'rgba(43,255,143,0.8)'; //中间饼图渐变结束颜色
+
+
+                    /*---------------------缩放----------------------------*/
+                    var scale = 1;
+
+
+                    /*---------------------颜色配置----------------------------*/
+                    var color = [{
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0,
+                            color: startColor // 0% 处的颜色
+                        }, {
+                            offset: 1,
+                            color: endColor // 100% 处的颜色
+                        }],
+                        globalCoord: false // 缺省为 false
+                    }, 'none'];
+                    /*---------------------富文本----------------------------*/
+                    var rich = {
+                        time: {
+                            color: innerColor,
+                            fontSize: 32 * scale,
+                            padding: [0, 0],
+                            fontWeight:'bold'
+                        },
+                        unit:{
+                            color: innerColor,
+                            fontSize: 14 * scale,
+                            padding: [0,0,0, 0],
+                            verticalAlign:'bottom',
+                        }
+                    }
+
+
+                    option1 = {
+                        backgroundColor: '#031f2d',
+                        title: [{
+                            text: '市场占比',
+                            x: '50%',
+                            y: '90%',
+                            textAlign: 'center',
+                            textStyle: {
+                                color: '#fff',
+                                textAlign: 'center',
+                                fontSize: 24 * scale,
+                                fontWeight: 'bold'
+                            },
+                        }],
+
+                        series: [
+                            //内圈圆环
+                            {
+                                name: 'Line 0',
+                                type: 'pie',
+                                clockWise: false, //顺时加载
+                                hoverAnimation: false, //鼠标移入变大
+                                center: ['50%', '50%'],
+                                radius: ['50%', '51.5%'],
+                                itemStyle: {
+                                    normal: {
+                                        color: innerColor
+                                    }
+                                },
+                                //只是为了百分百显示圆环
+                                data: [{
+                                    value: 0,
+                                    name: '',
+                                }],
                                 label: {
-                                    show: false
+                                    normal: {
+                                        formatter: function(params) {
+                                            var time = echartData[0].value;
+                                            return '{time|' + (marketAllNumber/AllCrawNumber).toFixed(6) + '}{unit|%}';
+                                        },
+                                        position: 'center',
+                                        textStyle: {
+                                            fontSize: 38 * scale,
+                                            fontWeight: 'bold',
+                                            color: textColor
+                                        },
+                                        rich:rich
+                                    }
+                                }
+                            },
+                            //中间圆环
+                            {
+                                name: 'Line 1',
+                                type: 'pie',
+                                clockWise: false, //顺时加载
+                                hoverAnimation: true, //鼠标移入变大
+                                center: ['50%', '50%'],
+                                radius: ['75%', '65%'],
+                                color: color,
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: false
+                                        },
+                                        labelLine: {
+                                            show: false
+                                        },
+                                    }
                                 },
-                                labelLine: {
-                                    show: false
+                                data:echartData,
+                            },
+                            //外层圆环
+                            {
+                                name: 'Line 2',
+                                type: 'pie',
+                                clockWise: false, //顺时加载
+                                hoverAnimation: false, //鼠标移入变大
+                                center: ['50%', '50%'],
+                                radius: ['75%', '75%'],
+                                itemStyle: {
+                                    normal: {
+                                        borderWidth: 2* scale,
+                                        borderColor: outColor,
+                                        label: {
+                                            show: false
+                                        },
+                                        labelLine: {
+                                            show: false
+                                        },
+                                    }
                                 },
+                                //只是为了百分百显示圆环
+                                data: [{
+                                    value: 10,
+                                    name: '',
+                                }]
+                            }
+                        ],
+                    };
+                    myChart_pie.setOption(option1);
+
+                    var myChart_ndgr = echarts.init(document.getElementById('ndgr'));
+                    option2 = {
+                        backgroundColor: '#2c343c',
+
+                        title: {
+                            text: '品种占比',
+                            left: 'center',
+                            top: 10,
+                            textStyle: {
+                                color: '#ccc'
                             }
                         },
-                        data:echartData,
-                    },
-                    //外层圆环
-                    {
-                        name: 'Line 2',
-                        type: 'pie',
-                        clockWise: false, //顺时加载
-                        hoverAnimation: false, //鼠标移入变大
-                        center: ['50%', '50%'],
-                        radius: ['75%', '75%'],
-                        itemStyle: {
-                            normal: {
-                                borderWidth: 2* scale,
-                                borderColor: outColor,
-                                label: {
-                                    show: false
-                                },
-                                labelLine: {
-                                    show: false
-                                },
+
+                        tooltip : {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b} : {c} ({d}%)"
+                        },
+
+                        visualMap: {
+                            show: false,
+                            min: 80,
+                            max: 600,
+                            inRange: {
+                                colorLightness: [0, 1]
                             }
                         },
-                        //只是为了百分百显示圆环
-                        data: [{
-                            value: 10,
-                            name: '',
-                        }]
-                    }
-                ],
-            };
-            myChart_pie.setOption(option1);
-
-            var myChart_ndgr = echarts.init(document.getElementById('ndgr'));
-            option2 = {
-                backgroundColor: '#2c343c',
-
-                title: {
-                    text: 'Customized Pie',
-                    left: 'center',
-                    top: 20,
-                    textStyle: {
-                        color: '#ccc'
-                    }
-                },
-
-                tooltip : {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
-                },
-
-                visualMap: {
-                    show: false,
-                    min: 80,
-                    max: 600,
-                    inRange: {
-                        colorLightness: [0, 1]
-                    }
-                },
-                series : [
-                    {
-                        name:'访问来源',
-                        type:'pie',
-                        radius : '55%',
-                        center: ['50%', '50%'],
-                        data:[
-                            {value:335, name:'直接访问'},
-                            {value:310, name:'邮件营销'},
-                            {value:274, name:'联盟广告'},
-                            {value:235, name:'视频广告'},
-                            {value:400, name:'搜索引擎'}
-                        ].sort(function (a, b) { return a.value - b.value}),
-                        roseType: 'angle',
-                        label: {
-                            normal: {
-                                textStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
+                        series : [
+                            {
+                                name:'所占比例',
+                                type:'pie',
+                                radius : '55%',
+                                center: ['50%', '50%'],
+                                data:marketNameAndCounter.sort(function (a, b) { return a.value - b.value}),
+                                roseType: 'angle',
+                                label: {
+                                    normal: {
+                                        textStyle: {
+                                            color: 'white'
+                                        }
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        lineStyle: {
+                                            color: 'rgba(255, 255, 255, 0.3)'
+                                        },
+                                        smooth: 0.2,
+                                        length: 10,
+                                        length2: 20
+                                    }
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: '#c23531',
+                                        shadowBlur: 200,
+                                        shadowColor: 'yellow'
+                                    }
                                 }
                             }
-                        },
-                        labelLine: {
-                            normal: {
-                                lineStyle: {
-                                    color: 'rgba(255, 255, 255, 0.3)'
-                                },
-                                smooth: 0.2,
-                                length: 10,
-                                length2: 20
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: '#c23531',
-                                shadowBlur: 200,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            };
-            myChart_ndgr.setOption(option2);
+                        ]
+                    };
+                    myChart_ndgr.setOption(option2);
 
+                }
+            });
         }
 
 

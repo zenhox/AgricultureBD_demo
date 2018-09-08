@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="css/nongye_price.css" />
 	<link href="css/sroll.css" rel="stylesheet" type="text/css">
 	<link href="css/tab.css" rel="stylesheet" type="text/css">
-	
+	<link href="css/buttonstyle.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 		#se {
 			position: absolute;
